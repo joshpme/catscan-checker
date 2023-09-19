@@ -1,0 +1,6 @@
+packages:
+  - name: catscan
+    environment:
+    functions:
+      - name: latex
+        runtime: go:1.20
