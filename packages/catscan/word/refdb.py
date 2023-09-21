@@ -1,3 +1,5 @@
+import re
+
 import mysql.connector
 import os
 from utils import remove_white_space
