@@ -7,7 +7,5 @@ functions:
       deploy_on_push: true
       repo: joshpme/catscan-checker
     name: catscan-checker
-    routes:
-      - path: /
     source_dir: /
 name: catscan-checker
