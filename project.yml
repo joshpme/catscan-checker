@@ -13,7 +13,7 @@ packages:
         runtime: go:1.20
       - name: word
         web: true
-        runtime: python:3.11
+        runtime: python:3.9
       - name: conferences
         web: true
-        runtime: python:3.11
+        runtime: python:3.9
