@@ -1,6 +1,21 @@
 packages:
   - name: catscan
     environment:
+      SPACES_KEY: "${SPACES_KEY}"
+      SPACES_SECRET: "${SPACES_SECRET}"
+      REFDB_USER: "${REFDB_USER}"
+      REFDB_PASS: "${REFDB_PASS}"
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASS: '${MYSQL_PASS}'
+      MYSQL_HOST: '${MYSQL_HOST}'
+      MYSQL_PORT: '${MYSQL_PORT}'
+      MYSQL_DB: '${MYSQL_DB}'
     functions:
       - name: latex
         runtime: go:1.20
+      - name: word
+        web: true
+        runtime: python:3.11
+      - name: conferences
+        web: true
+        runtime: python:3.11
