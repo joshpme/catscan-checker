@@ -3,8 +3,6 @@ packages:
     environment:
       SPACES_KEY: "${SPACES_KEY}"
       SPACES_SECRET: "${SPACES_SECRET}"
-      REFDB_USER: "${REFDB_USER}"
-      REFDB_PASS: "${REFDB_PASS}"
       MYSQL_USER: '${MYSQL_USER}'
       MYSQL_PASS: '${MYSQL_PASS}'
       MYSQL_HOST: '${MYSQL_HOST}'

@@ -1,7 +1,5 @@
-import requests, re
-from datetime import datetime, timedelta
+import mysql.connector
 import os
-import json
 from utils import remove_white_space
 
 SPMS_HELP_INFO = 'CSESPMSCeck'
@@ -19,45 +17,29 @@ class PaperNotFoundError(Exception):
     pass
 
 
-def get_new_auth_token():
-    data = {
-        "username": os.getenv('REFDB_USER'),
-        "password": os.getenv('REFDB_PASS')
-    }
-    try:
-        response = requests.post(BASE_URL + "/api/login_check", json=data)
-        if response.ok:
-            token = response.json()['token']
-            return token
-    except Exception:
-        print("Failed to get new token")
-    return None
 
+def get_references(conference_id):
 
-def authenticate():
-    return get_new_auth_token()
+    cnx = mysql.connector.connect(
+        user=os.getenv('MYSQL_USER'),
+        password=os.getenv('MYSQL_PASS'),
+        host=os.getenv('MYSQL_HOST'),
+        port=os.getenv('MYSQL_PORT'),
+        database=os.getenv('MYSQL_DB')
+    )
+    cursor = cnx.cursor()
 
+    query = """SELECT * FROM references WHERE conference_id = %s"""
+    cursor.execute(query, (conference_id, ))
 
-def get_conferences(token):
-    try:
-        response = requests.get(BASE_URL + "/api/conferences/?bearer=%s" % token)
-        if response.ok:
-            return response.json()
-    except Exception:
-        print("Failed to get conferences")
+    references = []
+    for data in cursor:
+        references.append(data)
 
-    return None
+    cursor.close()
+    cnx.close()
 
-
-def get_references(token, conference_id):
-    try:
-        response = requests.get(BASE_URL + "/api/conferences/" + str(conference_id) + "/references/?bearer=%s" % token)
-        if response.ok:
-            return response.json()
-    except Exception:
-        print("Failed to get references")
-
-    return None
+    return references
 
 
 NON_BREAKING_SPACE = '\u00A0'

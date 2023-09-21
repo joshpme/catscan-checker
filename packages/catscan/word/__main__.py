@@ -1,4 +1,4 @@
-from refdb import authenticate, get_references, create_spms_variables
+from refdb import get_references, create_spms_variables
 from score import score
 from page import check_tracking_on
 from doc import create_upload_variables
@@ -54,7 +54,7 @@ def check_docx(filename, conference_id):
     if conference_id is not None:
         references = []
         if conference_id != '' and conference_id.isdigit():
-            references = get_references(authenticate(), conference_id)
+            references = get_references(conference_id)
 
         if conference_id:
             reference_check_summary, reference_details = create_spms_variables(get_name(filename), authors, title, references)
