@@ -1,5 +1,5 @@
 import re
-import mysql.connector
+import pymysql.cursors
 import os
 from utils import remove_white_space
 
@@ -20,14 +20,13 @@ class PaperNotFoundError(Exception):
 
 
 def get_references(conference_id):
-
-    cnx = mysql.connector.connect(
+    cnx = pymysql.connect(
         user=os.getenv('MYSQL_USER'),
         password=os.getenv('MYSQL_PASS'),
         host=os.getenv('MYSQL_HOST'),
         port=os.getenv('MYSQL_PORT'),
-        database=os.getenv('MYSQL_DB')
-    )
+        database=os.getenv('MYSQL_DB'),
+        cursorclass=pymysql.cursors.DictCursor)
     cursor = cnx.cursor()
 
     query = """SELECT * FROM references WHERE conference_id = %s"""
