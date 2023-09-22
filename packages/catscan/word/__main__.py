@@ -86,4 +86,9 @@ def check_docx(filename, conference_id):
 def main(event):
     filename = event.get("name", None)
     conference_id = event.get("conference", None)
-    return {'body': check_docx(filename, conference_id)}
+    try:
+        output = check_docx(filename, conference_id)
+    except Exception as err:
+        output = f"Unexpected {err=}, {type(err)=}"
+
+    return {'body': output}
