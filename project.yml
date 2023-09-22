@@ -8,7 +8,7 @@ packages:
       MYSQL_HOST: '${MYSQL_HOST}'
       MYSQL_PORT: '${MYSQL_PORT}'
       MYSQL_DB: '${MYSQL_DB}'
-    actions:
+    functions:
       - name: cleanup
         web: false
         runtime: 'python:3.11'
