@@ -86,7 +86,8 @@ def check_docx(filename, conference_id):
 def main(event):
     filename = event.get("name", None)
     conference_id = event.get("conference", None)
-    return {'body': check_docx(filename, conference_id)}
+    return {'body': get_references(get_name(filename), conference_id)}
+    #return {'body': check_docx(filename, conference_id)}
 
 # output = main({ "name": "THPA094.docx", "conference": "865" })
 # print(output)

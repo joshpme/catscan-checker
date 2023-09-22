@@ -36,7 +36,7 @@ def get_references(paper_code, conference_id):
     for (paperId, title) in cursor:
         references.update({paperId: {'title': title, 'authors': []}})
 
-    query = """SELECT paper_id , author.name FROM reference 
+    query = """SELECT paper_id, author.name FROM reference 
     LEFT JOIN author_reference ON author_reference.reference_id = reference.id
     LEFT JOIN author ON author.id = author_reference.author_id  
     WHERE paper_id = %s AND conference_id = %s"""
