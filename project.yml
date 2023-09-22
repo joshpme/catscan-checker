@@ -13,10 +13,10 @@ packages:
         web: false
         runtime: 'python:3.11'
         triggers:
-          - name: 'every hour'
-            sourceType: scheduler
-            sourceDetails:
-              cron: '0 * * * *'
+        - name: clean-up-files
+          sourceType: scheduler
+          sourceDetails:
+            cron: '*/5 * * * *'
       - name: word
         web: true
         runtime: 'python:3.11'
