@@ -52,11 +52,8 @@ def check_docx(filename, conference_id):
     summary, authors, title = details
 
     if conference_id is not None:
-        references = []
         paper_code = get_name(filename)
-        if conference_id != '' and conference_id.isdigit():
-            references = get_references(paper_code, conference_id)
-
+        references = get_references(paper_code, conference_id)
         if conference_id:
             reference_check_summary, reference_details = create_spms_variables(paper_code, authors, title, references)
             if reference_check_summary is not None and reference_details is not None:
