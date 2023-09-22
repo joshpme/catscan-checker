@@ -5,38 +5,42 @@ from doc import create_upload_variables
 from docx import Document
 from s3 import get_file
 
+
 def get_extension(filename):
     return filename.rsplit('.', 1)[1].lower()
+
 
 def allowed_file(filename):
     return '.' in filename and get_extension(filename) in {"docx"}
 
+
 def get_name(filename):
     return filename.rsplit('.', 1)[0].upper()
+
 
 def check_docx(filename, conference_id):
     if filename is None:
         return {
-            "error": "Not file specified"
+            "error": "Not file specified."
         }
 
     if not allowed_file(filename):
         return {
-            "error": "File format is not allowed"
+            "error": "File format is not allowed.\nFile must be a .docx"
         }
 
     file = get_file(filename)
 
     if file is None:
         return {
-            "error": "File not found"
+            "error": "File not found.\nPlease try again."
         }
 
     try:
         doc = Document(docx=file)
     except KeyError:
         return {
-            "error": "Document may not be in a supported format. Try to re-saving the file as a 'Word "
+            "error": "Document may not be in a supported format.\nTry to re-saving the file as a 'Word "
                      "Document' and try again."
         }
 
@@ -45,7 +49,7 @@ def check_docx(filename, conference_id):
 
     if tracking_is_on:
         return {
-            "error": "Cannot process file, tracking is turned on. Please turn tracking off, and try again."
+            "error": "Cannot process file, tracking is turned on.\nPlease turn tracking off, and try again."
         }
 
     details, error = create_upload_variables(doc)
@@ -86,12 +90,13 @@ def check_docx(filename, conference_id):
         "filename": filename
     }
 
+
 def main(event):
     filename = event.get("name", None)
     conference_id = event.get("conference", None)
     try:
         output = check_docx(filename, conference_id)
     except Exception as err:
-        output = { "error": f"Unexpected {err=}, {type(err)=}" }
+        output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
 
     return {'body': output}
