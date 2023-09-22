@@ -1,13 +1,13 @@
 import os
-import mysql.connector
+import pymysql.cursors
 
 def main():
     try:
-        cnx = mysql.connector.connect(
+        cnx = pymysql.connect(
             user=os.getenv('MYSQL_USER'),
             password=os.getenv('MYSQL_PASS'),
             host=os.getenv('MYSQL_HOST'),
-            port=os.getenv('MYSQL_PORT'),
+            port=int(os.getenv('MYSQL_PORT')),
             database=os.getenv('MYSQL_DB')
         )
         cursor = cnx.cursor()

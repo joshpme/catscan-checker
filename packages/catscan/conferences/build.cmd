@@ -8,9 +8,7 @@ python -m venv virtualenv
 call virtualenv\Scripts\activate
 
 :: Install requirements.txt into the virtual environment
-:: pip install -r requirements.txt
-
-python __main__.py
+pip install -r requirements.txt
 
 :: Deactivate the virtual environment
 deactivate

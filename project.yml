@@ -9,18 +9,19 @@ packages:
       MYSQL_PORT: '${MYSQL_PORT}'
       MYSQL_DB: '${MYSQL_DB}'
     functions:
-      - name: cleanup
-        web: false
-        runtime: 'python:3.11'
-        triggers:
-          - name: clean-up-files
-            sourceType: scheduler
-            sourceDetails:
-              cron: '*/5 * * * *'
+#      - name: cleanup
+#        web: false
+#        runtime: 'python:3.11'
+#        triggers:
+#          - name: clean-up-files
+#            sourceType: scheduler
+#            sourceDetails:
+#              cron: '0 * * * *'
       - name: word
         web: true
         runtime: 'python:3.11'
         limits:
+          memory: 512
           timeout: 15000
       - name: conferences
         web: true
