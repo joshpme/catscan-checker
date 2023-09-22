@@ -3,4 +3,5 @@ __deployer__.zip
 .DS_Store
 .env
 .idea
-/packages/catscan/word/virtualenv/
+packages/catscan/word/virtualenv/
+packages/catscan/word/__pycache__/

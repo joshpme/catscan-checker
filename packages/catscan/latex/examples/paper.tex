@@ -1,0 +1,98 @@
+% !TeX spellcheck = en_GB
+% !TeX program = lualatex
+%
+% v 2.3  Feb 2019   Volker RW Schaa
+%		# changes in the collaboration therefore updated file "jacow-collaboration.tex"
+%		# all References with DOIs have their period/full stop before the DOI (after pp. or year)
+%		# in the author/affiliation block all ZIP codes in square brackets removed as it was not %         understood as optional parameter and ZIP codes had bin put in brackets
+%       # References to the current IPAC are changed to "IPAC'19, Melbourne, Australia"
+%       # font for ‘url’ style changed to ‘newtxtt’ as it is easier to distinguish "O" and "0"
+%
+\documentclass[a4paper,
+%boxit,        % check whether paper is inside correct margins
+%titlepage,    % separate title page
+%refpage       % separate references
+%biblatex,     % biblatex is used
+    keeplastbox,   % flushend option: not to un-indent last line in References
+%nospread,     % flushend option: do not fill with whitespace to balance columns
+%hyphens,      % allow \url to hyphenate at "-" (hyphens)
+%xetex,        % use XeLaTeX to process the file
+%luatex,       % use LuaLaTeX to process the file
+]{jacow}
+%
+% ONLY FOR \footnote in table/tabular
+%
+\usepackage{pdfpages,multirow,ragged2e} %
+%
+% CHANGE SEQUENCE OF GRAPHICS EXTENSION TO BE EMBEDDED
+% ----------------------------------------------------
+% test for XeTeX where the sequence is by default eps-> pdf, jpg, png, pdf, ...
+%    and the JACoW template provides JACpic2v3.eps and JACpic2v3.jpg which
+%    might generates errors, therefore PNG and JPG first
+%
+\makeatletter%
+\ifboolexpr{bool{xetex}}
+{\renewcommand{\Gin@extensions}{.pdf,%
+    .png,.jpg,.bmp,.pict,.tif,.psd,.mac,.sga,.tga,.gif,%
+    .eps,.ps,%
+}}{}
+\makeatother
+
+% CHECK FOR XeTeX/LuaTeX BEFORE DEFINING AN INPUT ENCODING
+% --------------------------------------------------------
+%   utf8  is default for XeTeX/LuaTeX
+%   utf8  in LaTeX only realises a small portion of codes
+%
+\ifboolexpr{bool{xetex} or bool{luatex}} % test for XeTeX/LuaTeX
+{}                                      % input encoding is utf8 by default
+{\usepackage[utf8]{inputenc}}           % switch to utf8
+
+\usepackage[USenglish]{babel}
+
+%
+% if BibLaTeX is used
+%
+\ifboolexpr{bool{jacowbiblatex}}%
+{%
+    \addbibresource{jacow-test.bib}
+    \addbibresource{biblatex-examples.bib}
+}{}
+\listfiles
+
+%%
+%%   Lengths for the spaces in the title
+%%   \setlength\titleblockstartskip{..}  %before title, default 3pt
+%%   \setlength\titleblockmiddleskip{..} %between title + author, default 1em
+%%   \setlength\titleblockendskip{..}    %afterauthor, default 1em
+
+\begin{document}
+
+    \ifboolexpr{bool{jacowbiblatex}}%
+    {\printbibliography}%
+    {%
+    % "biblatex" is not used, go the "manual" way
+
+        \begin{thebibliography}{99}   % Use for  10-99  references
+            %\begin{thebibliography}{9} % Use for 1-9 references
+
+            \bibitem{ERL} M. Tigner.  "A possible apparatus for electron clashing-beam experiments",  Il Nuovo
+            Cimento (1955-1965) 37.3 (1965), pp. 1228–1231. \url{doi: 10.123213}
+            \bibitem{cern} CERN \textit{European Strategy for Particle Physics. } https://europeanstrategyupdate.
+            web.cern.ch/welcome. Accessed: 2021-11-09. 2021. doi:10.12312312
+            %\bibitem{cern} CERN \textit{European Strategy for Particle Physics. } https://europeanstrategyupdate.
+            %web.cern.ch/welcome. Accessed: 2021-11-09. 2021. doi:10.12312312
+
+
+
+        \end{thebibliography}
+    }
+% end \ifboolexpr
+%
+% for use as JACoW template the inclusion of the ANNEX parts have been commented out
+% to generate the complete documentation please remove the "%" of the next two commands
+%
+%%%\newpage
+
+%%%\include{annexes-A4}
+
+\end{document}
