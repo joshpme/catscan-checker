@@ -32,7 +32,13 @@ def check_docx(filename, conference_id):
             "error": "File not found"
         }
 
-    doc = Document(docx=file)
+    try:
+        doc = Document(docx=file)
+    except KeyError:
+        return {
+            "error": "Document may not be in a supported format. Try to re-saving the file as a 'Word "
+                     "Document' and try again."
+        }
 
     metadata = doc.core_properties
     tracking_is_on = check_tracking_on(doc)
