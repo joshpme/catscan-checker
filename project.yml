@@ -12,6 +12,8 @@ packages:
       - name: word
         web: true
         runtime: 'python:3.11'
+        limits:
+          timeout: 30000
       - name: conferences
         web: true
         runtime: 'python:3.11'
