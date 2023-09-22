@@ -1,11 +1,8 @@
 import os
 import mysql.connector
 
-
 def main():
-
     try:
-
         cnx = mysql.connector.connect(
             user=os.getenv('MYSQL_USER'),
             password=os.getenv('MYSQL_PASS'),
@@ -15,7 +12,7 @@ def main():
         )
         cursor = cnx.cursor()
 
-        query = ("SELECT id, code FROM conference")
+        query = ("SELECT id, code FROM conference WHERE is_published = 0 ORDER BY id DESC")
         cursor.execute(query)
 
         conferences = []
@@ -25,8 +22,6 @@ def main():
         cursor.close()
         cnx.close()
     except Exception as err:
-        return {'body': f"Unexpected {err=}, {type(err)=}"}
+        return {'body': { "error": f"Unexpected {err=}, {type(err)=}"}}
 
-    # conferences = filter(lambda x: not x['isPublished'], get_conferences(authenticate()))
-    # conferences = sorted(conferences, key=lambda x: x['id'], reverse=True)
     return {'body': conferences}
