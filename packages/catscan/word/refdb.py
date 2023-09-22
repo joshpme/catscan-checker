@@ -19,27 +19,42 @@ class PaperNotFoundError(Exception):
 
 
 
-def get_references(conference_id):
+def get_references(paper_code, conference_id):
     cnx = pymysql.connect(
         user=os.getenv('MYSQL_USER'),
         password=os.getenv('MYSQL_PASS'),
         host=os.getenv('MYSQL_HOST'),
-        port=os.getenv('MYSQL_PORT'),
+        port=int(os.getenv('MYSQL_PORT')),
         database=os.getenv('MYSQL_DB'),
         cursorclass=pymysql.cursors.DictCursor)
     cursor = cnx.cursor()
 
-    query = """SELECT * FROM reference WHERE conference_id = %s"""
-    cursor.execute(query, (conference_id, ))
+    query = """SELECT paper_id, title FROM reference WHERE paper_id = %s AND conference_id = %s"""
+    cursor.execute(query, (paper_code, conference_id,))
 
-    references = []
-    for data in cursor:
-        references.append(data)
+    references = {}
+    for (paperId, title) in cursor:
+        references.update({paperId: {'title': title, 'authors': []}})
+
+    query = """SELECT paper_id , author.name FROM reference 
+    LEFT JOIN author_reference ON author_reference.reference_id = reference.id
+    LEFT JOIN author ON author.id = author_reference.author_id  
+    WHERE paper_id = %s AND conference_id = %s"""
+    cursor.execute(query, (paper_code, conference_id,))
+
+    for (paperId, name) in cursor:
+        data = references.get(paperId)
+        data['authors'].append({'name': name})
+        references.update({paperId: data})
 
     cursor.close()
     cnx.close()
 
-    return references
+    output = []
+    for key, data in references.items():
+        output.append({ 'paperId': key, 'authors': data['authors'], 'title': data['title'] })
+
+    return output
 
 
 NON_BREAKING_SPACE = '\u00A0'
