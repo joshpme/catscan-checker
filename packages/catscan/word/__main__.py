@@ -53,7 +53,7 @@ def check_docx(filename, conference_id):
 
     if conference_id is not None:
         references = []
-        paper_code = get_name(filename);
+        paper_code = get_name(filename)
         if conference_id != '' and conference_id.isdigit():
             references = get_references(paper_code, conference_id)
 
