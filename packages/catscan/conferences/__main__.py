@@ -13,12 +13,12 @@ def main():
     )
     cursor = cnx.cursor()
 
-    query = ("SELECT * FROM conferences")
+    query = ("SELECT id, code FROM conferences")
     cursor.execute(query)
 
     conferences = []
-    for data in cursor:
-        conferences.append(data)
+    for (id, code) in cursor:
+        conferences.append({'id': id, 'code': code })
 
     cursor.close()
     cnx.close()
