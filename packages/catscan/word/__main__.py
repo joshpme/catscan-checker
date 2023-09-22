@@ -51,16 +51,16 @@ def check_docx(filename, conference_id):
 
     summary, authors, title = details
 
-    # if conference_id is not None:
-    #     references = []
-    #     paper_code = get_name(filename);
-    #     if conference_id != '' and conference_id.isdigit():
-    #         references = get_references(paper_code, conference_id)
-    #
-    #     if conference_id:
-    #         reference_check_summary, reference_details = create_spms_variables(paper_code, authors, title, references)
-    #         if reference_check_summary is not None and reference_details is not None:
-    #             summary.update(reference_check_summary)
+    if conference_id is not None:
+        references = []
+        paper_code = get_name(filename);
+        if conference_id != '' and conference_id.isdigit():
+            references = get_references(paper_code, conference_id)
+
+        if conference_id:
+            reference_check_summary, reference_details = create_spms_variables(paper_code, authors, title, references)
+            if reference_check_summary is not None and reference_details is not None:
+                summary.update(reference_check_summary)
 
     scores = score(summary)
 
@@ -86,8 +86,4 @@ def check_docx(filename, conference_id):
 def main(event):
     filename = event.get("name", None)
     conference_id = event.get("conference", None)
-    return {'body': get_references(get_name(filename), conference_id)}
-    #return {'body': check_docx(filename, conference_id)}
-
-# output = main({ "name": "THPA094.docx", "conference": "865" })
-# print(output)
+    return {'body': check_docx(filename, conference_id)}

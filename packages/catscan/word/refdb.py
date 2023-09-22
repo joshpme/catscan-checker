@@ -25,11 +25,10 @@ def get_references(paper_code, conference_id):
         password=os.getenv('MYSQL_PASS'),
         host=os.getenv('MYSQL_HOST'),
         port=int(os.getenv('MYSQL_PORT')),
-        database=os.getenv('MYSQL_DB'),
-        cursorclass=pymysql.cursors.DictCursor)
+        database=os.getenv('MYSQL_DB'))
     cursor = cnx.cursor()
 
-    query = """SELECT paper_id, title FROM reference WHERE paper_id = %s AND conference_id = %s"""
+    query = """SELECT reference.paper_id, reference.title FROM reference WHERE paper_id = %s AND conference_id = %s"""
     cursor.execute(query, (paper_code, conference_id,))
 
     references = {}
