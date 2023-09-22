@@ -20,5 +20,5 @@ def get_file(filename):
     body = file.get("Body")
     bytes = body.read()
     file = io.BytesIO(bytes)
-
+    client.delete_object(Bucket='catstore', Key=filename)
     return file
