@@ -15,3 +15,6 @@ packages:
       - name: conferences
         web: true
         runtime: 'python:3.11'
+      - name: latex
+        web: true
+        runtime: 'go:1.20'
