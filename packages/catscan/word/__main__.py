@@ -92,6 +92,6 @@ def main(event):
     try:
         output = check_docx(filename, conference_id)
     except Exception as err:
-        output = f"Unexpected {err=}, {type(err)=}"
+        output = { "error": f"Unexpected {err=}, {type(err)=}" }
 
     return {'body': output}
