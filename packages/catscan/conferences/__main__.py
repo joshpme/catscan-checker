@@ -14,7 +14,7 @@ def main():
         )
         cursor = cnx.cursor()
 
-        query = ("SELECT id, code FROM conferences")
+        query = ("SELECT id, code FROM conference")
         cursor.execute(query)
 
         conferences = []
