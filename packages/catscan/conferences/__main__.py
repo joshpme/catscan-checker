@@ -3,29 +3,32 @@ import mysql.connector
 
 
 def main():
-    try:
 
-        cnx = mysql.connector.connect(
-            user=os.getenv('MYSQL_USER'),
-            password=os.getenv('MYSQL_PASS'),
-            host=os.getenv('MYSQL_HOST'),
-            port=os.getenv('MYSQL_PORT'),
-            database=os.getenv('MYSQL_DB')
-        )
-        cursor = cnx.cursor()
+    # try:
 
-        query = ("SELECT id, code FROM conference")
-        cursor.execute(query)
+    #     cnx = mysql.connector.connect(
+    #         user=os.getenv('MYSQL_USER'),
+    #         password=os.getenv('MYSQL_PASS'),
+    #         host=os.getenv('MYSQL_HOST'),
+    #         port=os.getenv('MYSQL_PORT'),
+    #         database=os.getenv('MYSQL_DB')
+    #     )
+    #     cursor = cnx.cursor()
 
-        conferences = []
-        for (id, code) in cursor:
-            conferences.append({'id': id, 'code': code })
+    #     query = ("SELECT id, code FROM conference")
+    #     cursor.execute(query)
 
-        cursor.close()
-        cnx.close()
-    except Exception as err:
-        return {'body': f"Unexpected {err=}, {type(err)=}"}
+    #     conferences = []
+    #     for (id, code) in cursor:
+    #         conferences.append({'id': id, 'code': code })
+
+    #     cursor.close()
+    #     cnx.close()
+    # except Exception as err:
+    #     return {'body': f"Unexpected {err=}, {type(err)=}"}
 
     # conferences = filter(lambda x: not x['isPublished'], get_conferences(authenticate()))
     # conferences = sorted(conferences, key=lambda x: x['id'], reverse=True)
-    return {'body': conferences}
+    return {'body': {
+        'DATABASE_USER': os.getenv('DATABASE_USER')
+    }}
