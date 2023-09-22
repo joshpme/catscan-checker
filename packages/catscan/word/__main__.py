@@ -32,6 +32,10 @@ def check_docx(filename, conference_id):
             "error": "File not found"
         }
 
+    return {
+        "success": "true"
+    }
+
     doc = Document(docx=file)
 
     metadata = doc.core_properties
