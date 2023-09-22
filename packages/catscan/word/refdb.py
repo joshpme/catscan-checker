@@ -29,7 +29,7 @@ def get_references(conference_id):
         cursorclass=pymysql.cursors.DictCursor)
     cursor = cnx.cursor()
 
-    query = """SELECT * FROM references WHERE conference_id = %s"""
+    query = """SELECT * FROM reference WHERE conference_id = %s"""
     cursor.execute(query, (conference_id, ))
 
     references = []
