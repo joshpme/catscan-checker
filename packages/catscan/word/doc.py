@@ -83,17 +83,17 @@ def create_upload_variables(doc):
 
     # get style details
     summary = {
-        'Styles': get_style_summary(doc),
-        'Margins': get_margin_summary(doc),
-        'List': get_all_paragraph_summary(doc),
         'Title': doc_summary['Title'],
         'Authors': doc_summary['Authors'],
         'Abstract': doc_summary['Abstract'],
         'Headings': get_heading_summary(doc),
         'Paragraphs': get_paragraph_summary(doc),
-        'References': get_reference_summary(doc),
         'Figures': get_figure_summary(doc),
-        'Tables': get_table_summary(doc)
+        'Tables': get_table_summary(doc),
+        'References': get_reference_summary(doc),
+        'Styles': get_style_summary(doc),
+        'Margins': get_margin_summary(doc),
+        'List': get_all_paragraph_summary(doc)
     }
 
     # get title and author to use in SPMS check
