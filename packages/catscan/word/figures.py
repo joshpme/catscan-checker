@@ -229,7 +229,7 @@ def get_figure_summary(doc):
         'extra_info': EXTRA_INF0,
         'ok': ok,
         'message': 'Figure issues',
-        'details': figures,
+        'details': figures.values(),
         'anchor': 'figures',
         'show_total': True,
     }
