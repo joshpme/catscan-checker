@@ -411,7 +411,7 @@ def create_spms_variables(paper_name, authors, title, references):
         return None, None
 
     summary['Abstract Submission'] = {
-        'title': ' Title Author Check',
+        'title': 'Title Author Check',
         'help_info': SPMS_HELP_INFO,
         'extra_info': SPMS_EXTRA_INFO,
         'ok': reference_csv_details['title']['match'] and reference_csv_details['author']['match'],

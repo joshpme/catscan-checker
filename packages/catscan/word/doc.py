@@ -1,6 +1,5 @@
 from styles import get_style_summary
 from margins import get_margin_summary
-from languages import get_language_summary
 from title import get_title_summary, get_title_summary_latex
 from authors import get_author_summary, get_author_summary_latex
 from abstract import get_abstract_summary, get_abstract_summary_latex
@@ -86,7 +85,6 @@ def create_upload_variables(doc):
     summary = {
         'Styles': get_style_summary(doc),
         'Margins': get_margin_summary(doc),
-        'Languages': get_language_summary(doc),
         'List': get_all_paragraph_summary(doc),
         'Title': doc_summary['Title'],
         'Authors': doc_summary['Authors'],
