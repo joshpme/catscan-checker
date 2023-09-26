@@ -5,7 +5,7 @@ import (
 )
 
 type Comment struct {
-	Location Location
+	Location Location `json:"location"`
 }
 
 func FindComments(contents string) []Comment {

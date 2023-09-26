@@ -28,6 +28,12 @@ func TestMain(m *testing.M) {
 	fileName := "./examples/paper.tex"
 	contents, err := GetContents(fileName)
 
+	comments := FindComments(contents)
+
+	for _, comment := range comments {
+		fmt.Printf("%s\n", contents[comment.Location.Start:comment.Location.End])
+	}
+
 	if err != nil {
 		fmt.Println(err)
 		return

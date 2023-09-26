@@ -5,7 +5,7 @@ import (
 )
 
 type Document struct {
-	Location Location
+	Location Location `json:"location"`
 }
 
 func FindDocument(contents string, comments []Comment) Document {
