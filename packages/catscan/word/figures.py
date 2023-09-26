@@ -221,9 +221,9 @@ def get_figure_summary(doc):
                     # If find a 2 (?) then result is 2 unless a false is found later
                     ok = 2
 
-    list_figs = []
-    for val in figures.values():
-        list_figs.append(val[0])
+    list_of_figures = []
+    for f in figures.values():
+        list_of_figures.append(f)
 
     return {
         'title': 'Figures',
@@ -233,7 +233,7 @@ def get_figure_summary(doc):
         'extra_info': EXTRA_INF0,
         'ok': ok,
         'message': 'Figure issues',
-        'details': list_figs,
+        'details': list_of_figures,
         'anchor': 'figures',
         'show_total': True,
     }

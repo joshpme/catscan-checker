@@ -1,7 +1,21 @@
 def score_node(node):
     positive, unknown, negative = 0, 0, 0
 
-    if isinstance(node, dict):
+    if isinstance(node, list):
+        for row in node:
+            for name, value in row.items():
+                if name == 'text':
+                    continue
+                if '_ok' in name:
+                    if value == 2:
+                        unknown += 1
+                    elif value is False:
+                        negative += 1
+                    elif value is True:
+                        positive += 1
+                elif isinstance(value, str) and 'should be' in value:
+                    negative += 1
+    elif isinstance(node, dict):
         for name, value in node.items():
             if name == 'text':
                 continue
