@@ -1,41 +1,40 @@
 package main
 
 import (
-	"regexp"
+	regexp2 "github.com/dlclark/regexp2"
 	"strings"
 )
 
 type BibItem struct {
-	Name         string   `json:"name"`
+	Name         string   `json:"-"`
 	OriginalText string   `json:"-"`
 	Ref          string   `json:"ref"`
 	Location     Location `json:"location"`
 }
 
 func removeExcessWhitespace(contents string) string {
-	var whitespaceRegex = regexp.MustCompile(`(?s)\s+`)
-	return whitespaceRegex.ReplaceAllString(contents, " ")
+	var whitespaceRegex = regexp2.MustCompile(`\s+`, regexp2.Singleline)
+	var withoutMoreThanOneSpace, _ = whitespaceRegex.Replace(contents, " ", 0, -1)
+	return strings.Trim(withoutMoreThanOneSpace, " \n\t")
 }
 
+var bibItemRegex = regexp2.MustCompile(`\\bibitem\{(.*?)}(.*?)(?=(\\bibitem|\\end\{thebibliography}))`, regexp2.Singleline)
+
 func findBibItems(contents string) []BibItem {
-	var bibItemRegex = regexp.MustCompile(`(?s)\\bibitem{(.*?)}(.*?)(\\bibitem|\\end{thebibliography})`)
 	var items []BibItem
-	matches := bibItemRegex.FindAllStringSubmatchIndex(contents, -1)
-	for _, match := range matches {
-		matchStart := match[0]
-		matchEnd := match[6] // before next bibitem or end of thebibliography
-		nameStart := match[2]
-		nameEnd := match[3]
-		refStart := match[4]
-		refEnd := match[5]
-		refContent := removeExcessWhitespace(contents[refStart:refEnd])
-		trimmedItem := strings.Trim(refContent, " \n\t")
+	match, err := bibItemRegex.FindStringMatch(contents)
+	for err == nil && match != nil {
+		fullMatch := match.Groups()[0].Capture
 		items = append(items, BibItem{
-			Name:         contents[nameStart:nameEnd],
-			Ref:          trimmedItem,
-			OriginalText: contents[matchStart:matchEnd],
-			Location:     Location{Start: matchStart, End: matchEnd},
+			Name:         match.Groups()[1].String(),
+			Ref:          removeExcessWhitespace(match.Groups()[2].String()),
+			OriginalText: match.Groups()[2].String(),
+			Location: Location{
+				Start: fullMatch.Index,
+				End:   fullMatch.Index + fullMatch.Length,
+			},
 		})
+		match, err = bibItemRegex.FindNextMatch(match)
 	}
 	return items
 }

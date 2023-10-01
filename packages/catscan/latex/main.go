@@ -17,11 +17,11 @@ type Request struct {
 
 type Payload struct {
 	Filename string    `json:"filename"`
+	Contents string    `json:"content"`
 	Issues   []Issue   `json:"issues"`
 	BibItems []BibItem `json:"bibItems"`
-	Document Document  `json:"document"`
-	Comments []Comment `json:"comments"`
-	Contents string    `json:"content"`
+	Document Document  `json:"-"`
+	Comments []Comment `json:"-"`
 }
 
 type Response struct {
@@ -42,7 +42,7 @@ func Main(in Request) (*Response, error) {
 	bibItems := FindValidBibItems(contents, comments, document)
 	bibItemIssues := FindBibItemIssues(bibItems)
 
-	for i, _ := range bibItemIssues {
+	for i := range bibItemIssues {
 		bibItemIssues[i].Location.Start = convertOffset(bibItemIssues[i].Location.Start, contents)
 		bibItemIssues[i].Location.End = convertOffset(bibItemIssues[i].Location.End, contents)
 	}
@@ -56,7 +56,7 @@ func Main(in Request) (*Response, error) {
 		Contents: contents,
 	}
 
-	jsonBytes, err := json.Marshal(payload)
+	jsonBytes, err := json.MarshalIndent(payload, "  ", "   ")
 
 	if err != nil {
 		return nil, fmt.Errorf("Error serializing response as json: %s", err.Error())

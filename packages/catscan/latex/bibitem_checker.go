@@ -4,17 +4,27 @@ import (
 	"regexp"
 )
 
-var containsEtAl = regexp.MustCompile(`et al.`)
+var containsEtAl = regexp.MustCompile(`et al\.`)
 var wrappedEtAl = regexp.MustCompile(`\\(emph|textit)\{et al\.}`)
+var commaProceedsEtAl = regexp.MustCompile(`,\s*(\\(emph|textit)\{)?et al\.`)
 var containsDoi = regexp.MustCompile(`doi:10.`)
 var containsSpace = regexp.MustCompile(`doi:\s10`)
 var wrappedDoi = regexp.MustCompile(`\\url\{doi:10\.`)
 var noPrefix = regexp.MustCompile(`\\url{10\.`)
 var doiIsUrl = regexp.MustCompile(`https?://doi.org`)
-var yearWrappedInParathesis = regexp.MustCompile(`\(\d{4}\)`)
+
+//var yearWrappedInParathesis = regexp.MustCompile(`\(\d{4}\)`)
 
 func checkBibItem(bibItem BibItem) []Issue {
 	var issues []Issue
+
+	// et al. should not be proceeded by a comma
+	// eg. L. Kiani et al.,
+	ifCommaProceedsEtAl := commaProceedsEtAl.FindStringIndex(bibItem.OriginalText)
+	if ifCommaProceedsEtAl != nil {
+		location := Location{Start: ifCommaProceedsEtAl[0] + bibItem.Location.Start, End: ifCommaProceedsEtAl[1] + bibItem.Location.Start}
+		issues = append(issues, Issue{Type: "ET_AL_WITH_COMMA", Location: location})
+	}
 
 	// Check if et al. not wrapped in a emph or textit macro
 	// eg. L. Kiani et al.,
