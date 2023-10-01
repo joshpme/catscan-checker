@@ -24,14 +24,13 @@ func findBibItems(contents string) []BibItem {
 	var items []BibItem
 	match, err := bibItemRegex.FindStringMatch(contents)
 	for err == nil && match != nil {
-		fullMatch := match.Groups()[0].Capture
 		items = append(items, BibItem{
 			Name:         match.Groups()[1].String(),
 			Ref:          removeExcessWhitespace(match.Groups()[2].String()),
 			OriginalText: match.Groups()[2].String(),
 			Location: Location{
-				Start: fullMatch.Index,
-				End:   fullMatch.Index + fullMatch.Length,
+				Start: match.Groups()[2].Index,
+				End:   match.Groups()[2].Index + match.Groups()[2].Length,
 			},
 		})
 		match, err = bibItemRegex.FindNextMatch(match)
