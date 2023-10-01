@@ -30,10 +30,6 @@ type Response struct {
 	Body       string            `json:"body,omitempty"`
 }
 
-func convertOffset(byteOffset int, contents string) int {
-	return len([]rune(contents[:byteOffset]))
-}
-
 func Main(in Request) (*Response, error) {
 	filename := in.Filename
 	contents := in.Content
@@ -41,11 +37,6 @@ func Main(in Request) (*Response, error) {
 	document := FindDocument(contents, comments)
 	bibItems := FindValidBibItems(contents, comments, document)
 	bibItemIssues := FindBibItemIssues(bibItems)
-
-	for i := range bibItemIssues {
-		bibItemIssues[i].Location.Start = convertOffset(bibItemIssues[i].Location.Start, contents)
-		bibItemIssues[i].Location.End = convertOffset(bibItemIssues[i].Location.End, contents)
-	}
 
 	payload := Payload{
 		Document: document,

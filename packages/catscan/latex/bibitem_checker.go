@@ -1,17 +1,19 @@
 package main
 
 import (
+	"github.com/dlclark/regexp2"
 	"regexp"
 )
 
-var containsEtAl = regexp.MustCompile(`et al\.`)
+var containsEtAl = regexp2.MustCompile(`et al\.`, 0)
+var commaProceedsEtAl = regexp2.MustCompile(`,\s*(\\(emph|textit)\{)?et al`, 0)
+var containsDoi = regexp2.MustCompile(`doi:10.`, 0)
+var containsSpace = regexp2.MustCompile(`doi:\s10`, 0)
+var noPrefix = regexp2.MustCompile(`\\url{10\.`, 0)
+var doiIsUrl = regexp2.MustCompile(`https?://doi.org`, 0)
+
 var wrappedEtAl = regexp.MustCompile(`\\(emph|textit)\{et al\.}`)
-var commaProceedsEtAl = regexp.MustCompile(`,\s*(\\(emph|textit)\{)?et al\.`)
-var containsDoi = regexp.MustCompile(`doi:10.`)
-var containsSpace = regexp.MustCompile(`doi:\s10`)
 var wrappedDoi = regexp.MustCompile(`\\url\{doi:10\.`)
-var noPrefix = regexp.MustCompile(`\\url{10\.`)
-var doiIsUrl = regexp.MustCompile(`https?://doi.org`)
 
 //var yearWrappedInParathesis = regexp.MustCompile(`\(\d{4}\)`)
 
@@ -20,55 +22,55 @@ func checkBibItem(bibItem BibItem) []Issue {
 
 	// et al. should not be proceeded by a comma
 	// eg. L. Kiani et al.,
-	ifCommaProceedsEtAl := commaProceedsEtAl.FindStringIndex(bibItem.OriginalText)
-	if ifCommaProceedsEtAl != nil {
-		location := Location{Start: ifCommaProceedsEtAl[0] + bibItem.Location.Start, End: ifCommaProceedsEtAl[1] + bibItem.Location.Start}
+	match, err := commaProceedsEtAl.FindStringMatch(bibItem.OriginalText)
+	if err == nil && match != nil {
+		location := Location{Start: match.Index + bibItem.Location.Start, End: match.Index + match.Length + bibItem.Location.Start}
 		issues = append(issues, Issue{Type: "ET_AL_WITH_COMMA", Location: location})
 	}
 
 	// Check if et al. not wrapped in a emph or textit macro
 	// eg. L. Kiani et al.,
-	ifContainsEtAl := containsEtAl.FindStringIndex(bibItem.OriginalText)
-	if ifContainsEtAl != nil {
+	match, err = containsEtAl.FindStringMatch(bibItem.OriginalText)
+	if err == nil && match != nil {
 		isWrapped := wrappedEtAl.FindString(bibItem.OriginalText)
 		if isWrapped == "" {
-			location := Location{Start: ifContainsEtAl[0] + bibItem.Location.Start, End: ifContainsEtAl[1] + bibItem.Location.Start}
+			location := Location{Start: match.Index + bibItem.Location.Start, End: match.Index + match.Length + bibItem.Location.Start}
 			issues = append(issues, Issue{Type: "ET_AL_NOT_WRAPPED", Location: location})
 		}
 	}
 
 	// Check that the doi does not contain a space after the colon
 	// e.g. doi: 10.1000/182
-	issueExists := containsSpace.FindStringIndex(bibItem.OriginalText)
-	if issueExists != nil {
-		location := Location{Start: issueExists[0] + bibItem.Location.Start, End: issueExists[1] + bibItem.Location.Start}
+	match, err = containsSpace.FindStringMatch(bibItem.OriginalText)
+	if err == nil && match != nil {
+		location := Location{Start: match.Index + bibItem.Location.Start, End: match.Index + match.Length + bibItem.Location.Start}
 		issues = append(issues, Issue{Type: "DOI_CONTAINS_SPACE", Location: location})
 	}
 
 	// Is wrapped in a URL macro
 	// e.g. doi:10.1000/182 (without \url{})
-	ifContainsDoi := containsDoi.FindStringIndex(bibItem.OriginalText)
-	if ifContainsDoi != nil {
+	match, err = containsDoi.FindStringMatch(bibItem.OriginalText)
+	if err == nil && match != nil {
 		isWrapped := wrappedDoi.FindString(bibItem.OriginalText)
 		if isWrapped == "" {
-			location := Location{Start: ifContainsDoi[0] + bibItem.Location.Start, End: ifContainsDoi[1] + bibItem.Location.Start}
+			location := Location{Start: match.Index + bibItem.Location.Start, End: match.Index + match.Length + bibItem.Location.Start}
 			issues = append(issues, Issue{Type: "DOI_NOT_WRAPPED", Location: location})
 		}
 	}
 
 	// Check that doi has a doi: prefix
 	// e.g. \url{10.1000/182}
-	ifNoPrefix := noPrefix.FindStringIndex(bibItem.OriginalText)
-	if ifNoPrefix != nil {
-		location := Location{Start: ifNoPrefix[0] + bibItem.Location.Start, End: ifNoPrefix[1] + bibItem.Location.Start}
+	match, err = noPrefix.FindStringMatch(bibItem.OriginalText)
+	if err == nil && match != nil {
+		location := Location{Start: match.Index + bibItem.Location.Start, End: match.Index + match.Length + bibItem.Location.Start}
 		issues = append(issues, Issue{Type: "NO_DOI_PREFIX", Location: location})
 	}
 
 	// Check that DOI is not a http link
 	// e.g. \url{https://doi.org/10.1000/182}
-	ifDoiIsUrl := doiIsUrl.FindStringIndex(bibItem.OriginalText)
-	if ifDoiIsUrl != nil {
-		location := Location{Start: ifDoiIsUrl[0] + bibItem.Location.Start, End: ifDoiIsUrl[1] + bibItem.Location.Start}
+	match, err = doiIsUrl.FindStringMatch(bibItem.OriginalText)
+	if err == nil && match != nil {
+		location := Location{Start: match.Index + bibItem.Location.Start, End: match.Index + match.Length + bibItem.Location.Start}
 		issues = append(issues, Issue{Type: "DOI_IS_URL", Location: location})
 	}
 

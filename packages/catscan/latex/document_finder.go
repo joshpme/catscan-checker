@@ -1,34 +1,37 @@
 package main
 
 import (
-	"regexp"
+	"github.com/dlclark/regexp2"
 )
 
 type Document struct {
 	Location Location `json:"location"`
 }
 
+var documentBeginRegex = regexp2.MustCompile(`\\begin{document}`, 0)
+var documentEndRegex = regexp2.MustCompile(`\\end{document}`, 0)
+
 func FindDocument(contents string, comments []Comment) Document {
-	var documentBeginRegex = regexp.MustCompile(`\\begin{document}`)
-	documentBeginMatches := documentBeginRegex.FindAllStringIndex(contents, -1)
+	match, err := documentBeginRegex.FindStringMatch(contents)
 	start := 0
-	for _, match := range documentBeginMatches {
-		location := Location{Start: match[0], End: match[1]}
+	for err == nil && match != nil {
+		location := Location{Start: match.Index, End: match.Index + match.Length}
 		if !locationInComments(location, comments) {
 			start = location.Start
 			break
 		}
+		match, err = documentBeginRegex.FindNextMatch(match)
 	}
 
-	var documentEndRegex = regexp.MustCompile(`\\end{document}`)
-	documentEndMatches := documentEndRegex.FindAllStringIndex(contents, -1)
+	match, err = documentEndRegex.FindStringMatch(contents)
 	end := len(contents) - 1
-	for _, match := range documentEndMatches {
-		location := Location{Start: match[0], End: match[1]}
+	for err == nil && match != nil {
+		location := Location{Start: match.Index, End: match.Index + match.Length}
 		if !locationInComments(location, comments) {
 			end = location.Start
 			break
 		}
+		match, err = documentBeginRegex.FindNextMatch(match)
 	}
 
 	return Document{Location{start, end}}

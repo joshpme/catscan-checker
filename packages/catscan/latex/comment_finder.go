@@ -1,19 +1,26 @@
 package main
 
 import (
-	"regexp"
+	"github.com/dlclark/regexp2"
 )
 
 type Comment struct {
 	Location Location `json:"location"`
 }
 
+var commentRegex = regexp2.MustCompile(`%.*?\n`, regexp2.Singleline)
+
 func FindComments(contents string) []Comment {
-	var commentRegex = regexp.MustCompile(`(?s)%.*?\n`)
-	matches := commentRegex.FindAllStringIndex(contents, -1)
+	match, err := commentRegex.FindStringMatch(contents)
 	comments := make([]Comment, 0)
-	for _, match := range matches {
-		comments = append(comments, Comment{Location: Location{Start: match[0], End: match[1]}})
+	for err == nil && match != nil {
+		comments = append(comments, Comment{
+			Location: Location{
+				Start: match.Index,
+				End:   match.Index + match.Length,
+			},
+		})
+		match, err = commentRegex.FindNextMatch(match)
 	}
 	return comments
 }
