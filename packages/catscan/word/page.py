@@ -95,7 +95,11 @@ def get_text(p):
 
 def check_title_case(text, ratio=0.7):
     if text:
-        return (sum(map(str.isupper, text)) / len(list(filter(str.isalpha, text)))) > ratio
+        dividend = len(list(filter(str.isalpha, text)))
+        if dividend == 0:
+            return False
+        else:
+            return (sum(map(str.isupper, text)) / dividend) > ratio
     else:
         return False
 

@@ -163,24 +163,25 @@ def extract_references(doc, strict_styles=False):
         url_font = {'name': 'Liberation Mono', 'size': 8}
         has_url = has_url_error = False
         for r in ref['p'].runs:
-            text = r.text.strip()
-            for s in starts:
-                if text.startswith(s):
-                    has_url = True
-                    bold, italic, font_size, font_name, all_caps = \
-                        get_style_font_run(r)
+            if r.style is not None:
+                text = r.text.strip()
+                for s in starts:
+                    if text.startswith(s):
+                        has_url = True
+                        bold, italic, font_size, font_name, all_caps = \
+                            get_style_font_run(r)
 
-                    if not font_size or not font_name == url_font['name'] \
-                            or not font_size == url_font['size']:
+                        if not font_size or not font_name == url_font['name'] \
+                                or not font_size == url_font['size']:
+                            has_url_error = True
+                            ref['text_ok'] = False
+                        break
+                    elif s in text:
+                        # means that the font name and size did not change at start.
+                        # may be an issue if two DOIs or URLs after one another
+                        has_url = True
                         has_url_error = True
                         ref['text_ok'] = False
-                    break
-                elif s in text:
-                    # means that the font name and size did not change at start.
-                    # may be an issue if two DOIs or URLs after one another
-                    has_url = True
-                    has_url_error = True
-                    ref['text_ok'] = False
 
         if has_url_error:
             ref['text_error'] = ref['text_error'] + \

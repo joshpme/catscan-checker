@@ -61,7 +61,7 @@ def check_jacow_styles(doc):
 
 
 def get_jacow_styles(doc):
-    return [s.name for s in doc.styles if s.name.startswith('JACoW')]
+    return [s.name for s in doc.styles if s.name is not None and s.name.startswith('JACoW')]
 
 
 def get_paragraph_style_exceptions(doc):
@@ -172,6 +172,7 @@ def get_style_font_run(run):
 
     if font_name is None:
         font_name = run.font.name
+
     if font_size is None:
         font_size = run.font.size
 
