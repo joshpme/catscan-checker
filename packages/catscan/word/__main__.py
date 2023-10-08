@@ -77,11 +77,15 @@ def check_docx(filename, conference_id):
         meta = {
             "author": metadata.author,
             "revision": metadata.revision,
-            "created": metadata.created.strftime("%d/%m/%Y %H:%M"),
-            "modified": metadata.modified.strftime("%d/%m/%Y %H:%M"),
             "version": metadata.version,
             "language": metadata.language,
         }
+
+        if metadata.created is not None:
+            meta["created"] = metadata.created.strftime("%d/%m/%Y %H:%M")
+
+        if metadata.modified is not None:
+            meta["modified"] = metadata.modified.strftime("%d/%m/%Y %H:%M")
 
     return {
         "scores": scores,
