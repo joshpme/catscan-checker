@@ -13,6 +13,8 @@ def get_contribution(conference_id, contribution_id):
     response = requests.get(indico_base + url, headers=headers)
     if response.status_code == 200:
         return response.json()
+
+    print("Status code:", response.status_code)
     return None
 
 
@@ -20,6 +22,7 @@ def find_revision(conference_id, contribution_id, revision_id):
     contribution = get_contribution(conference_id, contribution_id)
 
     if contribution is None:
+        print("No contribution found")
         return None
 
     for revision in contribution.get('revisions', []):
@@ -32,13 +35,15 @@ def find_revision(conference_id, contribution_id, revision_id):
 def find_word_file(conference_id, contribution_id, revision_id):
     revision = find_revision(conference_id, contribution_id, revision_id)
     if revision is None:
+        print("No revision found")
         return None
 
     for file in revision.get('files', []):
         if file['filename'].endswith('.docx'):
             return file
 
-    return None, None
+    print("No word file found")
+    return None
 
 
 def get_word_contents(conference_id, contribution_id, revision_id):
@@ -56,5 +61,6 @@ def get_word_contents(conference_id, contribution_id, revision_id):
         file_contents = io.BytesIO(response.content)
         return file_contents, file['filename']
 
+    print("Status code:", response.status_code)
     return None, None
 
