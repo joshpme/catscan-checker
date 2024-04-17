@@ -1,10 +1,12 @@
+import json
+
 from refdb import get_references, create_spms_variables
 from score import score
 from page import check_tracking_on
 from doc import create_upload_variables
 from docx import Document
 from s3 import get_file
-
+from indico import get_word_contents
 
 def get_extension(filename):
     return filename.rsplit('.', 1)[1].lower()
@@ -18,7 +20,7 @@ def get_name(filename):
     return filename.rsplit('.', 1)[0].upper()
 
 
-def check_docx(filename, conference_id):
+def check_docx(filename, conference_id, file=None):
     if filename is None:
         return {
             "error": "Not file specified."
@@ -29,7 +31,8 @@ def check_docx(filename, conference_id):
             "error": "File format is not allowed.\nFile must be a .docx"
         }
 
-    file = get_file(filename)
+    if file is None:
+        file = get_file(filename)
 
     if file is None:
         return {
@@ -96,11 +99,32 @@ def check_docx(filename, conference_id):
 
 
 def main(event):
+    output = {"error": "No file specified."}
+
     filename = event.get("name", None)
     conference_id = event.get("conference", None)
-    try:
-        output = check_docx(filename, conference_id)
-    except Exception as err:
-        output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
+
+    if filename is not None:
+        try:
+            output = check_docx(filename, conference_id)
+            return {'body': output}
+        except Exception as err:
+            output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
+
+    contribution_id = event.get("contribution", None)
+    revision_id = event.get("revision", None)
+
+    if contribution_id is not None and revision_id is not None:
+        file_contents, filename = get_word_contents(conference_id, contribution_id, revision_id)
+        if file_contents is None or filename is None:
+            output = {"error": "Could not get contents from indico."}
+            return {'body': output}
+
+        try:
+            output = check_docx(filename, conference_id, file_contents)
+            return {'body': output}
+
+        except Exception as err:
+            output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
 
     return {'body': output}
