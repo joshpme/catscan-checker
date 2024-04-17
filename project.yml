@@ -23,7 +23,7 @@ packages:
         runtime: 'python:3.11'
         limits:
           memory: 512
-          timeout: 15000
+          timeout: 30000
       - name: conferences
         web: true
         runtime: 'python:3.11'
