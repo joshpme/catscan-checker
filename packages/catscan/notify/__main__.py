@@ -2,14 +2,16 @@ import os
 import requests
 
 def main(event):
-    headers = event.get("headers", {})
-    auth = headers.get("Authorization", None)
-    if auth is None:
-        return {"body": {"error": "Unauthorized"}}
+    # headers = event.get("headers", {})
+    # auth = headers.get("Authorization", None)
+    # if auth is None:
+    #     return {"body": {"error": "Unauthorized"}}
+    #
+    # bearer_token = f"Bearer {os.getenv('INDICO_AUTH')}"
+    # if auth != bearer_token:
+    #     return {"body": {"error": "Incorrect auth token"}}
 
-    bearer_token = f"Bearer {os.getenv('INDICO_AUTH')}"
-    if auth != bearer_token:
-        return {"body": {"error": "Incorrect auth token"}}
+    print(event)
 
     event_id = event.get("event", None)
     if event_id is None:
@@ -43,7 +45,7 @@ def main(event):
         "contribution": contrib_id,
         "revision": revision_id
     }
-    response = requests.post(url, data, headers=headers)
+    response = requests.post(url, data)
     if response.status_code == 200:
         return {'body': response.json()}
 
