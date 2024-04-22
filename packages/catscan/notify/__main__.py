@@ -2,9 +2,9 @@ import os
 import requests
 
 def main(event):
-    return {"body": event}
-    headers = event.get("headers", {})
-    auth = headers.get("Authorization", None)
+    http = event.get("http", {})
+    headers = http.get("headers", {})
+    auth = headers.get("authorization", None)
     if auth is None:
         return {"body": {"error": "Unauthorized"}}
 
