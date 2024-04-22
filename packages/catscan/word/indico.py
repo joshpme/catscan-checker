@@ -26,7 +26,7 @@ def find_revision(conference_id, contribution_id, revision_id):
         return None
 
     for revision in contribution.get('revisions', []):
-        if revision['id'] == revision_id:
+        if f"{revision['id']}" == f"{revision_id}":
             return revision
 
     return None
