@@ -1,11 +1,13 @@
 import json
+import os
+import hashlib
 
 from refdb import get_references, create_spms_variables
 from score import score
 from page import check_tracking_on
 from doc import create_upload_variables
 from docx import Document
-from s3 import get_file
+from s3 import get_file, put_file
 from indico import get_word_contents
 
 def get_extension(filename):
@@ -23,7 +25,7 @@ def get_name(filename):
 def check_docx(filename, conference_id, file=None):
     if filename is None:
         return {
-            "error": "Not file specified."
+            "error": "No file specified."
         }
 
     if not allowed_file(filename):
@@ -99,8 +101,6 @@ def check_docx(filename, conference_id, file=None):
 
 
 def main(event):
-    output = {"error": "No file specified."}
-
     filename = event.get("name", None)
     conference_id = event.get("conference", None)
 
@@ -110,21 +110,42 @@ def main(event):
             return {'body': output}
         except Exception as err:
             output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
+            return {'body': output}
 
     contribution_id = event.get("contribution", None)
     revision_id = event.get("revision", None)
 
     if contribution_id is not None and revision_id is not None:
+        http = event.get("http", {})
+        headers = http.get("headers", {})
+        auth = headers.get("authorization", None)
+        if auth is None:
+            return {"body": {"error": "Unauthorized"}}
+
+        bearer_token = f"Bearer {os.getenv('INDICO_AUTH')}"
+        if auth != bearer_token:
+            return {"body": {"error": "Incorrect auth token"}}
+
         file_contents, filename = get_word_contents(conference_id, contribution_id, revision_id)
         if file_contents is None or filename is None:
             output = {"error": "Could not get contents from indico."}
             return {'body': output}
 
         try:
-            output = check_docx(filename, conference_id, file_contents)
-            return {'body': output}
-
+            results = check_docx(filename, conference_id, file_contents)
+            results_string = json.dumps(results)
+            try:
+                hasher = hashlib.sha1()
+                hasher.update(results_string.encode())
+                new_file_name = f"{hasher.hexdigest()}.json"
+                put_file(new_file_name, results_string)
+                return {'body': {"results": results, "filename": new_file_name}}
+            except Exception as err:
+                output = {
+                    "error": f"An unexpected error occurred cache results of data.\n Details:\n {err=}, {type(err)=}"}
+                return {'body': output}
         except Exception as err:
             output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
+            return {'body': output}
 
-    return {'body': output}
+    return {'body': {"error": "No file specified."}}

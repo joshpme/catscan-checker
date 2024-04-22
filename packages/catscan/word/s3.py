@@ -22,3 +22,15 @@ def get_file(filename):
     file = io.BytesIO(bytes)
     client.delete_object(Bucket='catstore', Key=filename)
     return file
+
+def put_file(filename, file):
+    session = boto3.session.Session()
+    client = session.client('s3',
+                            config=botocore.config.Config(s3={'addressing_style': 'virtual'}),
+                            region_name='syd1',
+                            endpoint_url='https://syd1.digitaloceanspaces.com',
+                            aws_access_key_id=os.getenv('SPACES_KEY'),
+                            aws_secret_access_key=os.getenv('SPACES_SECRET'))
+
+    client.put_object(Bucket='catstore', Key=filename, Body=file)
+    return True
