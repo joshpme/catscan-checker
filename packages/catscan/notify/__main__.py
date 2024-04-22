@@ -2,6 +2,7 @@ import os
 import requests
 
 def main(event):
+    return {"body": event}
     headers = event.get("headers", {})
     auth = headers.get("Authorization", None)
     if auth is None:
