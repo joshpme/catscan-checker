@@ -9,6 +9,7 @@ packages:
       MYSQL_PORT: '${MYSQL_PORT}'
       MYSQL_DB: '${MYSQL_DB}'
       INDICO_TOKEN: '${INDICO_TOKEN}'
+      INDICO_AUTH: '${INDICO_AUTH}'
     functions:
 #      - name: cleanup
 #        web: false
@@ -18,6 +19,12 @@ packages:
 #            sourceType: scheduler
 #            sourceDetails:
 #              cron: '0 * * * *'
+      - name: notify
+        web: true
+        runtime: 'python:3.11'
+        limits:
+          memory: 128
+          timeout: 60000
       - name: word
         web: true
         runtime: 'python:3.11'
