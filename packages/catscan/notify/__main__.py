@@ -2,16 +2,14 @@ import os
 import requests
 
 def main(event):
-    # headers = event.get("headers", {})
-    # auth = headers.get("Authorization", None)
-    # if auth is None:
-    #     return {"body": {"error": "Unauthorized"}}
-    #
-    # bearer_token = f"Bearer {os.getenv('INDICO_AUTH')}"
-    # if auth != bearer_token:
-    #     return {"body": {"error": "Incorrect auth token"}}
+    headers = event.get("headers", {})
+    auth = headers.get("Authorization", None)
+    if auth is None:
+        return {"body": {"error": "Unauthorized"}}
 
-    print(event)
+    bearer_token = f"Bearer {os.getenv('INDICO_AUTH')}"
+    if auth != bearer_token:
+        return {"body": {"error": "Incorrect auth token"}}
 
     event_id = event.get("event", None)
     if event_id is None:
