@@ -130,4 +130,6 @@ def main(event):
         send_data(response)
         return response
     except Exception as e:
-        return {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
+        error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
+        send_data(error_response)
+        return error_response
