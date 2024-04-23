@@ -131,7 +131,10 @@ def run_scan(event):
 
 
 def main(event):
-    send_data(event)
-    response = run_scan(event)
-    send_data(response)
-    return response
+    try:
+        send_data(event)
+        response = run_scan(event)
+        send_data(response)
+        return response
+    except Exception as e:
+        return {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
