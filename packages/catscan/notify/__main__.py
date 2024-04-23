@@ -49,24 +49,7 @@ def construct_table(response):
     return table
 
 
-def send_data(event):
-    event_id = event.get("event", None)
-    contrib_id = event.get("contrib_id", None)
-    revision_id = event.get("revision_id", None)
-    action = event.get("action", None)
-    editable_type = event.get("editable_type", None)
-    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json={
-        "event": event_id,
-        "contrib_id": contrib_id,
-        "revision_id": revision_id,
-        "action": action,
-        "editable_type": editable_type
-    })
-
 def main(event):
-    send_data(event)
-    return {"body": {"error": "Unauthorized"}}
-
     http = event.get("http", {})
     headers = http.get("headers", {})
     auth = headers.get("authorization", None)
@@ -77,26 +60,30 @@ def main(event):
     if auth != bearer_token:
         return {"body": {"error": "Incorrect auth token"}}
 
-    event_id = event.get("event", None)
+    payload = event.get("payload", None)
+    if payload is None:
+        return {"body": {"error": "Payload not provided"}}
+
+    event_id = payload.get("event", None)
     if event_id is None:
         return {"body": {"error": "Event ID not provided"}}
 
-    contrib_id = event.get("contrib_id", None)
+    contrib_id = payload.get("contrib_id", None)
     if contrib_id is None:
         return {"body": {"error": "Contribution ID not provided"}}
 
-    revision_id = event.get("revision_id", None)
+    revision_id = payload.get("revision_id", None)
     if revision_id is None:
         return {"body": {"error": "Revision ID not provided"}}
 
-    action = event.get("action", None)
+    action = payload.get("action", None)
     if action is None:
         return {"body": {"error": "Action not provided"}}
 
     if action not in {"create", "update"}:
         return {"body": {"ignored": "Invalid action"}}
 
-    editable_type = event.get("editable_type", None)
+    editable_type = payload.get("editable_type", None)
     if editable_type is None:
         return {"body": {"error": "Editable type not provided"}}
 
