@@ -1,3 +1,4 @@
+import io
 import json
 import os
 import hashlib
@@ -7,7 +8,7 @@ from score import score
 from page import check_tracking_on
 from doc import create_upload_variables
 from docx import Document
-from s3 import get_file, put_file
+from s3 import get_file, put_file, delete_file
 from indico import get_word_contents
 
 def get_extension(filename):
@@ -34,7 +35,13 @@ def check_docx(filename, conference_id, file=None):
         }
 
     if file is None:
-        file = get_file(filename)
+        body = get_file(filename)
+        if body is None:
+            return {
+                "error": "File not found.\nPlease try again."
+            }
+        file = io.BytesIO(body)
+        delete_file(filename)
 
     if file is None:
         return {
@@ -111,6 +118,13 @@ def main(event):
         except Exception as err:
             output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
             return {'body': output}
+
+    results = event.get("results", None)
+    if results is not None:
+        body = get_file(f"{results}.json").decode('utf-8')
+        if body is None:
+            return {'body': {"error": "Could not get results from Catscan."}}
+        return {'body': json.loads(body)}
 
     contribution_id = event.get("contribution", None)
     revision_id = event.get("revision", None)
