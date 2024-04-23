@@ -126,13 +126,6 @@ def run_scan(event):
 
 def main(event):
     try:
-        payload = event.get("payload", None)
-        http = payload.get("http", {})
-        headers = http.get("headers", {})
-        send_data({
-            "payload": payload,
-            "headers": headers
-        })
         response = run_scan(event)
         send_data(response)
         return response
