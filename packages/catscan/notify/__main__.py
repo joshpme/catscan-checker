@@ -43,8 +43,7 @@ def construct_table(response):
 
     table = "<table><thead><tr><td><b>Section</b></td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody>"
     for category, scores in categories.items():
-        if scores[1] != 0 or scores[2] != 0:
-            table += f"<tr><td>{category.title()}&nbsp;</td><td>&nbsp;{scores[0]}&nbsp;</td><td>&nbsp;{scores[1]}&nbsp;</td><td>&nbsp;{scores[2]}</td></tr>"
+        table += f"<tr><td>{category.title()}&nbsp;</td><td>&nbsp;{scores[0]}&nbsp;</td><td>&nbsp;{scores[1]}&nbsp;</td><td>&nbsp;{scores[2]}</td></tr>"
     table += "</tbody></table>"
 
     return table
