@@ -1,7 +1,4 @@
-import json
 import os
-import boto3
-import botocore
 import requests
 
 def leave_comment(conference_id, contribution_id, revision_id, comment):
@@ -52,11 +49,23 @@ def construct_table(response):
     return table
 
 
-def send_data(data):
-    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json=data)
+def send_data(event):
+    event_id = event.get("event", None)
+    contrib_id = event.get("contrib_id", None)
+    revision_id = event.get("revision_id", None)
+    action = event.get("action", None)
+    editable_type = event.get("editable_type", None)
+    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json={
+        "event": event_id,
+        "contrib_id": contrib_id,
+        "revision_id": revision_id,
+        "action": action,
+        "editable_type": editable_type
+    })
 
 def main(event):
     send_data(event)
+    return {"body": {"error": "Unauthorized"}}
 
     http = event.get("http", {})
     headers = http.get("headers", {})
