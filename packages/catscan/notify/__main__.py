@@ -33,25 +33,6 @@ def catscan(conference_id, contribution_id, revision_id):
     return {"error": "Could not get results from Catscan."}
 
 
-def construct_table(response):
-    results = response.get("results", None)
-    if results is None:
-        print("No body in response")
-        return None
-
-    categories = results.get("scores", None)
-    if categories is None:
-        print("No scores in body")
-        return None
-
-    table = "<table><thead><tr><td><b>Section</b></td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody>"
-    for category, scores in categories.items():
-        table += f"<tr><td>{category.title()}&nbsp;</td><td>&nbsp;{scores[0]}&nbsp;</td><td>&nbsp;{scores[1]}&nbsp;</td><td>&nbsp;{scores[2]}</td></tr>"
-    table += "</tbody></table>"
-
-    return table
-
-
 def send_data(data):
     requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json=data)
 
@@ -101,6 +82,8 @@ def run_scan(event):
     if editable_type not in {"paper"}:
         return {"body": {"ignored": "Invalid editable type"}}
 
+    send_data({"body": "Running Catscan", "event": event_id, "contribution": contrib_id, "revision": revision_id})
+
     response = catscan(event_id, contrib_id, revision_id)
 
     if "error" in response:
@@ -111,13 +94,9 @@ def run_scan(event):
         return {"body": {"error": "Filename not provided"}}
 
     result_name = filename[:-5]
-    html_response = f"<h2>CatScan Results</h2>"
-    html_response += f"<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>"
-    html_response += f"<p><b><a target='_blank' href='https://scan.jacow.org/?results={result_name}'>See Report</a></b></p>"
-
-    table = construct_table(response)
-    if table is not None:
-        html_response += "<h3>Summary</h3>" + table
+    html_response = f"# CatScan Results\n\n"
+    html_response += f"Your paper has been automatically scanned for formatting issues. Here are the results:\n\n"
+    html_response += f"[See Report](https://scan.jacow.org/?results={result_name})"
 
     leave_comment(event_id, contrib_id, revision_id, html_response)
 
