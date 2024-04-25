@@ -12,44 +12,43 @@ def get_contribution(conference_id, contribution_id):
     }
     response = requests.get(indico_base + url, headers=headers)
     if response.status_code == 200:
-        return response.json()
+        return response.json(), None
 
-    print("Status code:", response.status_code)
-    return None
+    return None, f"Status code: {response.status_code}"
 
 
 def find_revision(conference_id, contribution_id, revision_id):
-    contribution = get_contribution(conference_id, contribution_id)
+    contribution, error = get_contribution(conference_id, contribution_id)
 
     if contribution is None:
-        print("No contribution found")
-        return None
+        return None, f"No contribution found {error}"
 
     for revision in contribution.get('revisions', []):
         if f"{revision['id']}" == f"{revision_id}":
-            return revision
+            return revision, None
 
-    return None
+    return None, "No revision found"
 
 
 def find_word_file(conference_id, contribution_id, revision_id):
-    revision = find_revision(conference_id, contribution_id, revision_id)
+    revision, error = find_revision(conference_id, contribution_id, revision_id)
+    if error is not None:
+        return None, f"No revision found: {error}"
+
     if revision is None:
-        print("No revision found")
-        return None
+        return None, "No revision found"
 
     for file in revision.get('files', []):
         if file['filename'].endswith('.docx'):
-            return file
+            return file, None
 
-    print("No word file found")
-    return None
+    return None, "No word file found"
 
 
 def get_word_contents(conference_id, contribution_id, revision_id):
-    file = find_word_file(conference_id, contribution_id, revision_id)
-    if file is None:
-        return None, None
+    file, error = find_word_file(conference_id, contribution_id, revision_id)
+    if file is None or error is not None:
+        return None, None, f"Could not get word contents {error}"
 
     url = file['download_url']
     token = os.getenv('INDICO_TOKEN')
@@ -59,8 +58,7 @@ def get_word_contents(conference_id, contribution_id, revision_id):
     response = requests.get(indico_base + url, headers=headers)
     if response.status_code == 200:
         file_contents = io.BytesIO(response.content)
-        return file_contents, file['filename']
+        return file_contents, file['filename'], None
 
-    print("Status code:", response.status_code)
-    return None, None
+    return None, None, f"Status code: {response.status_code}"
 

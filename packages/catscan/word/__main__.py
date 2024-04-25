@@ -140,10 +140,15 @@ def main(event):
         if auth != bearer_token:
             return {"body": {"error": "Incorrect auth token"}}
 
-        file_contents, filename = get_word_contents(conference_id, contribution_id, revision_id)
-        if file_contents is None or filename is None:
-            output = {"error": "Could not get contents from indico."}
-            return {'body': output}
+        file_contents, filename, error = get_word_contents(conference_id, contribution_id, revision_id)
+        if file_contents is None or filename is None or error is not None:
+            return {'body': {
+                "error_reason": error,
+                "error": "Could not get contents from indico.",
+                "contribution": contribution_id,
+                "revision": revision_id,
+                "conference": conference_id
+            }}
 
         try:
             results = check_docx(filename, conference_id, file_contents)
@@ -155,9 +160,7 @@ def main(event):
                 put_file(new_file_name, results_string)
                 return {'body': {"results": results, "filename": new_file_name}}
             except Exception as err:
-                output = {
-                    "error": f"An unexpected error occurred cache results of data.\n Details:\n {err=}, {type(err)=}"}
-                return {'body': output}
+                return {'body': {"error": f"An unexpected error occurred cache results of data.\n Details:\n {err=}, {type(err)=}"}}
         except Exception as err:
             output = {"error": f"An unexpected error occurred.\n Details:\n {err=}, {type(err)=}"}
             return {'body': output}
