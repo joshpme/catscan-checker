@@ -56,9 +56,12 @@ def run_scan(event):
     if auth != bearer_token:
         return {"body": {"error": "Incorrect auth token"}}
 
-    event_id = payload.get("event", None)
-    if event_id is None:
-        return {"body": {"error": "Event ID not provided"}}
+    event_name = payload.get("event", None)
+    if event_name is None:
+        return {"body": {"error": "Event Name not provided"}}
+
+    # Event name is asd-1234, I need to pull of the last digits to get the event ID
+    event_id = event_name.split("-")[-1]
 
     contrib_id = payload.get("contrib_id", None)
     if contrib_id is None:
