@@ -1,6 +1,32 @@
 import os
 import requests
 
+indico_base = "https://indico.jacow.org"
+
+def get_contribution(conference_id, contribution_id):
+    url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper"
+    token = os.getenv('INDICO_TOKEN')
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    response = requests.get(indico_base + url, headers=headers)
+    if response.status_code == 200:
+        return response.json(), None
+
+    return None, f"Status code: {response.status_code}"
+
+
+def find_revision(conference_id, contribution_id, revision_id):
+    contribution, error = get_contribution(conference_id, contribution_id)
+
+    if contribution is None:
+        return None, f"No contribution found {error}"
+
+    for revision in contribution.get('revisions', []):
+        if f"{revision['id']}" == f"{revision_id}":
+            return revision, None
+
+    return None, "No revision found"
 
 def leave_comment(conference_id, contribution_id, revision_id, comment):
     indico_base = "https://indico.jacow.org"
@@ -86,6 +112,16 @@ def run_scan(event):
         return {"body": {"ignored": "Invalid editable type"}}
 
     send_data({"body": "Running Catscan", "event": event_id, "contribution": contrib_id, "revision": revision_id})
+
+    revision, error = find_revision(event_id, contrib_id, revision_id)
+
+    if error is not None:
+        return {"body": {"error": error}}
+    if revision is None:
+        return {"body": {"error": "No revision found"}}
+
+    if revision['is_editor_revision'] is True:
+        return {"body": {"ignored": "Editor revision"}}
 
     response = catscan(event_id, contrib_id, revision_id)
 
