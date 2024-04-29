@@ -117,10 +117,11 @@ def run_scan(event):
 
     if error is not None:
         return {"body": {"error": error}}
+
     if revision is None:
         return {"body": {"error": "No revision found"}}
 
-    if revision['is_editor_revision'] is True:
+    if 'is_editor_revision' in revision and revision['is_editor_revision'] is True:
         return {"body": {"ignored": "Editor revision"}}
 
     response = catscan(event_id, contrib_id, revision_id)
