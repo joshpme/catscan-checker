@@ -102,14 +102,14 @@ def run_scan(event):
         return {"body": {"error": "Action not provided"}}
 
     if action not in {"create", "update"}:
-        return {"body": {"ignored": "Invalid action"}}
+        return {"body": {"ignored": f'Invalid action: {action}'}}
 
     editable_type = payload.get("editable_type", None)
     if editable_type is None:
         return {"body": {"error": "Editable type not provided"}}
 
     if editable_type not in {"paper"}:
-        return {"body": {"ignored": "Invalid editable type"}}
+        return {"body": {"ignored": f'Invalid editable type: {editable_type}'}}
 
     send_data({"body": "Running Catscan", "event": event_id, "contribution": contrib_id, "revision": revision_id})
 
