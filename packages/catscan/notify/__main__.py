@@ -111,8 +111,6 @@ def run_scan(event):
     if editable_type not in {"paper"}:
         return {"body": {"ignored": f'Invalid editable type: {editable_type}'}}
 
-    send_data({"body": "Running Catscan", "event": event_id, "contribution": contrib_id, "revision": revision_id})
-
     revision, error = find_revision(event_id, contrib_id, revision_id)
 
     if error is not None:
@@ -124,6 +122,7 @@ def run_scan(event):
     if 'is_editor_revision' in revision and revision['is_editor_revision'] is True:
         return {"body": {"ignored": "Editor revision"}}
 
+    send_data({"body": "Running Catscan", "event": event_id, "contribution": contrib_id, "revision": revision_id})
     response = catscan(event_id, contrib_id, revision_id)
 
     if "error" in response:
