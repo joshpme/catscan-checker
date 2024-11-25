@@ -18,14 +18,14 @@ packages:
           memory: 128
       - name: worker
         runtime: 'python:3.12'
-        limits:
-          memory: 128
-          timeout: 60000
         triggers:
           - name: queue-worker
             sourceType: scheduler
             sourceDetails:
               cron: '* * * * *'
+        limits:
+          memory: 128
+          timeout: 60000
       - name: word
         web: true
         runtime: 'python:3.12'
