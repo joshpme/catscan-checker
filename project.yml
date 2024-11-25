@@ -17,16 +17,15 @@ packages:
         limits:
           memory: 128
       - name: worker
-        web: false
         runtime: 'python:3.12'
         limits:
           memory: 128
           timeout: 60000
         triggers:
-        - name: empty-queue
-          sourceType: scheduler
-          sourceDetails:
-            cron: '* * * * *'
+          - name: queue-worker
+            sourceType: scheduler
+            sourceDetails:
+              cron: '* * * * *'
       - name: word
         web: true
         runtime: 'python:3.12'
