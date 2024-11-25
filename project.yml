@@ -18,13 +18,12 @@ packages:
           memory: 128
       - name: worker
         runtime: 'python:3.12'
-        triggers:
-          - name: queue-worker
-            sourceType: scheduler
-            sourceDetails:
-              cron: '* * * * *'
-              withBody: {}
-
+#        triggers:
+#          - name: queue-worker
+#            sourceType: scheduler
+#            sourceDetails:
+#              cron: '* * * * *'
+#              withBody: {}
         limits:
           memory: 128
           timeout: 60000
