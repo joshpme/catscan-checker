@@ -48,21 +48,22 @@ def check_queue():
         port=int(os.getenv('MYSQL_PORT')),
         database=os.getenv('MYSQL_DB'))
     cursor = cnx.cursor()
-
     query = """SELECT id as queue_id, event_id, contribution_id, revision_id FROM scan_queue WHERE scanned IS NULL AND (SCAN_START IS NULL OR SCAN_START < NOW() - INTERVAL 1 MINUTE) ORDER BY REQUESTED ASC LIMIT 1"""
     cursor.execute(query)
-
+    r = None
     for (queue_id, event_id, contribution_id, revision_id) in cursor:
         start_scan = """UPDATE scan_queue SET SCAN_START = NOW() WHERE id = %s"""
         if cursor.execute(start_scan, (queue_id,)) == 1:
             cnx.commit()
-            return {
+            r = {
                 "queue_id": queue_id,
                 "event_id": event_id,
                 "contribution_id": contribution_id,
                 "revision_id": revision_id
             }
-    return None
+    cursor.close()
+    cnx.close()
+    return r
 
 def save_results(queue_id, results):
     cnx = pymysql.connect(
@@ -81,6 +82,8 @@ def save_results(queue_id, results):
         cursor.execute(failure, (json.dumps(results), queue_id,))
 
     cnx.commit()
+    cursor.close()
+    cnx.close()
 
 def run_scan(event_id, contrib_id, revision_id):
     response = catscan(event_id, contrib_id, revision_id)

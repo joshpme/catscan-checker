@@ -44,9 +44,13 @@ def append_queue(event_id, contrib_id, revision_id):
     sql_result = cursor.execute(query, (event_id, contrib_id, revision_id))
     if sql_result == 1:
         cnx.commit()
+        cursor.close()
+        cnx.close()
         return None
-    else:
-        return "Failed to insert into scan_queue"
+
+    cursor.close()
+    cnx.close()
+    return "Failed to insert into scan_queue"
 
 
 def append_item(event):
