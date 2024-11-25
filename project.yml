@@ -13,11 +13,11 @@ packages:
     functions:
       - name: notify
         web: true
-        runtime: 'python:3.12'
+        runtime: 'python:3.11'
         limits:
           memory: 128
       - name: worker
-        runtime: 'python:3.12'
+        runtime: 'python:3.11'
 #        triggers:
 #          - name: queue-worker
 #            sourceType: scheduler
@@ -29,13 +29,13 @@ packages:
           timeout: 60000
       - name: word
         web: true
-        runtime: 'python:3.12'
+        runtime: 'python:3.11'
         limits:
           memory: 512
           timeout: 30000
       - name: conferences
         web: true
-        runtime: 'python:3.12'
+        runtime: 'python:3.11'
       - name: latex
         web: true
         runtime: 'go:1.20'
