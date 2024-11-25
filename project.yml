@@ -23,6 +23,8 @@ packages:
             sourceType: scheduler
             sourceDetails:
               cron: '* * * * *'
+              withBody: {}
+
         limits:
           memory: 128
           timeout: 60000
