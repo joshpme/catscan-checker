@@ -11,29 +11,31 @@ packages:
       INDICO_TOKEN: '${INDICO_TOKEN}'
       INDICO_AUTH: '${INDICO_AUTH}'
     functions:
-#      - name: cleanup
-#        web: false
-#        runtime: 'python:3.11'
-#        triggers:
-#          - name: clean-up-files
-#            sourceType: scheduler
-#            sourceDetails:
-#              cron: '0 * * * *'
       - name: notify
         web: true
-        runtime: 'python:3.11'
+        runtime: 'python:3.12'
+        limits:
+          memory: 128
+      - name: worker
+        web: false
+        runtime: 'python:3.12'
         limits:
           memory: 128
           timeout: 60000
+        triggers:
+          - name: empty-queue
+            sourceType: scheduler
+            sourceDetails:
+              cron: '* * * * *'
       - name: word
         web: true
-        runtime: 'python:3.11'
+        runtime: 'python:3.12'
         limits:
           memory: 512
           timeout: 30000
       - name: conferences
         web: true
-        runtime: 'python:3.11'
+        runtime: 'python:3.12'
       - name: latex
         web: true
         runtime: 'go:1.20'

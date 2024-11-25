@@ -1,7 +1,9 @@
-import os
 import requests
+import pymysql
+import os
 
 indico_base = "https://indico.jacow.org"
+
 
 def get_contribution(conference_id, contribution_id):
     url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper"
@@ -28,42 +30,26 @@ def find_revision(conference_id, contribution_id, revision_id):
 
     return None, "No revision found"
 
-def leave_comment(conference_id, contribution_id, revision_id, comment):
-    indico_base = "https://indico.jacow.org"
-    url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper/{revision_id}/comments/"
-    token = os.getenv('INDICO_TOKEN')
-    headers = {
-        'Authorization': f'Bearer {token}'
-    }
-    data = {
-        'text': comment
-    }
-    response = requests.post(indico_base + url, data=data, headers=headers)
-    return response
+
+def append_queue(event_id, contrib_id, revision_id):
+    cnx = pymysql.connect(
+        user=os.getenv('MYSQL_USER'),
+        password=os.getenv('MYSQL_PASS'),
+        host=os.getenv('MYSQL_HOST'),
+        port=int(os.getenv('MYSQL_PORT')),
+        database=os.getenv('MYSQL_DB'))
+    cursor = cnx.cursor()
+
+    query = """INSERT INTO scan_queue (event_id, contribution_id, revision_id) VALUES (%s, %s, %s)"""
+    sql_result = cursor.execute(query, (event_id, contrib_id, revision_id))
+    if sql_result == 1:
+        cnx.commit()
+        return None
+    else:
+        return "Failed to insert into scan_queue"
 
 
-def catscan(conference_id, contribution_id, revision_id):
-    url = f"https://scan-api.jacow.org/catscan/word"
-    data = {
-        "conference": conference_id,
-        "contribution": contribution_id,
-        "revision": revision_id
-    }
-    internal_headers = {
-        'Authorization': f'Bearer {os.getenv("INDICO_AUTH")}'
-    }
-    response = requests.post(url, data, headers=internal_headers)
-    if response.status_code == 200:
-        return response.json()
-
-    return {"error": "Could not get results from Catscan."}
-
-
-def send_data(data):
-    requests.post("https://webhook.site/54076fc4-d71f-42ad-93c6-c044366787df", json=data)
-
-
-def run_scan(event):
+def append_item(event):
     http = event.get("http", {})
     headers = http.get("headers", {})
     auth = headers.get("authorization", None)
@@ -122,32 +108,15 @@ def run_scan(event):
     if 'is_editor_revision' in revision and revision['is_editor_revision'] is True:
         return {"body": {"ignored": "Editor revision"}}
 
-    send_data({"body": "Running Catscan", "event": event_id, "contribution": contrib_id, "revision": revision_id})
-    response = catscan(event_id, contrib_id, revision_id)
+    append_queue(event_id, contrib_id, revision_id)
 
-    if "error" in response:
-        return {"body": response}
-
-    filename = response.get("filename", None)
-    if filename is None:
-        return {"body": {"error": "Filename not provided"}}
-
-    result_name = filename[:-5]
-    html_response = f"# CatScan Results\n\n"
-    html_response += f"Your paper has been automatically scanned for formatting issues. Here are the results:\n\n"
-    html_response += f"[See Report](https://scan.jacow.org/?results={result_name})"
-
-    leave_comment(event_id, contrib_id, revision_id, html_response)
-
-    return {'body': "Successfully added comment"}
+    return {'body': "Successfully added to queue"}
 
 
 def main(event):
     try:
-        response = run_scan(event)
-        send_data(response)
+        response = append_item(event)
         return response
     except Exception as e:
         error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
-        send_data(error_response)
         return error_response
