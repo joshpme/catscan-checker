@@ -4,7 +4,6 @@ import os
 
 indico_base = "https://indico.jacow.org"
 
-
 def get_contribution(conference_id, contribution_id):
     url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper"
     token = os.getenv('INDICO_TOKEN')
@@ -30,28 +29,37 @@ def find_revision(conference_id, contribution_id, revision_id):
 
     return None, "No revision found"
 
-
-def append_queue(event_id, contrib_id, revision_id):
-    cnx = pymysql.connect(
+def connect_db():
+    return pymysql.connect(
         user=os.getenv('MYSQL_USER'),
         password=os.getenv('MYSQL_PASS'),
         host=os.getenv('MYSQL_HOST'),
         port=int(os.getenv('MYSQL_PORT')),
         database=os.getenv('MYSQL_DB'))
-    cursor = cnx.cursor()
 
-    query = """INSERT INTO scan_queue (event_id, contribution_id, revision_id) VALUES (%s, %s, %s)"""
-    sql_result = cursor.execute(query, (event_id, contrib_id, revision_id))
-    if sql_result == 1:
-        cnx.commit()
-        cursor.close()
-        cnx.close()
-        return None
+def append_queue(cnx, event_id, contrib_id, revision_id):
+    try:
+        with cnx.cursor() as cursor:
+            query = """INSERT INTO scan_queue (event_id, contribution_id, revision_id) VALUES (%s, %s, %s)"""
+            sql_result = cursor.execute(query, (event_id, contrib_id, revision_id))
+            if sql_result == 1:
+                cnx.commit()
+                return None
+            return "Failed to insert into scan_queue"
+    except Exception as e:
+        return f"Database error: {str(e)}"
 
-    cursor.close()
-    cnx.close()
-    return "Failed to insert into scan_queue"
-
+def append_log(cnx, event_id, contrib_id, revision_id, editable_type, action_type):
+    try:
+        with cnx.cursor() as cursor:
+            query = """INSERT INTO notify_log (event_id, contribution_id, revision_id, action_type, editable_type) VALUES (%s, %s, %s, %s, %s)"""
+            sql_result = cursor.execute(query, (event_id, contrib_id, revision_id, action_type, editable_type))
+            if sql_result == 1:
+                cnx.commit()
+                return None
+            return "Failed to insert into notify_log"
+    except Exception as e:
+        return f"Database error: {str(e)}"
 
 def append_item(event):
     http = event.get("http", {})
@@ -91,31 +99,33 @@ def append_item(event):
     if action is None:
         return {"body": {"error": "Action not provided"}}
 
-    if action not in {"create", "update"}:
-        return {"body": {"ignored": f'Invalid action: {action}'}}
-
     editable_type = payload.get("editable_type", None)
     if editable_type is None:
         return {"body": {"error": "Editable type not provided"}}
 
-    if editable_type not in {"paper"}:
-        return {"body": {"ignored": f'Invalid editable type: {editable_type}'}}
+    with connect_db() as cnx:
+        append_log(cnx, event_id, contrib_id, revision_id, editable_type, action)
 
-    revision, error = find_revision(event_id, contrib_id, revision_id)
+        if action not in {"create", "update"}:
+            return {"body": {"ignored": f'Invalid action: {action}'}}
 
-    if error is not None:
-        return {"body": {"error": error}}
+        if editable_type not in {"paper"}:
+            return {"body": {"ignored": f'Invalid editable type: {editable_type}'}}
 
-    if revision is None:
-        return {"body": {"error": "No revision found"}}
+        revision, error = find_revision(event_id, contrib_id, revision_id)
 
-    if 'is_editor_revision' in revision and revision['is_editor_revision'] is True:
-        return {"body": {"ignored": "Editor revision"}}
+        if error is not None:
+            return {"body": {"error": error}}
 
-    append_queue(event_id, contrib_id, revision_id)
+        if revision is None:
+            return {"body": {"error": "No revision found"}}
+
+        if 'is_editor_revision' in revision and revision['is_editor_revision'] is True:
+            return {"body": {"ignored": "Editor revision"}}
+
+        append_queue(cnx, event_id, contrib_id, revision_id)
 
     return {'body': "Successfully added to queue"}
-
 
 def main(event):
     try:
@@ -124,3 +134,38 @@ def main(event):
     except Exception as e:
         error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
         return error_response
+
+
+
+def test_main():
+    # Set up environment variables
+    os.environ['INDICO_AUTH'] = 'test_auth_token'
+    os.environ['INDICO_TOKEN'] = 'test_indico_token'
+    os.environ['MYSQL_USER'] = 'root'
+    os.environ['MYSQL_PASS'] = ''
+    os.environ['MYSQL_HOST'] = 'localhost'
+    os.environ['MYSQL_PORT'] = '3306'
+    os.environ['MYSQL_DB'] = 'test'
+
+    # Create a valid test event
+    test_event = {
+        "http": {
+            "headers": {
+                "authorization": "Bearer test_auth_token"
+            }
+        },
+        "payload": {
+            "event": "test-1234",  # Conference ID
+            "contrib_id": "5678",   # Contribution ID
+            "revision_id": "9012",  # Revision ID
+            "action": "create",     # Valid action
+            "editable_type": "paper" # Valid editable type
+        }
+    }
+
+    # Execute main function
+    result = main(test_event)
+    print("Test Result:", result)
+
+
+test_main()
