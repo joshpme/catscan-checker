@@ -8,6 +8,7 @@ import (
 type BibItem struct {
 	Name         string   `json:"-"`
 	OriginalText string   `json:"-"`
+	Doi          string   `json:"doi"`
 	Ref          string   `json:"ref"`
 	Location     Location `json:"location"`
 }
@@ -58,9 +59,36 @@ func filterBibItemInDocument(references []BibItem, document Document) []BibItem 
 	return filtered
 }
 
+var doiRegex = regexp2.MustCompile(`10.\d{4,9}/[-._;()/:A-Z0-9]+`, regexp2.Singleline)
+
+func findLastDoi(reference string) string {
+	var lastDoi string
+	match, err := doiRegex.FindStringMatch(reference)
+	for err == nil && match != nil {
+		lastDoi = match.Groups()[0].String()
+		match, err = doiRegex.FindNextMatch(match)
+	}
+	return lastDoi
+}
+
+func findDois(references []BibItem) []BibItem {
+	var dois []BibItem
+	for _, ref := range references {
+		dois = append(dois, BibItem{
+			Name:         ref.Name,
+			Ref:          ref.Ref,
+			OriginalText: ref.OriginalText,
+			Location:     ref.Location,
+			Doi:          findLastDoi(ref.Ref),
+		})
+	}
+	return dois
+}
+
 func FindValidBibItems(contents string, comments []Comment, document Document) []BibItem {
 	all := findBibItems(contents)
 	noCommented := filterBibItemsInComments(all, comments)
 	inDocument := filterBibItemInDocument(noCommented, document)
-	return inDocument
+	withDois := findDois(inDocument)
+	return withDois
 }
