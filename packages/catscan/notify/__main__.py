@@ -136,36 +136,36 @@ def main(event):
         return error_response
 
 
-
-def test_main():
-    # Set up environment variables
-    os.environ['INDICO_AUTH'] = 'test_auth_token'
-    os.environ['INDICO_TOKEN'] = 'test_indico_token'
-    os.environ['MYSQL_USER'] = 'root'
-    os.environ['MYSQL_PASS'] = ''
-    os.environ['MYSQL_HOST'] = 'localhost'
-    os.environ['MYSQL_PORT'] = '3306'
-    os.environ['MYSQL_DB'] = 'test'
-
-    # Create a valid test event
-    test_event = {
-        "http": {
-            "headers": {
-                "authorization": "Bearer test_auth_token"
-            }
-        },
-        "payload": {
-            "event": "test-1234",  # Conference ID
-            "contrib_id": "5678",   # Contribution ID
-            "revision_id": "9012",  # Revision ID
-            "action": "create",     # Valid action
-            "editable_type": "paper" # Valid editable type
-        }
-    }
-
-    # Execute main function
-    result = main(test_event)
-    print("Test Result:", result)
-
-
-test_main()
+#
+# def test_main():
+#     # Set up environment variables
+#     os.environ['INDICO_AUTH'] = 'test_auth_token'
+#     os.environ['INDICO_TOKEN'] = 'test_indico_token'
+#     os.environ['MYSQL_USER'] = 'root'
+#     os.environ['MYSQL_PASS'] = ''
+#     os.environ['MYSQL_HOST'] = 'localhost'
+#     os.environ['MYSQL_PORT'] = '3306'
+#     os.environ['MYSQL_DB'] = 'test'
+#
+#     # Create a valid test event
+#     test_event = {
+#         "http": {
+#             "headers": {
+#                 "authorization": "Bearer test_auth_token"
+#             }
+#         },
+#         "payload": {
+#             "event": "test-1234",  # Conference ID
+#             "contrib_id": "5678",   # Contribution ID
+#             "revision_id": "9012",  # Revision ID
+#             "action": "create",     # Valid action
+#             "editable_type": "paper" # Valid editable type
+#         }
+#     }
+#
+#     # Execute main function
+#     result = main(test_event)
+#     print("Test Result:", result)
+#
+#
+# test_main()
