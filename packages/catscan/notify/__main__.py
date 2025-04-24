@@ -1,8 +1,24 @@
 import requests
 import pymysql
 import os
+import sentry_sdk
 
 indico_base = "https://indico.jacow.org"
+
+# Set up environment variables
+# os.environ['SENTRY_DSN'] = ""
+# os.environ['INDICO_AUTH'] = 'test_auth_token'
+# os.environ['INDICO_TOKEN'] = 'test_indico_token'
+# os.environ['MYSQL_USER'] = 'root'
+# os.environ['MYSQL_PASS'] = ''
+# os.environ['MYSQL_HOST'] = 'localhost'
+# os.environ['MYSQL_PORT'] = '3306'
+# os.environ['MYSQL_DB'] = 'test'
+
+sentry_sdk.init(
+    dsn=os.getenv("SENTRY_DSN"),
+    send_default_pii=True,
+)
 
 def get_contribution(conference_id, contribution_id):
     url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper"
@@ -15,6 +31,7 @@ def get_contribution(conference_id, contribution_id):
         return response.json(), None
 
     return None, f"Status code: {response.status_code}"
+
 
 def find_latest_revision(conference_id, contribution_id, revision_id=None):
     contribution, error = get_contribution(conference_id, contribution_id)
@@ -45,6 +62,7 @@ def connect_db():
         port=int(os.getenv('MYSQL_PORT')),
         database=os.getenv('MYSQL_DB'))
 
+
 def append_queue(cnx, event_id, contrib_id, revision_id):
     try:
         with cnx.cursor() as cursor:
@@ -56,6 +74,7 @@ def append_queue(cnx, event_id, contrib_id, revision_id):
             return "Failed to insert into scan_queue"
     except Exception as e:
         return f"Database error: {str(e)}"
+
 
 def append_log(cnx, event_id, contrib_id, revision_id, editable_type, action_type):
     try:
@@ -69,6 +88,7 @@ def append_log(cnx, event_id, contrib_id, revision_id, editable_type, action_typ
             return "Failed to insert into notify_log"
     except Exception as e:
         return f"Database error: {str(e)}"
+
 
 def append_item(event):
     http = event.get("http", {})
@@ -99,7 +119,6 @@ def append_item(event):
     contrib_id = payload.get("contrib_id", None)
     if contrib_id is None:
         return {"body": {"error": "Contribution ID not provided"}}
-
 
     action = payload.get("action", None)
     if action is None:
@@ -135,26 +154,23 @@ def append_item(event):
 
     return {'body': "Successfully added to queue"}
 
+
 def main(event):
     try:
         response = append_item(event)
+        sentry_sdk.capture_event({
+            "message": "Notification occurred",
+            "level": "info",
+            "extra": {"response": response, "event": event},
+        })
         return response
     except Exception as e:
-        error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
-        return error_response
-
-
+        error_msg = f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"
+        sentry_sdk.capture_message(error_msg, level="error")
+        return {"body": {"error": error_msg}}
+#
 #
 # def test_main():
-#     # Set up environment variables
-#     os.environ['INDICO_AUTH'] = 'test_auth_token'
-#     os.environ['INDICO_TOKEN'] = 'test_indico_token'
-#     os.environ['MYSQL_USER'] = 'root'
-#     os.environ['MYSQL_PASS'] = ''
-#     os.environ['MYSQL_HOST'] = 'localhost'
-#     os.environ['MYSQL_PORT'] = '3306'
-#     os.environ['MYSQL_DB'] = 'test'
-#
 #     # Create a valid test event
 #     test_event = {
 #         "http": {
@@ -164,10 +180,10 @@ def main(event):
 #         },
 #         "payload": {
 #             "event": "test-1234",  # Conference ID
-#             "contrib_id": "5678",   # Contribution ID
+#             "contrib_id": "5678",  # Contribution ID
 #             "revision_id": "9012",  # Revision ID
-#             "action": "create",     # Valid action
-#             "editable_type": "paper" # Valid editable type
+#             "action": "create",  # Valid action
+#             "editable_type": "paper"  # Valid editable type
 #         }
 #     }
 #
