@@ -6,7 +6,6 @@ import os
 indico_base = "https://indico.jacow.org"
 
 def leave_comment(conference_id, contribution_id, revision_id, comment):
-    indico_base = "https://indico.jacow.org"
     url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper/{revision_id}/comments/"
     token = os.getenv('INDICO_TOKEN')
     headers = {
@@ -39,51 +38,40 @@ def catscan(conference_id, contribution_id, revision_id):
 
     return {"error": "Could not get results from Catscan."}
 
-
-def check_queue():
-    cnx = pymysql.connect(
+def connect_db():
+    return pymysql.connect(
         user=os.getenv('MYSQL_USER'),
         password=os.getenv('MYSQL_PASS'),
         host=os.getenv('MYSQL_HOST'),
         port=int(os.getenv('MYSQL_PORT')),
         database=os.getenv('MYSQL_DB'))
-    cursor = cnx.cursor()
-    query = """SELECT id as queue_id, event_id, contribution_id, revision_id FROM scan_queue WHERE scanned IS NULL AND (SCAN_START IS NULL OR SCAN_START < NOW() - INTERVAL 1 MINUTE) ORDER BY REQUESTED ASC LIMIT 1"""
-    cursor.execute(query)
+
+def check_queue(cnx):
     r = None
-    for (queue_id, event_id, contribution_id, revision_id) in cursor:
-        start_scan = """UPDATE scan_queue SET SCAN_START = NOW() WHERE id = %s"""
-        if cursor.execute(start_scan, (queue_id,)) == 1:
-            cnx.commit()
-            r = {
-                "queue_id": queue_id,
-                "event_id": event_id,
-                "contribution_id": contribution_id,
-                "revision_id": revision_id
-            }
-    cursor.close()
-    cnx.close()
+    with cnx.cursor() as cursor:
+        query = """SELECT id as queue_id, event_id, contribution_id, revision_id FROM scan_queue WHERE scanned IS NULL AND (SCAN_START IS NULL OR SCAN_START < NOW() - INTERVAL 1 MINUTE) ORDER BY REQUESTED ASC LIMIT 1"""
+        cursor.execute(query)
+        for (queue_id, event_id, contribution_id, revision_id) in cursor:
+            start_scan = """UPDATE scan_queue SET SCAN_START = NOW() WHERE id = %s"""
+            if cursor.execute(start_scan, (queue_id,)) == 1:
+                cnx.commit()
+                r = {
+                    "queue_id": queue_id,
+                    "event_id": event_id,
+                    "contribution_id": contribution_id,
+                    "revision_id": revision_id
+                }
     return r
 
-def save_results(queue_id, results):
-    cnx = pymysql.connect(
-        user=os.getenv('MYSQL_USER'),
-        password=os.getenv('MYSQL_PASS'),
-        host=os.getenv('MYSQL_HOST'),
-        port=int(os.getenv('MYSQL_PORT')),
-        database=os.getenv('MYSQL_DB'))
-    cursor = cnx.cursor()
-
-    if results is None:
-        successful = """UPDATE scan_queue SET scanned = NOW() WHERE id = %s"""
-        cursor.execute(successful, (queue_id,))
-    else:
-        failure = """UPDATE scan_queue SET failure_reason = %s, scanned = NOW() WHERE id = %s"""
-        cursor.execute(failure, (json.dumps(results), queue_id,))
-
-    cnx.commit()
-    cursor.close()
-    cnx.close()
+def save_results(cnx, queue_id, results):
+    with cnx.cursor() as cursor:
+        if results is None:
+            successful = """UPDATE scan_queue SET scanned = NOW() WHERE id = %s"""
+            cursor.execute(successful, (queue_id,))
+        else:
+            failure = """UPDATE scan_queue SET failure_reason = %s, scanned = NOW() WHERE id = %s"""
+            cursor.execute(failure, (json.dumps(results), queue_id,))
+        cnx.commit()
 
 def run_scan(event_id, contrib_id, revision_id):
     response = catscan(event_id, contrib_id, revision_id)
@@ -110,18 +98,24 @@ def run_scan(event_id, contrib_id, revision_id):
 
 def main():
     try:
-        to_scan = check_queue()
-        if to_scan is not None:
-            queue_id = to_scan.get("queue_id")
-            event_id = to_scan.get("event_id")
-            contribution_id = to_scan.get("contribution_id")
-            revision_id = to_scan.get("revision_id")
-            scan_result = run_scan(event_id=event_id, contrib_id=contribution_id, revision_id=revision_id)
-            save_results(
-                queue_id=queue_id,
-                results=scan_result)
+        to_scan = False
+        queue_id = "unknown"
+        scan_result = {}
+        with connect_db() as cnx:
+            to_scan = check_queue(cnx)
+            if to_scan is not None:
+                queue_id = to_scan.get("queue_id")
+                event_id = to_scan.get("event_id")
+                contribution_id = to_scan.get("contribution_id")
+                revision_id = to_scan.get("revision_id")
+                scan_result = run_scan(event_id=event_id, contrib_id=contribution_id, revision_id=revision_id)
+                save_results(
+                    cnx,
+                    queue_id=queue_id,
+                    results=scan_result)
+        if to_scan:
             return {'body': f"Scanned {queue_id}: " + json.dumps(scan_result)}
         return {'body': "Nothing to scan"}
-    except Exception as e:
+    except BaseException as e:
         error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
         return error_response
