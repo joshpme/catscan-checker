@@ -211,8 +211,11 @@ def main():
                         return {'body': "Could not download contents of latex file"}
                     scan_result = run_latex_scan(filename, contents)
 
-                    if "body" not in scan_result:
+                    if scan_result is None or "body" not in scan_result:
                         return {"body": {"error": "No body in result"}}
+
+                    if "error" in scan_result:
+                        return {"body": {"error": "Could not scan latex file"}}
 
                     if scan_result["body"] == "No issues found":
                         return {'body': "No issues found"}
