@@ -135,7 +135,7 @@ def connect_db():
 def check_queue(cnx):
     r = None
     with cnx.cursor() as cursor:
-        query = """SELECT id as queue_id, event_id, contribution_id, revision_id FROM scan_queue WHERE scanned IS NULL AND (SCAN_START IS NULL OR SCAN_START < NOW() - INTERVAL 1 MINUTE) ORDER BY REQUESTED ASC LIMIT 1"""
+        query = """SELECT id as queue_id, event_id, contribution_id, revision_id FROM scan_queue WHERE scanned IS NULL AND SCAN_START IS NULL ORDER BY REQUESTED ASC LIMIT 1""" #  OR SCAN_START < NOW() - INTERVAL 1 MINUTE
         cursor.execute(query)
         for (queue_id, event_id, contribution_id, revision_id) in cursor:
             start_scan = """UPDATE scan_queue SET SCAN_START = NOW() WHERE id = %s"""
