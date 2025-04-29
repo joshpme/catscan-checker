@@ -5,8 +5,94 @@ import os
 
 indico_base = "https://indico.jacow.org"
 
-def leave_comment(conference_id, contribution_id, revision_id, comment):
-    url = f"/event/{conference_id}/api/contributions/{contribution_id}/editing/paper/{revision_id}/comments/"
+def run_latex_scan(filename, content):
+    latex_scanner_url = os.getenv('LATEX_SCANNER_URL')
+    data = {
+        'filename': filename,
+        'content': content
+    }
+    response = requests.post(latex_scanner_url, json=data)
+
+    if not response.ok:
+        return {"error": f"Could not get response from latex scanner: {response.status_code}"}
+
+    if response.status_code == 200:
+        return response.json()
+
+    return None
+
+# output, filename, contents, error
+def download_contents(file):
+    url = file['download_url']
+    token = os.getenv('INDICO_TOKEN')
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    response = requests.get(indico_base + url, headers=headers)
+    if response.status_code == 200:
+        return file['filename'], response.content.decode('utf-8'), None
+
+    return None, None, f"Status code: {response.status_code}"
+
+# Options: latex / word / bibtex / unknown
+def get_contribution(event_id, contribution_id):
+    url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
+    token = os.getenv('INDICO_TOKEN')
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    response = requests.get(indico_base + url, headers=headers)
+    if response.status_code == 200:
+        return response.json(), None
+
+    return None, f"Status code: {response.status_code}"
+
+
+def find_revision(event_id, contribution_id, revision_id):
+    contribution, error = get_contribution(event_id, contribution_id)
+
+    if contribution is None:
+        return None, f"No contribution found {error}"
+
+    for revision in contribution.get('revisions', []):
+        if f"{revision['id']}" == f"{revision_id}":
+            return revision, None
+
+    return None, "No revision found"
+
+
+# Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
+def check_paper_type(event_id, contrib_id, revision_id):
+    revision, error = find_revision(event_id, contrib_id, revision_id)
+    if error is not None:
+        return None, None, f"No revision found: {error}"
+
+    if revision is None:
+        return None, None, "No revision found"
+
+    bibtex_type = 182
+    source_file_type = 180
+
+    for file in revision.get('files', []):
+        if file['filename'].lower().endswith('.docx') and file['file_type'] == source_file_type:
+            return "word", file, None
+
+    type = "unknown"
+    for file in revision.get('files', []):
+        if file['filename'].lower().endswith('.bib') and file['file_type'] == bibtex_type:
+            type = "bibtex"
+
+    for file in revision.get('files', []):
+        if file['filename'].lower().endswith('.tex') and file['file_type'] == source_file_type:
+            if type == "unknown":
+                type = "latex"
+            return type, file, None
+
+    return "unknown", None, None
+
+
+def leave_comment(event_id, contribution_id, revision_id, comment):
+    url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper/{revision_id}/comments/"
     token = os.getenv('INDICO_TOKEN')
     headers = {
         'Authorization': f'Bearer {token}'
@@ -22,10 +108,10 @@ def leave_comment(conference_id, contribution_id, revision_id, comment):
     return None
 
 
-def catscan(conference_id, contribution_id, revision_id):
+def catscan(event_id, contribution_id, revision_id):
     url = f"https://scan-api.jacow.org/catscan/word"
     data = {
-        "conference": conference_id,
+        "conference": event_id,
         "contribution": contribution_id,
         "revision": revision_id
     }
@@ -73,7 +159,7 @@ def save_results(cnx, queue_id, results):
             cursor.execute(failure, (json.dumps(results), queue_id,))
         cnx.commit()
 
-def run_scan(event_id, contrib_id, revision_id):
+def run_word_scan(event_id, contrib_id, revision_id):
     response = catscan(event_id, contrib_id, revision_id)
 
     if "error" in response:
@@ -95,7 +181,6 @@ def run_scan(event_id, contrib_id, revision_id):
     return None
 
 
-
 def main():
     try:
         to_scan = False
@@ -108,14 +193,44 @@ def main():
                 event_id = to_scan.get("event_id")
                 contribution_id = to_scan.get("contribution_id")
                 revision_id = to_scan.get("revision_id")
-                scan_result = run_scan(event_id=event_id, contrib_id=contribution_id, revision_id=revision_id)
-                save_results(
-                    cnx,
-                    queue_id=queue_id,
-                    results=scan_result)
+
+                file_type, file, error = check_paper_type(event_id=event_id, contrib_id=contribution_id, revision_id=revision_id)
+                if error is not None:
+                    return {"body": {"error": f"Error fetching paper type.\n Details:\n {error}"}}
+
+                if file_type == "word":
+                    scan_result = run_word_scan(event_id=event_id, contrib_id=contribution_id, revision_id=revision_id)
+                    save_results(
+                        cnx,
+                        queue_id=queue_id,
+                        results=scan_result)
+
+                if file_type == "latex":
+                    filename, contents, error = download_contents(file)
+                    if error is not None:
+                        return {'body': "Could not download contents of latex file"}
+                    scan_result = run_latex_scan(filename, contents)
+
+                    if "body" not in scan_result:
+                        return {"body": {"error": "No body in result"}}
+
+                    if scan_result["body"] == "No issues found":
+                        return {'body': "No issues found"}
+
+                    md_response = f"# CatScan LaTeX (beta)\n\n"
+                    md_response += "CatScan detected the following issues in your references:\n"
+                    md_response += scan_result["body"]
+                    comment_response = leave_comment(event_id, contribution_id, revision_id, md_response)
+                    if comment_response is not None:
+                        return comment_response.get("error", "Unknown error")
+                    save_results(
+                        cnx,
+                        queue_id=queue_id,
+                        results=md_response)
+
         if to_scan:
             return {'body': f"Scanned {queue_id}: " + json.dumps(scan_result)}
         return {'body': "Nothing to scan"}
     except BaseException as e:
-        error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}, {type(e)=}"}}
+        error_response = {"body": {"error": f"An unexpected error occurred.\n Details:\n {e=}"}}
         return error_response
