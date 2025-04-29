@@ -41,5 +41,3 @@ packages:
       - name: latex
         web: true
         runtime: 'go:1.20'
-      - name: latex-comment
-        web: true
