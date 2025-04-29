@@ -11,6 +11,7 @@ packages:
       INDICO_TOKEN: '${INDICO_TOKEN}'
       INDICO_AUTH: '${INDICO_AUTH}'
       SENTRY_DSN: '${SENTRY_DSN}'
+      GEMINI_KEY: '${GEMINI_KEY}'
     functions:
       - name: notify
         web: true
@@ -42,4 +43,4 @@ packages:
         runtime: 'go:1.20'
       - name: latex-comment
         web: true
-        runtime: 'go:1.20'
+        runtime: 'go:1.24'

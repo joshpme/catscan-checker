@@ -1,7 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"github.com/google/generative-ai-go/genai"
+	"google.golang.org/api/option"
 	"latex/checker"
 	"latex/finder"
 	"latex/structs"
@@ -77,6 +80,56 @@ type Response struct {
 	Body       string            `json:"body,omitempty"`
 }
 
+func geminiSummarize(content string) (string, error) {
+	apiKey := os.Getenv("GEMINI_KEY")
+	if apiKey == "" {
+		log.Fatal("GEMINI_KEY environment variable not set")
+	}
+
+	ctx := context.Background()
+	client, err := genai.NewClient(ctx, option.WithAPIKey(apiKey))
+	if err != nil {
+		log.Fatalf("error creating client: %v", err)
+	}
+	defer client.Close()
+
+	model := client.GenerativeModel("models/gemini-2.0-flash") // Or "gemini-pro"
+
+	prompt := fmt.Sprintf(`You are an editor correcting bibitem references in a latex paper for a scientific conference. Your output should be valid markdown.
+		
+		The text to be corrected is:
+		
+		%s
+		
+		Provide a summary of the issues in the form of a comment to the author in markdown.  Do not include any introductory or concluding text, only the markdown.`, content)
+
+	resp, err := model.GenerateContent(ctx, genai.Text(prompt))
+	if err != nil {
+		log.Fatalf("error generating content: %v", err)
+	}
+
+	if len(resp.Candidates) == 0 || len(resp.Candidates[0].Content.Parts) == 0 {
+		return "", fmt.Errorf("no content generated")
+	}
+
+	part := resp.Candidates[0].Content.Parts[0]
+	switch part := part.(type) {
+	case genai.Text:
+		return stripOutMDWrappers(string(part)), nil
+	}
+	return "", fmt.Errorf("unexpected part type: %T", part)
+}
+
+func stripOutMDWrappers(content string) string {
+	content = strings.TrimPrefix(content, "```")
+	content = strings.TrimSuffix(content, "```")
+	if strings.HasPrefix(content, "markdown") {
+		content = strings.TrimPrefix(content, "markdown")
+	}
+	content = strings.TrimSpace(content)
+	return content
+}
+
 func Main(in Request) (*Response, error) {
 
 	fileName := in.Filename
@@ -118,9 +171,14 @@ func Main(in Request) (*Response, error) {
 		}
 	}
 	if issueFound {
+		output, err := geminiSummarize(report)
+		if err != nil {
+			return nil, fmt.Errorf("error generating summary: %w", err)
+		}
+
 		return &Response{
 			StatusCode: 200,
-			Body:       report,
+			Body:       output,
 		}, nil
 	}
 	return &Response{
