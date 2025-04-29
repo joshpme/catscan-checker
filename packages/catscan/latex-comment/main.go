@@ -99,8 +99,10 @@ func geminiSummarize(content string) (string, error) {
 		
 		The text to be corrected is:
 		
+		`+"```"+`
 		%s
-		
+		`+"```"+`
+
 		Provide a summary of the issues in the form of a comment to the author in markdown.  Do not include any introductory or concluding text, only the markdown.`, content)
 
 	resp, err := model.GenerateContent(ctx, genai.Text(prompt))
