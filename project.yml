@@ -12,6 +12,7 @@ packages:
       INDICO_AUTH: '${INDICO_AUTH}'
       SENTRY_DSN: '${SENTRY_DSN}'
       GEMINI_KEY: '${GEMINI_KEY}'
+      LATEX_SCANNER_URL: '${LATEX_SCANNER_URL}'
     functions:
       - name: notify
         web: true
