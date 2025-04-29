@@ -229,7 +229,7 @@ def main():
                     save_results(
                         cnx,
                         queue_id=queue_id,
-                        results=md_response)
+                        results=None)
 
         if to_scan:
             return {'body': f"Scanned {queue_id}: " + json.dumps(scan_result)}
