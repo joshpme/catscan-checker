@@ -223,6 +223,7 @@ def main():
                     md_response = f"# CatScan LaTeX (beta)\n\n"
                     md_response += "CatScan detected the following issues in your references:\n"
                     md_response += scan_result["body"]
+                    md_response += "\n\nJACoW Resources: [Formatting Citations](https://www.jacow.org/Authors/FormattingCitations) | [Reference Search](https://refs.jacow.org/)"
                     comment_response = leave_comment(event_id, contribution_id, revision_id, md_response)
                     if comment_response is not None:
                         return comment_response.get("error", "Unknown error")
