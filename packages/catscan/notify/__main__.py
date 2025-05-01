@@ -39,19 +39,22 @@ def find_latest_revision(conference_id, contribution_id, revision_id=None):
     if contribution is None:
         return None, f"No contribution found {error}"
 
-    highest = -1
-    curr_revision = None
-    for revision in contribution.get('revisions', []):
-        if revision_id is not None and f"{revision['id']}" == f"{revision_id}":
-            return revision, None
-        elif revision['id'] > highest:
-            highest = revision['id']
-            curr_revision = revision
+    if revision_id is None:
+        highest = -1
+        curr_revision = None
+        for revision in contribution.get('revisions', []):
+            if revision['id'] > highest:
+                highest = revision['id']
+                curr_revision = revision
 
-    if highest == -1:
-        return None, "Revision not found"
+        if highest != -1:
+            return curr_revision, None
     else:
-        return curr_revision, None
+        for revision in contribution.get('revisions', []):
+            if f"{revision['id']}" == f"{revision_id}":
+                return revision, None
+
+    return None, "Revision not found"
 
 
 def connect_db():
