@@ -37,6 +37,9 @@ ABSTRACT_DETAILS = {
 def get_page_size(section):
     width = round(section.page_width, -4)
     if width == round(Mm(210), -4):
+        height = round(section.page_height, -4)
+        if height == round(Mm(279.5), -4):
+            return 'JACoW'
         return 'A4'
     elif width == round(Inches(8.5), -4):
         return 'Letter'

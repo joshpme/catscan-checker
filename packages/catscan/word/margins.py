@@ -54,12 +54,22 @@ def check_sections(doc):
 def check_margins_A4(section):
     return get_margins_A4(section) == [37, 19, 20, 20]
 
+def check_margins_JACoW(section):
+    return get_margins_JACoW(section) == [19, 19, 20, 20]
 
 def check_margins_letter(section):
     return get_margins_letter(section) == [0.75, 0.75, 0.79, 1.02]
 
 
 def get_margins_A4(section):
+    return [
+        round(section.top_margin.mm),
+        round(section.bottom_margin.mm),
+        round(section.left_margin.mm),
+        round(section.right_margin.mm),
+    ]
+
+def get_margins_JACoW(section):
     return [
         round(section.top_margin.mm),
         round(section.bottom_margin.mm),
@@ -83,6 +93,8 @@ def get_margins(section):
         return get_margins_A4(section)
     elif page_size == 'Letter':
         return get_margins_letter(section)
+    elif page_size == 'JACoW':
+        return get_margins_JACoW(section)
 
 
 def check_margins(section):
@@ -91,6 +103,8 @@ def check_margins(section):
         return check_margins_A4(section)
     elif page_size == 'Letter':
         return check_margins_letter(section)
+    elif page_size == 'JACoW':
+        return check_margins_JACoW(section)
 
 
 def get_columns(section):
