@@ -19,6 +19,9 @@ def scan(to_scan):
     if 'is_editor_revision' in revision and revision['is_editor_revision'] is True:
         return "Editor revision"
 
+    # reset revision id to revision['id'] found on revision from indico
+    revision_id = revision['id']
+
     file_type, file = check_paper_type(revision)
 
     if error is not None:
