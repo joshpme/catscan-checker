@@ -12,7 +12,9 @@ packages:
       INDICO_AUTH: '${INDICO_AUTH}'
       SENTRY_DSN: '${SENTRY_DSN}'
       GEMINI_KEY: '${GEMINI_KEY}'
+      INDICO_BASE_URL: '${INDICO_BASE_URL}'
       LATEX_SCANNER_URL: '${LATEX_SCANNER_URL}'
+      WORD_SCANNER_URL: '${WORD_SCANNER_URL}'
     functions:
       - name: notify
         web: true
@@ -21,12 +23,6 @@ packages:
           memory: 128
       - name: worker
         runtime: 'python:3.11'
-#        triggers:
-#          - name: queue-worker
-#            sourceType: scheduler
-#            sourceDetails:
-#              cron: '* * * * *'
-#              withBody: {}
         limits:
           memory: 128
           timeout: 60000

@@ -1,0 +1,1653 @@
+{
+    "can_assign_self": false,
+    "can_comment": true,
+    "can_create_internal_comments": true,
+    "can_delete": false,
+    "can_perform_editor_actions": true,
+    "can_perform_submitter_actions": true,
+    "can_unassign": true,
+    "contribution": {
+        "code": "THPAA1",
+        "friendly_id": 105,
+        "id": 289,
+        "title": "Iron From Ice"
+    },
+    "editing_enabled": true,
+    "editor": {
+        "avatar_url": "",
+        "full_name": "Example User",
+        "id": 69,
+        "identifier": "User:69"
+    },
+    "has_published_revision": false,
+    "id": 1896,
+    "last_update_dt": "2024-11-25T21:43:18.121305",
+    "review_conditions_valid": true,
+    "revisions": [
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-22T11:34:51.889839+00:00",
+                    "html": "<p>asd</p>",
+                    "id": 4304,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4304",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "asd",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-22T11:39:29.290782+00:00",
+                    "html": "<p>https://scan.jacow.org/results?23423482374982347</p>",
+                    "id": 4305,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4305",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "https://scan.jacow.org/results?23423482374982347",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-22T11:42:40.703370+00:00",
+                    "html": "<p><b>Test</b></p>",
+                    "id": 4306,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4306",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<b>Test</b>",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-22T11:42:55.726087+00:00",
+                    "html": "&lt;script&gt;test&lt;/script&gt;",
+                    "id": 4307,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4307",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<script>test</script>",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-22T11:43:11.787305+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/results?23423482374982347\">CatScan Results</a></p>",
+                    "id": 4308,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4308",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href=\"https://scan.jacow.org/results?23423482374982347\">CatScan Results</a>",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-22T11:43:57.377509+00:00",
+                    "html": "<table><tbody><tr><td>Hi</td></tr></tbody></table>",
+                    "id": 4309,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4309",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<table><tr><td>Hi</td></tr></table>",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T09:56:33.417796+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p>",
+                    "id": 4310,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4310",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:03:56.327509+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p>",
+                    "id": 4311,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4311",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:05:57.305767+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p>",
+                    "id": 4312,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4312",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:07:03.002042+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p>",
+                    "id": 4313,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4313",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:07:36.898246+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p>",
+                    "id": 4314,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4314",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:08:18.486752+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p><table><thead><tr><td>Section</td><td>Warnings</td><td>Errors</td></tr></thead><tbody><tr><td><b>Total</b></td><td>46</td><td>24</td></tr></tbody></table><p></p>",
+                    "id": 4315,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4315",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a><table><thead><tr><td>Section</td><td>Warnings</td><td>Errors</td></tr></thead><tbody><tr><td><b>Total</b></td><td>46</td><td>24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:09:28.456925+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p><table><thead><tr><td><b>Section</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures</b></td><td>10</td><td>0</td></tr><tr><td><b>List</b></td><td>36</td><td>0</td></tr><tr><td><b>Paragraphs</b></td><td>0</td><td>10</td></tr><tr><td><b>References</b></td><td>0</td><td>14</td></tr><tr><td><b>Total</b></td><td>46</td><td>24</td></tr></tbody></table><p></p>",
+                    "id": 4316,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4316",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a><table><thead><tr><td><b>Section</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures</b></td><td>10</td><td>0</td></tr><tr><td><b>List</b></td><td>36</td><td>0</td></tr><tr><td><b>Paragraphs</b></td><td>0</td><td>10</td></tr><tr><td><b>References</b></td><td>0</td><td>14</td></tr><tr><td><b>Total</b></td><td>46</td><td>24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:12:07.981314+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p><table><thead><tr><td><b>Section</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures</b></td><td>10</td><td>0</td></tr><tr><td><b>List</b></td><td>36</td><td>0</td></tr><tr><td><b>Paragraphs</b></td><td>0</td><td>10</td></tr><tr><td><b>References</b></td><td>0</td><td>14</td></tr><tr><td><b>Total</b></td><td>46</td><td>24</td></tr></tbody></table><p></p>",
+                    "id": 4317,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4317",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a><table cellpadding=5 border style='border-spacing:0'><thead><tr><td><b>Section</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures</b></td><td>10</td><td>0</td></tr><tr><td><b>List</b></td><td>36</td><td>0</td></tr><tr><td><b>Paragraphs</b></td><td>0</td><td>10</td></tr><tr><td><b>References</b></td><td>0</td><td>14</td></tr><tr><td><b>Total</b></td><td>46</td><td>24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:13:11.316309+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">CatScan Results</a></p><table><thead><tr><td><b>Section</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table><p></p>",
+                    "id": 4318,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4318",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>CatScan Results</a><table><thead><tr><td><b>Section</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:14:53.230159+00:00",
+                    "html": "<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4319,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4319",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<a href='https://scan.jacow.org/?results=XXX'>See Report</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:15:12.475640+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<table><thead><tr><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4320,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4320",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><table><thead><tr><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table><a href='https://scan.jacow.org/?results=XXX'>See Report</a>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:15:59.464873+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<table><thead><tr><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>",
+                    "id": 4321,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4321",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><table><thead><tr><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table><p><b><a href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:17:28.357476+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>\n<p><br><br>\n</p><h3>Summary:</h3><p></p>\n<table><thead><tr><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "id": 4322,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4322",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><p><b><a href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p><br><h3>Summary:</h3><table><thead><tr><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:18:09.122847+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>\n<p><br><br>\n</p><h3>Summary:</h3><p></p>\n<table><thead><tr><td></td><td><b>Ok</b></td><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "id": 4323,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4323",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><p><b><a href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p><br><h3>Summary:</h3><table><thead><tr><td></td><td><b>Ok</b></td><td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:18:55.875926+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>\n<h3>Summary</h3>\n<table><thead><tr><td></td><td><b>Ok</b></td><td></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "id": 4324,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4324",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><p><b><a href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p><h3>Summary</h3><table><thead><tr><td></td><td><b>Ok</b></td><td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td><b>Figures&nbsp;</b></td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>List&nbsp;</b></td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td><b>Paragraphs&nbsp;</b></td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td><b>References&nbsp;</b></td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td><b>Total&nbsp;</b></td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:19:22.228781+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>\n<h3>Summary</h3>\n<table><thead><tr><td>Section</td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td>Figures&nbsp;</td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td>List&nbsp;</td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Paragraphs&nbsp;</td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td>References&nbsp;</td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td>Total&nbsp;</td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "id": 4325,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4325",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><p><b><a href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p><h3>Summary</h3><table><thead><tr><td>Section</td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td>Figures&nbsp;</td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td>List&nbsp;</td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Paragraphs&nbsp;</td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td>References&nbsp;</td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td>Total&nbsp;</td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-23T10:20:31.834525+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>\n<h3>Summary</h3>\n<table><thead><tr><td><b>Section</b></td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td>Figures&nbsp;</td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td>List&nbsp;</td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Paragraphs&nbsp;</td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td>References&nbsp;</td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td>Total&nbsp;</td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "id": 4326,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/4326",
+                    "revision_id": 9066,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><p><b><a target='_blank' href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p><h3>Summary</h3><table><thead><tr><td><b>Section</b></td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td>Figures&nbsp;</td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td>List&nbsp;</td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Paragraphs&nbsp;</td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td>References&nbsp;</td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td>Total&nbsp;</td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9066/comments/",
+            "created_dt": "2024-04-22T10:42:14.558487+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9066/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9066/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9066/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9066/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9066/23536/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9066/23536/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23536,
+                    "size": 9243548,
+                    "uuid": "8efb65be-ecde-46e2-8321-13931caf4533"
+                }
+            ],
+            "id": 9066,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9066/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "set to red to allow resubmission",
+            "comment_html": "<p>set to red to allow resubmission</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9067/comments/",
+            "created_dt": "2024-04-23T10:30:08.514769+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9067/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9067/files.zip",
+            "files": [],
+            "id": 9067,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9067/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9068/comments/",
+            "created_dt": "2024-04-23T10:30:46.275949+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9068/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9068/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9068/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9068/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9068/23537/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9068/23537/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23537,
+                    "size": 9243548,
+                    "uuid": "6607a80f-f3ac-4bdd-b88c-ca49326d3e9c"
+                }
+            ],
+            "id": 9068,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9068/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "again",
+            "comment_html": "<p>again</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9069/comments/",
+            "created_dt": "2024-04-23T10:33:47.227727+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9069/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9069/files.zip",
+            "files": [],
+            "id": 9069,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9069/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9070/comments/",
+            "created_dt": "2024-04-23T11:00:43.054899+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9070/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9070/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9070/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9070/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9070/23538/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9070/23538/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23538,
+                    "size": 9243548,
+                    "uuid": "6810afd9-eeb8-479e-914d-c3e363d76bae"
+                }
+            ],
+            "id": 9070,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9070/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "and again",
+            "comment_html": "<p>and again</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9071/comments/",
+            "created_dt": "2024-04-23T12:02:03.145655+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9071/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9071/files.zip",
+            "files": [],
+            "id": 9071,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9071/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9072/comments/",
+            "created_dt": "2024-04-23T12:10:43.114859+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9072/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9072/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9072/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9072/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9072/23539/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9072/23539/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23539,
+                    "size": 9243548,
+                    "uuid": "470db566-6512-4355-acb3-ea1a5b71f692"
+                }
+            ],
+            "id": 9072,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9072/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "and again",
+            "comment_html": "<p>and again</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9073/comments/",
+            "created_dt": "2024-04-23T12:14:15.468510+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9073/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9073/files.zip",
+            "files": [],
+            "id": 9073,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9073/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9074/comments/",
+            "created_dt": "2024-04-23T12:28:43.283758+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9074/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9074/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9074/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9074/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9074/23540/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9074/23540/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23540,
+                    "size": 9243548,
+                    "uuid": "b68bf646-9a27-4b24-a41e-1ad15216fd61"
+                }
+            ],
+            "id": 9074,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9074/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "...",
+            "comment_html": "<p>...</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9075/comments/",
+            "created_dt": "2024-04-23T12:36:15.888712+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9075/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9075/files.zip",
+            "files": [],
+            "id": 9075,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9075/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9076/comments/",
+            "created_dt": "2024-04-23T12:37:24.950801+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9076/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9076/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9076/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9076/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9076/23541/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9076/23541/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23541,
+                    "size": 9243548,
+                    "uuid": "50fa9826-9d31-4552-a51b-02d8bac0c703"
+                }
+            ],
+            "id": 9076,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9076/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "new day",
+            "comment_html": "<p>new day</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9077/comments/",
+            "created_dt": "2024-04-24T06:45:41.283250+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9077/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9077/files.zip",
+            "files": [],
+            "id": 9077,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9077/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-24T08:40:53.974471+00:00",
+                    "html": "<h2>CatScan Results</h2>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><b><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></b></p>\n<h3>Summary</h3>\n<table><thead><tr><td><b>Section</b></td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td>Abstract&nbsp;</td><td>&nbsp;2&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Authors&nbsp;</td><td>&nbsp;2&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Figures&nbsp;</td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Headings&nbsp;</td><td>&nbsp;14&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>List&nbsp;</td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Margins&nbsp;</td><td>&nbsp;4&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Paragraphs&nbsp;</td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td>References&nbsp;</td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td>Styles&nbsp;</td><td>&nbsp;14&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Tables&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Title&nbsp;</td><td>&nbsp;3&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Total&nbsp;</td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "id": 4327,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9078/comments/4327",
+                    "revision_id": 9078,
+                    "system": false,
+                    "text": "<h2>CatScan Results</h2><p>Your paper has been automatically scanned for formatting issues. Here are the results:</p><p><b><a target='_blank' href='https://scan.jacow.org/?results=XXX'>See Report</a></b></p><h3>Summary</h3><table><thead><tr><td><b>Section</b></td><td><b>Ok</b></td><td><b>Warnings</b></td><td><b>Errors</b></td></tr></thead><tbody><tr><td>Abstract&nbsp;</td><td>&nbsp;2&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Authors&nbsp;</td><td>&nbsp;2&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Figures&nbsp;</td><td>&nbsp;40&nbsp;</td><td>&nbsp;10&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Headings&nbsp;</td><td>&nbsp;14&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>List&nbsp;</td><td>&nbsp;39&nbsp;</td><td>&nbsp;36&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Margins&nbsp;</td><td>&nbsp;4&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Paragraphs&nbsp;</td><td>&nbsp;23&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;10</td></tr><tr><td>References&nbsp;</td><td>&nbsp;41&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;14</td></tr><tr><td>Styles&nbsp;</td><td>&nbsp;14&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Tables&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Title&nbsp;</td><td>&nbsp;3&nbsp;</td><td>&nbsp;0&nbsp;</td><td>&nbsp;0</td></tr><tr><td>Total&nbsp;</td><td>&nbsp;182&nbsp;</td><td>&nbsp;46&nbsp;</td><td>&nbsp;24</td></tr></tbody></table>",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": true,
+                    "created_dt": "2024-04-25T09:31:27.708134+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4328,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9078/comments/4328",
+                    "revision_id": 9078,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/69/picture-default/XXX",
+                        "full_name": "Example User",
+                        "id": 69,
+                        "identifier": "User:69"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-25T09:34:07.151849+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4329,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9078/comments/4329",
+                    "revision_id": 9078,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-25T09:35:38.760324+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4330,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9078/comments/4330",
+                    "revision_id": 9078,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9078/comments/",
+            "created_dt": "2024-04-24T07:05:21.698113+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9078/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9078/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9078/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9078/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9078/23542/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9078/23542/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23542,
+                    "size": 9243548,
+                    "uuid": "7adc47af-ddbd-4500-817b-11b583dee27f"
+                }
+            ],
+            "id": 9078,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9078/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "givin' up ;-)",
+            "comment_html": "<p>givin' up ;-)</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9079/comments/",
+            "created_dt": "2024-04-25T09:45:40.620436+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9079/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9079/files.zip",
+            "files": [],
+            "id": 9079,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9079/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/9/picture-4129289642/OQ.6Qo7ugZeyMQT3yvMcBvVa4mKjpM",
+                "full_name": "Ivan Andrian",
+                "id": 9,
+                "identifier": "User:9"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9080/comments/",
+            "created_dt": "2024-04-25T09:46:17.003374+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9080/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9080/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9080/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9080/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9080/23544/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9080/23544/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23544,
+                    "size": 9243548,
+                    "uuid": "7f6255e6-8658-475b-ba61-201132bb37f8"
+                }
+            ],
+            "id": 9080,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9080/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "asd",
+            "comment_html": "<p>asd</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9081/comments/",
+            "created_dt": "2024-04-25T09:53:18.676892+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9081/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9081/files.zip",
+            "files": [],
+            "id": 9081,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9081/review",
+            "tags": [
+                {
+                    "code": "TC_00",
+                    "color": "teal",
+                    "id": 47,
+                    "is_used_in_revision": true,
+                    "system": false,
+                    "title": "Test tag",
+                    "url": "https://indico.jacow.org/event/37/editing/api/tag/47",
+                    "verbose_title": "TC_00: Test tag"
+                }
+            ],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-25T09:53:51.910000+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4331,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9082/comments/4331",
+                    "revision_id": 9082,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9082/comments/",
+            "created_dt": "2024-04-25T09:53:29.865471+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9082/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9082/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9082/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9082/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9082/23545/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9082/23545/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23545,
+                    "size": 9243548,
+                    "uuid": "b7be55c6-2700-45d8-90b3-a7a990e76d6c"
+                }
+            ],
+            "id": 9082,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9082/review",
+            "tags": [
+                {
+                    "code": "TC_00",
+                    "color": "teal",
+                    "id": 47,
+                    "is_used_in_revision": true,
+                    "system": false,
+                    "title": "Test tag",
+                    "url": "https://indico.jacow.org/event/37/editing/api/tag/47",
+                    "verbose_title": "TC_00: Test tag"
+                }
+            ],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "asdasd",
+            "comment_html": "<p>asdasd</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9083/comments/",
+            "created_dt": "2024-04-25T10:02:43.629421+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9083/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9083/files.zip",
+            "files": [],
+            "id": 9083,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9083/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-25T10:03:13.620067+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4332,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9084/comments/4332",
+                    "revision_id": 9084,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4636/picture-default/XXX",
+                        "full_name": "CatScan Dev JACoW",
+                        "id": 4636,
+                        "identifier": "User:4636"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9084/comments/",
+            "created_dt": "2024-04-25T10:02:59.108937+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9084/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9084/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9084/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9084/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9084/23546/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9084/23546/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23546,
+                    "size": 9243548,
+                    "uuid": "120217a0-092f-481f-a63d-6638bbe3cb06"
+                }
+            ],
+            "id": 9084,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9084/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "asd",
+            "comment_html": "<p>asd</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9085/comments/",
+            "created_dt": "2024-04-25T11:28:55.337637+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9085/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9085/files.zip",
+            "files": [],
+            "id": 9085,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9085/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-25T11:34:18.216910+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4333,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9086/comments/4333",
+                    "revision_id": 9086,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4635/picture-2338850916/XXX",
+                        "full_name": "CatScan JACoW",
+                        "id": 4635,
+                        "identifier": "User:4635"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9086/comments/",
+            "created_dt": "2024-04-25T11:34:04.426575+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9086/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9086/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9086/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9086/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9086/23547/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9086/23547/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23547,
+                    "size": 9243548,
+                    "uuid": "99ad03a2-26e2-4661-97ed-2921e79c725e"
+                }
+            ],
+            "id": 9086,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9086/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "Should ignore since this is an editor revision",
+            "comment_html": "<p>Should ignore since this is an editor revision</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9116/comments/",
+            "created_dt": "2024-04-29T09:38:58.109732+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9116/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9116/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9116/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9116/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9116/23567/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9116/23567/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23567,
+                    "size": 9243548,
+                    "uuid": "2e307670-3b97-4e0a-a4d5-ccc63cc07160"
+                }
+            ],
+            "id": 9116,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9116/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_confirmation"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9117/comments/",
+            "created_dt": "2024-04-29T09:39:42.742773+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9117/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9117/files.zip",
+            "files": [],
+            "id": 9117,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9117/review",
+            "tags": [],
+            "type": {
+                "name": "changes_rejection"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-04-29T09:40:23.629295+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 4335,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9118/comments/4335",
+                    "revision_id": 9118,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4635/picture-2338850916/XXX",
+                        "full_name": "CatScan JACoW",
+                        "id": 4635,
+                        "identifier": "User:4635"
+                    }
+                },
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-11-25T04:35:53.788601+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 11694,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/9118/comments/11694",
+                    "revision_id": 9118,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4635/picture-2338850916/XXX",
+                        "full_name": "CatScan JACoW",
+                        "id": 4635,
+                        "identifier": "User:4635"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/9118/comments/",
+            "created_dt": "2024-04-29T09:39:57.543547+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/9118/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/9118/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/9118/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9118/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/9118/23568/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/9118/23568/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 23568,
+                    "size": 9243548,
+                    "uuid": "9619892f-8d55-457d-9739-aca31654a86a"
+                }
+            ],
+            "id": 9118,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/9118/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "Please make changes",
+            "comment_html": "<p>Please make changes</p>",
+            "comments": [],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/20451/comments/",
+            "created_dt": "2024-11-25T21:40:39.897931+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/20451/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/20451/files.zip",
+            "files": [],
+            "id": 20451,
+            "is_editor_revision": true,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/20451/review",
+            "tags": [],
+            "type": {
+                "name": "needs_submitter_changes"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        },
+        {
+            "comment": "",
+            "comment_html": "",
+            "comments": [
+                {
+                    "can_modify": false,
+                    "created_dt": "2024-11-25T21:43:18.121305+00:00",
+                    "html": "<h1>CatScan Results</h1>\n<p>Your paper has been automatically scanned for formatting issues. Here are the results:</p>\n<p><a href=\"https://scan.jacow.org/?results=XXX\">See Report</a></p>",
+                    "id": 11698,
+                    "internal": false,
+                    "modified_dt": null,
+                    "modify_comment_url": "/event/37/api/contributions/289/editing/paper/20452/comments/11698",
+                    "revision_id": 20452,
+                    "system": false,
+                    "text": "# CatScan Results\n\nYour paper has been automatically scanned for formatting issues. Here are the results:\n\n[See Report](https://scan.jacow.org/?results=XXX)",
+                    "user": {
+                        "avatar_url": "/user/4635/picture-2338850916/XXX",
+                        "full_name": "CatScan JACoW",
+                        "id": 4635,
+                        "identifier": "User:4635"
+                    }
+                }
+            ],
+            "confirm_url": null,
+            "create_comment_url": "/event/37/api/contributions/289/editing/paper/20452/comments/",
+            "created_dt": "2024-11-25T21:41:02.784058+00:00",
+            "custom_action_url": "/event/37/api/contributions/289/editing/paper/20452/custom-action",
+            "custom_actions": [],
+            "download_files_url": "/event/37/contributions/289/editing/paper/20452/files.zip",
+            "files": [
+                {
+                    "content_type": "application/pdf",
+                    "download_url": "/event/37/contributions/289/editing/paper/20452/23535/THPAA1.pdf",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/20452/23535/THPAA1.pdf",
+                    "file_type": 1,
+                    "filename": "THPAA1.pdf",
+                    "id": 23535,
+                    "size": 828520,
+                    "uuid": "be0aad3b-971b-4ccc-8865-9f1f918d896d"
+                },
+                {
+                    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "download_url": "/event/37/contributions/289/editing/paper/20452/50013/THPAA1.docx",
+                    "external_download_url": "https://indico.jacow.org/event/37/contributions/289/editing/paper/20452/50013/THPAA1.docx",
+                    "file_type": 31,
+                    "filename": "THPAA1.docx",
+                    "id": 50013,
+                    "size": 9243548,
+                    "uuid": "52ca54ff-8cdc-474c-bf92-0ebe423bac42"
+                }
+            ],
+            "id": 20452,
+            "is_editor_revision": false,
+            "is_undone": false,
+            "modified_dt": null,
+            "review_url": "/event/37/api/contributions/289/editing/paper/20452/review",
+            "tags": [],
+            "type": {
+                "name": "ready_for_review"
+            },
+            "user": {
+                "avatar_url": "/user/69/picture-default/XXX",
+                "full_name": "Example User",
+                "id": 69,
+                "identifier": "User:69"
+            }
+        }
+    ],
+    "state": {
+        "css_class": "ready",
+        "name": "ready_for_review",
+        "title": "Ready for Review"
+    },
+    "type": "paper"
+}
