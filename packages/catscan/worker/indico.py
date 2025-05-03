@@ -56,20 +56,20 @@ def find_latest_revision(event_id, contribution_id, revision_id):
 
 # Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
 def check_paper_type(revision):
-    bibtex_type = 182
-    source_file_type = 180
+    bibtex_type = [182]
+    source_file_type = [180, 31]
 
     for file in revision.get('files', []):
-        if file['filename'].lower().endswith('.docx') and file['file_type'] == source_file_type:
+        if file['filename'].lower().endswith('.docx') and file['file_type'] in source_file_type:
             return "word", file
 
     file_type = "unknown"
     for file in revision.get('files', []):
-        if file['filename'].lower().endswith('.bib') and file['file_type'] == bibtex_type:
+        if file['filename'].lower().endswith('.bib') and file['file_type'] in bibtex_type:
             file_type = "bibtex"
 
     for file in revision.get('files', []):
-        if file['filename'].lower().endswith('.tex') and file['file_type'] == source_file_type:
+        if file['filename'].lower().endswith('.tex') and file['file_type'] in source_file_type:
             if file_type == "unknown":
                 file_type = "latex"
             return file_type, file

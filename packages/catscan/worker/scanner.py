@@ -27,12 +27,12 @@ def scan(to_scan):
     if error is not None:
         return error
 
-    scan_error = None
-    comment = None
     if file_type == "word":
         comment, scan_error = get_word_comment(event_id=event_id, contrib_id=contrib_id, revision_id=revision_id)
-    if file_type == "latex":
+    elif file_type == "latex":
         comment, scan_error = get_latex_comment(file=file)
+    else:
+        return f"Unknown file type: {file_type}"
 
     if scan_error is not None:
         return scan_error
