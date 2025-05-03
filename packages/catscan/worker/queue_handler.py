@@ -27,12 +27,12 @@ def check_queue(cnx):
                 }
     return r
 
-def save_results(cnx, queue_id, results):
+def save_results(cnx, queue_id, scan_error):
     with cnx.cursor() as cursor:
-        if results is None:
+        if scan_error is None:
             successful = """UPDATE scan_queue SET scanned = NOW() WHERE id = %s"""
             cursor.execute(successful, (queue_id,))
         else:
             failure = """UPDATE scan_queue SET failure_reason = %s, scanned = NOW() WHERE id = %s"""
-            cursor.execute(failure, (json.dumps(results), queue_id,))
+            cursor.execute(failure, (json.dumps(scan_error), queue_id,))
         cnx.commit()

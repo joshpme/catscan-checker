@@ -90,7 +90,7 @@ def leave_comment(event_id, contribution_id, revision_id, comment):
     response = requests.post(indico_base + url, data=data, headers=headers)
 
     if not response.ok:
-        return {"error": f"Could not leave comment: {response.status_code}"}
+        return f"Could not leave comment: {response.status_code}"
 
     return None
 

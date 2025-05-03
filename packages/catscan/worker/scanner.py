@@ -44,8 +44,8 @@ def scan(to_scan):
     })
 
     if comment is not None:
-        comment_response = leave_comment(event_id, contrib_id, revision_id, comment)
-        if comment_response is not None:
-            return comment_response.get("error", "Unknown error creating comment")
+        comment_error = leave_comment(event_id, contrib_id, revision_id, comment)
+        if comment_error is not None:
+            return comment_error
 
     return None

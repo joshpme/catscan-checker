@@ -15,15 +15,15 @@ def main():
             to_scan = check_queue(cnx)
             if to_scan is not None:
                 queue_id = to_scan.get("queue_id")
-                scan_result = scan(to_scan)
+                scan_error = scan(to_scan)
                 save_results(
                     cnx,
                     queue_id=queue_id,
-                    results=scan_result)
+                    scan_error=scan_error)
                 sentry_sdk.capture_event({
                     "message": "Worker initiated",
                     "level": "info",
-                    "extra": {"to_scan": to_scan, "result": scan_result},
+                    "extra": {"to_scan": to_scan, "error": scan_error},
                 })
         if to_scan:
             return {'body': f"Scanned {queue_id}"}
