@@ -1,6 +1,7 @@
 from word import get_word_comment
 from latex import get_latex_comment
 from indico import find_latest_revision, check_paper_type, leave_comment
+import sentry_sdk
 
 def scan(to_scan):
     event_id = to_scan.get("event_id")
@@ -32,6 +33,12 @@ def scan(to_scan):
 
     if scan_error is not None:
         return scan_error
+
+    sentry_sdk.capture_event({
+        "message": "Worker message",
+        "level": "info",
+        "extra": {"to_scan": to_scan, "comment": comment, "revision_id": revision_id},
+    })
 
     if comment is not None:
         comment_response = leave_comment(event_id, contrib_id, revision_id, comment)

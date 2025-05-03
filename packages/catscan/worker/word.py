@@ -13,16 +13,16 @@ def call_word_scan(event_id, contribution_id, revision_id):
     }
     response = requests.post(url, data, headers=internal_headers)
     if response.status_code == 200:
-        return response.json()
+        return response.json(), None
 
-    return {"error": "Could not get results from Catscan."}
+    return None, "Could not get results from Catscan."
 
 
 def get_word_comment(event_id, contrib_id, revision_id):
-    response = call_word_scan(event_id, contrib_id, revision_id)
+    response, error = call_word_scan(event_id, contrib_id, revision_id)
 
-    if "error" in response:
-        return None, response.get("error", "Unknown error")
+    if error is not None:
+        return None, error
 
     filename = response.get("filename", None)
     if filename is None:
