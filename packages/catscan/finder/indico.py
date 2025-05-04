@@ -4,23 +4,6 @@ import requests
 import os
 
 
-# # output, filename, contents, error
-# def find_papers(event_id):
-#     indico_base = os.getenv("INDICO_BASE_URL")
-#     url = f"/event/{event_id}/editing/api/paper/list"
-#     response = requests.get(indico_base + url, headers={
-#         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-#     })
-#     if response.status_code == 200:
-#         return response.json(), None
-#
-#     return None, f"Status code: {response.status_code}"
-
-#
-# # Options: latex / word / bibtex / unknown
-
-#
-#
 def find_latest_revision(paper):
     highest = -1
     curr_revision = None
@@ -33,9 +16,8 @@ def find_latest_revision(paper):
         return curr_revision, None
 
     return None, "Revision not found"
-#
-#
-# # Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
+
+# # Return data, content_type (latex|bibtex|word|unknown)
 def find_paper_type(revision):
     source_file_type = [180, 31]
 
@@ -55,13 +37,16 @@ def find_paper_type(revision):
             return file_type
 
     return "unknown"
-#
-#
-# def has_catscan_comment(revision):
-#     for comment in revision.get('comments', []):
-#         if f"{comment['user']['id']}" == f"{os.getenv("CATSCAN_USER_ID")}":
-#             return True
-#     return False
+
+def has_catscan_comment(revision):
+    catscan_user_id = os.getenv("CATSCAN_USER_ID")
+    for comment in revision.get('comments', []):
+        if "user" not in comment or "id" not in comment['user']:
+            continue
+        user_id = comment['user']['id']
+        if f"{user_id}" == f"{catscan_user_id}":
+            return True
+    return False
 
 def find_papers(session, event_id):
     indico_base = os.getenv("INDICO_BASE_URL")
@@ -117,25 +102,10 @@ def find_contributions(event_id, exclude_list=None):
             if revision is None:
                 continue
             paper_type = find_paper_type(revision)
-
-
+            if paper_type in ["latex", "word"]:
+                if has_catscan_comment(revision) is False:
+                    contribution_revision_tuples.append((contribution_id, revision['id']))
+            else:
+                append_to_exclude_list.append(contribution_id)
 
     return contribution_revision_tuples, append_to_exclude_list, None
-
-    #
-
-    #     # Skip if the contribution is not found
-    #     if revision_error is not None:
-    #         continue
-    #
-    #     if revision is None:
-    #         continue
-    #
-    #     paper_type, _ = check_paper_type(revision)
-    #
-    #     if paper_type in ["latex", "word"] and has_catscan_comment(revision) is False:
-    #         contribution_revision_tuples.append((contribution_id, revision['id']))
-    #     else:
-    #         append_to_exclude_list.append(contribution_id)
-    #
-    # return contribution_revision_tuples, append_to_exclude_list, None
