@@ -2,87 +2,87 @@ import requests
 import os
 
 indico_base = os.getenv("INDICO_BASE_URL")
-
-def shared_sess():
-    sx = requests.Session()
-    sx.headers.update({
-        'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-    })
-    return sx
-
-
-# output, filename, contents, error
-def find_papers(event_id, sx=None):
-    sess = sx
-    if sess is None:
-        sess = shared_sess()
-    url = f'/event/{event_id}/editing/api/paper/list'
-    response = sess.get(indico_base + url)
-    if response.status_code == 200:
-        return response.json(), None
-
-    return None, f"Status code: {response.status_code}"
-
-
-# Options: latex / word / bibtex / unknown
-def get_paper(event_id, contribution_id, sx=None):
-    sess = sx
-    if sess is None:
-        sess = shared_sess()
-    url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
-    response = sess.get(indico_base + url)
-    if response.status_code == 200:
-        return response.json(), None
-
-    return None, f"Status code: {response.status_code}"
-
-
-def find_latest_revision(event_id, contribution_id, sx=None):
-    contribution, get_paper_error = get_paper(event_id, contribution_id, sx=sx)
-
-    if contribution is None:
-        return None, f"No contribution found {get_paper_error}"
-
-    highest = -1
-    curr_revision = None
-    for revision in contribution.get('revisions', []):
-        if revision['id'] > highest:
-            highest = revision['id']
-            curr_revision = revision
-
-    if highest != -1:
-        return curr_revision, None
-
-    return None, "Revision not found"
-
-
-# Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
-def check_paper_type(revision):
-    source_file_type = [180, 31]
-
-    for file in revision.get('files', []):
-        if file['filename'].lower().endswith('.docx'):
-            return "word", file
-
-    file_type = "unknown"
-    for file in revision.get('files', []):
-        if file['filename'].lower().endswith('.bib'):
-            file_type = "bibtex"
-
-    for file in revision.get('files', []):
-        if file['filename'].lower().endswith('.tex') and file['file_type'] in source_file_type:
-            if file_type == "unknown":
-                file_type = "latex"
-            return file_type, file
-
-    return "unknown", None
-
-
-def has_catscan_comment(revision):
-    for comment in revision.get('comments', []):
-        if f"{comment['user']['id']}" == f"{os.getenv("CATSCAN_USER_ID")}":
-            return True
-    return False
+#
+# def shared_sess():
+#     sx = requests.Session()
+#     sx.headers.update({
+#         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
+#     })
+#     return sx
+#
+#
+# # output, filename, contents, error
+# def find_papers(event_id, sx=None):
+#     sess = sx
+#     if sess is None:
+#         sess = shared_sess()
+#     url = f'/event/{event_id}/editing/api/paper/list'
+#     response = sess.get(indico_base + url)
+#     if response.status_code == 200:
+#         return response.json(), None
+#
+#     return None, f"Status code: {response.status_code}"
+#
+#
+# # Options: latex / word / bibtex / unknown
+# def get_paper(event_id, contribution_id, sx=None):
+#     sess = sx
+#     if sess is None:
+#         sess = shared_sess()
+#     url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
+#     response = sess.get(indico_base + url)
+#     if response.status_code == 200:
+#         return response.json(), None
+#
+#     return None, f"Status code: {response.status_code}"
+#
+#
+# def find_latest_revision(event_id, contribution_id, sx=None):
+#     contribution, get_paper_error = get_paper(event_id, contribution_id, sx=sx)
+#
+#     if contribution is None:
+#         return None, f"No contribution found {get_paper_error}"
+#
+#     highest = -1
+#     curr_revision = None
+#     for revision in contribution.get('revisions', []):
+#         if revision['id'] > highest:
+#             highest = revision['id']
+#             curr_revision = revision
+#
+#     if highest != -1:
+#         return curr_revision, None
+#
+#     return None, "Revision not found"
+#
+#
+# # Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
+# def check_paper_type(revision):
+#     source_file_type = [180, 31]
+#
+#     for file in revision.get('files', []):
+#         if file['filename'].lower().endswith('.docx'):
+#             return "word", file
+#
+#     file_type = "unknown"
+#     for file in revision.get('files', []):
+#         if file['filename'].lower().endswith('.bib'):
+#             file_type = "bibtex"
+#
+#     for file in revision.get('files', []):
+#         if file['filename'].lower().endswith('.tex') and file['file_type'] in source_file_type:
+#             if file_type == "unknown":
+#                 file_type = "latex"
+#             return file_type, file
+#
+#     return "unknown", None
+#
+#
+# def has_catscan_comment(revision):
+#     for comment in revision.get('comments', []):
+#         if f"{comment['user']['id']}" == f"{os.getenv("CATSCAN_USER_ID")}":
+#             return True
+#     return False
 
 
 def find_contributions(event_id, exclude_list=None):
@@ -91,30 +91,31 @@ def find_contributions(event_id, exclude_list=None):
     append_to_exclude_list = []
     contribution_revision_tuples = []  # (contribution_id, revision_id)
 
-    sx = shared_sess()
-
-    papers, revision_error = find_papers(event_id, sx=sx)
-    if revision_error is not None:
-        return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
-
-    for paper in papers:
-        contribution_id = paper['id']
-        if contribution_id in exclude_list:
-            continue
-        revision, revision_error = find_latest_revision(event_id, contribution_id, sx=sx)
-
-        # Skip if the contribution is not found
-        if revision_error is not None:
-            continue
-
-        if revision is None:
-            continue
-
-        paper_type, _ = check_paper_type(revision)
-
-        # if paper_type in ["latex", "word"] and has_catscan_comment(revision) is False:
-        #     contribution_revision_tuples.append((contribution_id, revision['id']))
-        # else:
-        #     append_to_exclude_list.append(contribution_id)
-
     return contribution_revision_tuples, append_to_exclude_list, None
+    # sx = shared_sess()
+    #
+    # papers, revision_error = find_papers(event_id, sx=sx)
+    # if revision_error is not None:
+    #     return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
+    #
+    # for paper in papers:
+    #     contribution_id = paper['id']
+    #     if contribution_id in exclude_list:
+    #         continue
+    #     revision, revision_error = find_latest_revision(event_id, contribution_id, sx=sx)
+    #
+    #     # Skip if the contribution is not found
+    #     if revision_error is not None:
+    #         continue
+    #
+    #     if revision is None:
+    #         continue
+    #
+    #     paper_type, _ = check_paper_type(revision)
+    #
+    #     if paper_type in ["latex", "word"] and has_catscan_comment(revision) is False:
+    #         contribution_revision_tuples.append((contribution_id, revision['id']))
+    #     else:
+    #         append_to_exclude_list.append(contribution_id)
+    #
+    # return contribution_revision_tuples, append_to_exclude_list, None
