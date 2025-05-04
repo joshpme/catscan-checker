@@ -9,7 +9,7 @@
 # )
 
 def main():
-    return {"body":"This function is not meant to be called directly."}
+    return {"body":{"error":"This function is not meant to be called directly."}}
     # try:
     #     event_id = event.get("id", None)
     #     if event_id is None:
