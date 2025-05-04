@@ -13,10 +13,11 @@ def shared_sess():
 
 # output, filename, contents, error
 def find_papers(event_id, sx=None):
-    if sx is None:
-        sx = shared_sess()
+    sess = sx
+    if sess is None:
+        sess = shared_sess()
     url = f'/event/{event_id}/editing/api/paper/list'
-    response = sx.get(indico_base + url)
+    response = sess.get(indico_base + url)
     if response.status_code == 200:
         return response.json(), None
 
@@ -25,10 +26,11 @@ def find_papers(event_id, sx=None):
 
 # Options: latex / word / bibtex / unknown
 def get_paper(event_id, contribution_id, sx=None):
-    if sx is None:
-        sx = shared_sess()
+    sess = sx
+    if sess is None:
+        sess = shared_sess()
     url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
-    response = sx.get(indico_base + url)
+    response = sess.get(indico_base + url)
     if response.status_code == 200:
         return response.json(), None
 
@@ -110,9 +112,9 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
 
         paper_type, _ = check_paper_type(revision)
 
-        if paper_type in ["latex", "word"] and has_catscan_comment(revision) is False:
-            contribution_revision_tuples.append((contribution_id, revision['id']))
-        else:
-            append_to_exclude_list.append(contribution_id)
+        # if paper_type in ["latex", "word"] and has_catscan_comment(revision) is False:
+        #     contribution_revision_tuples.append((contribution_id, revision['id']))
+        # else:
+        #     append_to_exclude_list.append(contribution_id)
 
     return contribution_revision_tuples, append_to_exclude_list, None

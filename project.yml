@@ -44,4 +44,4 @@ packages:
         runtime: 'python:3.11'
         limits:
           timeout: 900000
-          memory: 256
+          memory: 512
