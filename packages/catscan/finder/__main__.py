@@ -15,7 +15,7 @@ def main(event):
         event_id = event.get("id", None)
         if event_id is None:
             return {"body": {"error": "Event ID is required"}}
-        queue_items, cached_items, errors = finder(event_id=event_id)
+        queue_items, cached_items, errors = [],[],None #finder(event_id=event_id)
         end_timer = time.time()
         output = {
             "event_id": event_id,
