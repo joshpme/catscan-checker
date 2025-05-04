@@ -1,4 +1,4 @@
-# from db import connect_db, get_cache, append_cache, append_queue, find_recent_queue_items
+from db import connect_db, get_cache, append_cache, append_queue, find_recent_queue_items
 #from indico import find_all_contributions_with_no_catscan_comment
 
 def finder(event_id):
@@ -6,10 +6,10 @@ def finder(event_id):
     queue_items = 0
     cached_items = 0
     exclude_list = []
-    # with connect_db() as cnx:
-    #     cache_list = get_cache(cnx, event_id)
-    #     recently_queued = find_recent_queue_items(cnx, event_id)
-    #     exclude_list = recently_queued + cache_list
+    with connect_db() as cnx:
+        cache_list = get_cache(cnx, event_id)
+        recently_queued = find_recent_queue_items(cnx, event_id)
+        exclude_list = recently_queued + cache_list
     # to_check, new_exclude_list, find_error = find_all_contributions_with_no_catscan_comment(event_id,
     #                                                                                         exclude_list=exclude_list)
     # if find_error is not None:
