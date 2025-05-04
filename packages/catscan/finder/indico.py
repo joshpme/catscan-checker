@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 import requests
 import os
 
@@ -85,10 +87,15 @@ def find_contributions(event_id, exclude_list=None):
     #def find_papers(event_id):
     indico_token = os.getenv("INDICO_TOKEN")
     token_value = f"Bearer {indico_token}"
-    requests.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list", headers={"Authorization": token_value})
-    # requests.get(os.getenv("INDICO_BASE_URL") + f"/event/{event_id}/editing/api/paper/list", {
-    #
-    # })
+    response = requests.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list", headers={"Authorization": token_value})
+
+    if response.status_code != 200:
+        return [], [], f"Status code: {response.status_code}"
+
+    try:
+        papers = response.json()
+    except JSONDecodeError as e:
+        return [], [], f"JSON decode error: {str(e)}"
 
 
 
