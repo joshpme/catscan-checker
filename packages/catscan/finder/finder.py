@@ -1,7 +1,7 @@
 from db import connect_db, get_cache, append_cache, append_queue, find_recent_queue_items
 from indico import find_all_contributions_with_no_catscan_comment
 
-def runner(event_id):
+def finder(event_id):
     errors = []
     with connect_db() as cnx:
         cache_list = get_cache(cnx, event_id)
