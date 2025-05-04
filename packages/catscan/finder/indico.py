@@ -3,7 +3,7 @@ import os
 
 indico_base = os.getenv("INDICO_BASE_URL")
 
-def create_shared_session():
+def shared_sess():
     sx = requests.Session()
     sx.headers.update({
         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
@@ -14,7 +14,7 @@ def create_shared_session():
 # output, filename, contents, error
 def find_papers(event_id, sx=None):
     if sx is None:
-        sx = create_shared_session()
+        sx = shared_sess()
     url = f'/event/{event_id}/editing/api/paper/list'
     response = sx.get(indico_base + url)
     if response.status_code == 200:
@@ -26,7 +26,7 @@ def find_papers(event_id, sx=None):
 # Options: latex / word / bibtex / unknown
 def get_paper(event_id, contribution_id, sx=None):
     if sx is None:
-        sx = create_shared_session()
+        sx = shared_sess()
     url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
     response = sx.get(indico_base + url)
     if response.status_code == 200:
@@ -36,10 +36,10 @@ def get_paper(event_id, contribution_id, sx=None):
 
 
 def find_latest_revision(event_id, contribution_id, sx=None):
-    contribution, error = get_paper(event_id, contribution_id, sx=sx)
+    contribution, get_paper_error = get_paper(event_id, contribution_id, sx=sx)
 
     if contribution is None:
-        return None, f"No contribution found {error}"
+        return None, f"No contribution found {get_paper_error}"
 
     highest = -1
     curr_revision = None
@@ -89,7 +89,7 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
     append_to_exclude_list = []
     contribution_revision_tuples = []  # (contribution_id, revision_id)
 
-    sx = create_shared_session()
+    sx = shared_sess()
 
     papers, revision_error = find_papers(event_id, sx=sx)
     if revision_error is not None:
