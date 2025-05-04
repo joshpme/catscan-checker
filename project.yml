@@ -43,5 +43,4 @@ packages:
         web: true
         runtime: 'python:3.11'
         limits:
-          memory: 256
-          timeout: 900000
+          timeout: 300000
