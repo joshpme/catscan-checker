@@ -77,6 +77,14 @@ import os
 #             return True
 #     return False
 
+def find_papers(session, event_id):
+    response = session.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list")
+    if response.status_code != 200:
+        return None, f"Status code: {response.status_code}"
+    try:
+        return response.json(), None
+    except JSONDecodeError as e:
+        return None, f"JSON decode error: {str(e)}"
 
 def find_contributions(event_id, exclude_list=None):
     if exclude_list is None:
@@ -92,19 +100,13 @@ def find_contributions(event_id, exclude_list=None):
         session.headers.update({
             'Authorization': token_value,
         })
-        response = session.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list")
-        if response.status_code != 200:
-            return [], [], f"Status code: {response.status_code}"
+        papers, revision_error = find_papers(session, event_id)
 
-        try:
-            papers = response.json()
-        except JSONDecodeError as e:
-            return [], [], f"JSON decode error: {str(e)}"
+        if papers is None:
+            return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
 
 
 
-
-    #find_papers(event_id)
 
     # if revision_error is not None:
     #     return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
