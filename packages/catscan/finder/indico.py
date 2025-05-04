@@ -85,17 +85,21 @@ def find_contributions(event_id, exclude_list=None):
     contribution_revision_tuples = []  # (contribution_id, revision_id)
 
     #def find_papers(event_id):
+
     indico_token = os.getenv("INDICO_TOKEN")
     token_value = f"Bearer {indico_token}"
-    response = requests.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list", headers={"Authorization": token_value})
+    with requests.Session() as session:
+        session.headers.update({
+            'Authorization': token_value,
+        })
+        response = session.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list")
+        if response.status_code != 200:
+            return [], [], f"Status code: {response.status_code}"
 
-    if response.status_code != 200:
-        return [], [], f"Status code: {response.status_code}"
-
-    try:
-        papers = response.json()
-    except JSONDecodeError as e:
-        return [], [], f"JSON decode error: {str(e)}"
+        try:
+            papers = response.json()
+        except JSONDecodeError as e:
+            return [], [], f"JSON decode error: {str(e)}"
 
 
 
