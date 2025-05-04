@@ -15,7 +15,7 @@ def main(event):
         event_id = event.get("id", None)
         if event_id is None:
             return {"body": {"error": "Event ID is required"}}
-        #finder(event_id=event_id)
+        finder(event_id=event_id)
         end_timer = time.time()
         content_body = {
             "event_id": event_id,
