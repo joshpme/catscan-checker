@@ -1,12 +1,12 @@
-#import os
+import os
 #import time
-# import sentry_sdk
+import sentry_sdk
 #from runner import runner
 
-# sentry_sdk.init(
-#     dsn=os.getenv("SENTRY_DSN"),
-#     send_default_pii=True,
-# )
+sentry_sdk.init(
+    dsn=os.getenv("SENTRY_DSN"),
+    send_default_pii=True,
+)
 
 def main():
     return {"body":{"error":"This function is not meant to be called directly."}}
