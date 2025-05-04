@@ -4,16 +4,11 @@ import os
 indico_base = os.getenv("INDICO_BASE_URL")
 
 def create_shared_session():
-    # Create a session object
-    session = requests.Session()
-
-    # Set common headers for the session
-    token = os.getenv('INDICO_TOKEN')
-    session.headers.update({
-        'Authorization': f'Bearer {token}'
+    sx = requests.Session()
+    sx.headers.update({
+        'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
     })
-
-    return session
+    return sx
 
 
 # output, filename, contents, error
@@ -58,6 +53,7 @@ def find_latest_revision(event_id, contribution_id, sx=None):
 
     return None, "Revision not found"
 
+
 # Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
 def check_paper_type(revision):
     source_file_type = [180, 31]
@@ -91,22 +87,22 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
     if exclude_list is None:
         exclude_list = []
     append_to_exclude_list = []
-    contribution_revision_tuples = [] # (contribution_id, revision_id)
+    contribution_revision_tuples = []  # (contribution_id, revision_id)
 
-    session = create_shared_session()
+    sx = create_shared_session()
 
-    papers, error = find_papers(event_id, sx=session)
-    if error is not None:
-        return None, append_to_exclude_list, f"Error finding papers: {error}"
+    papers, revision_error = find_papers(event_id, sx=sx)
+    if revision_error is not None:
+        return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
 
     for paper in papers:
         contribution_id = paper['id']
         if contribution_id in exclude_list:
             continue
-        revision, error = find_latest_revision(event_id, contribution_id, sx=session)
+        revision, revision_error = find_latest_revision(event_id, contribution_id, sx=sx)
 
         # Skip if the contribution is not found
-        if error is not None:
+        if revision_error is not None:
             continue
 
         if revision is None:
@@ -115,7 +111,7 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
         paper_type, _ = check_paper_type(revision)
 
         if paper_type in ["latex", "word"] and has_catscan_comment(revision) is False:
-            contribution_revision_tuples += [(contribution_id, revision['id'])]
+            contribution_revision_tuples.append((contribution_id, revision['id']))
         else:
             append_to_exclude_list.append(contribution_id)
 
