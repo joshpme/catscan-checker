@@ -3,15 +3,12 @@ import os
 
 
 # # output, filename, contents, error
-def find_papers(event_id, sx=None):
+def find_papers(event_id):
     indico_base = os.getenv("INDICO_BASE_URL")
     url = f'/event/{event_id}/editing/api/paper/list'
-    if sx is None:
-        response = requests.get(indico_base + url, headers={
-            'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-        })
-    else:
-        response = sx.get(indico_base + url)
+    response = requests.get(indico_base + url, headers={
+        'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
+    })
     if response.status_code == 200:
         return response.json(), None
 
@@ -84,12 +81,8 @@ def find_contributions(event_id, exclude_list=None):
         exclude_list = []
     append_to_exclude_list = []
     contribution_revision_tuples = []  # (contribution_id, revision_id)
-    sx = requests.Session()
-    sx.headers.update({
-        'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-    })
 
-    papers, revision_error = find_papers(event_id, sx=sx)
+    papers, revision_error = find_papers(event_id)
     if revision_error is not None:
         return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
 
