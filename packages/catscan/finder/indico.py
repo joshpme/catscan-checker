@@ -3,16 +3,16 @@ import os
 
 
 # # output, filename, contents, error
-def find_papers(event_id):
-    indico_base = os.getenv("INDICO_BASE_URL")
-    url = f'/event/{event_id}/editing/api/paper/list'
-    response = requests.get(indico_base + url, headers={
-        'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-    })
-    if response.status_code == 200:
-        return response.json(), None
-
-    return None, f"Status code: {response.status_code}"
+# def find_papers(event_id):
+#     indico_base = os.getenv("INDICO_BASE_URL")
+#     url = f'/event/{event_id}/editing/api/paper/list'
+#     response = requests.get(indico_base + url, headers={
+#         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
+#     })
+#     if response.status_code == 200:
+#         return response.json(), None
+#
+#     return None, f"Status code: {response.status_code}"
 
 #
 # # Options: latex / word / bibtex / unknown
@@ -82,9 +82,9 @@ def find_contributions(event_id, exclude_list=None):
     append_to_exclude_list = []
     contribution_revision_tuples = []  # (contribution_id, revision_id)
 
-    papers, revision_error = find_papers(event_id)
-    if revision_error is not None:
-        return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
+    # papers, revision_error = find_papers(event_id)
+    # if revision_error is not None:
+    #     return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
 
     # for paper in papers:
     #     contribution_id = paper['id']
