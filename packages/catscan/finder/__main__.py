@@ -1,7 +1,8 @@
 import os
 import time
 import sentry_sdk
-#from runner import runner
+
+# from runner import runner
 
 sentry_sdk.init(
     dsn=os.getenv("SENTRY_DSN"),
@@ -9,12 +10,29 @@ sentry_sdk.init(
 )
 
 def main(event):
-    start_timer = time.time()
-    event_id = event.get("id", None)
-    if event_id is None:
-        return {"body": {"error": "Event ID is required"}}
-    end_timer = time.time()
-    return {"body":{"error":"This function is not meant to be called directly.", "event_id": event_id, "duration": end_timer - start_timer}}
+    try:
+        start_timer = time.time()
+        event_id = event.get("id", None)
+        if event_id is None:
+            return {"body": {"error": "Event ID is required"}}
+        end_timer = time.time()
+        sentry_sdk.capture_event({
+            "message": "Finder ran",
+            "level": "info",
+            "extra": {
+                "event_id": event_id,
+                "duration": end_timer - start_timer,
+                # "queue_items": queue_items,
+                # "cached_items": cached_items,
+                # "errors": errors
+            },
+        })
+        return {"body": {"error": "This function is not meant to be called directly.", "event_id": event_id,
+                         "duration": end_timer - start_timer}}
+    except BaseException as e:
+        error_msg = f"Finder: An unexpected error occurred.\n Details:\n {e=}"
+        sentry_sdk.capture_message(error_msg, level="error")
+        return {"body": {"error": error_msg}}
     # try:
     #     event_id = event.get("id", None)
     #     if event_id is None:
