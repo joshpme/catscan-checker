@@ -85,11 +85,12 @@ def find_contributions(event_id, exclude_list=None):
     #def find_papers(event_id):
     indico_base = os.getenv("INDICO_BASE_URL")
     url = f"/event/{event_id}/editing/api/paper/list"
-    response = requests.get(indico_base + url, headers={
+    headers = {
         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-    })
+    }
+    response = requests.get(indico_base + url, headers)
 
-    content = response.json()
+
 
 
     #find_papers(event_id)
