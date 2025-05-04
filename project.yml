@@ -15,6 +15,7 @@ packages:
       INDICO_BASE_URL: '${INDICO_BASE_URL}'
       LATEX_SCANNER_URL: '${LATEX_SCANNER_URL}'
       WORD_SCANNER_URL: '${WORD_SCANNER_URL}'
+      CATSCAN_USER_ID: '${CATSCAN_USER_ID}'
     functions:
       - name: notify
         web: true
@@ -38,3 +39,9 @@ packages:
       - name: latex
         web: true
         runtime: 'go:1.20'
+      - name: finder
+        web: true
+        runtime: 'python:3.11'
+        limits:
+          memory: 256
+          timeout: 900000
