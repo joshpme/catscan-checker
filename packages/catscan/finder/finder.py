@@ -1,5 +1,5 @@
 from db import connect_db, get_cache, append_cache, append_queue, find_recent_queue_items
-#from indico import find_all_contributions_with_no_catscan_comment
+from indico import find_all_contributions_with_no_catscan_comment
 
 def finder(event_id):
     error_list = []
