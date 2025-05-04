@@ -1,23 +1,24 @@
-import os
-import time
-import sentry_sdk
-from runner import runner
+#import os
+#import time
+# import sentry_sdk
+#from runner import runner
 
 # sentry_sdk.init(
 #     dsn=os.getenv("SENTRY_DSN"),
 #     send_default_pii=True,
 # )
 
-def main(event):
-    try:
-        event_id = event.get("id", None)
-        if event_id is None:
-            return {"body": {"error": "Event ID is required"}}
-
-        return {"body": {"error": "This function is not meant to be called directly."}}
-    except BaseException as e:
-        error_msg = f"Finder: An unexpected error occurred.\n Details:\n {e=}"
-        return {"body": {"error": error_msg}}
+def main():
+    return {"body":"This function is not meant to be called directly."}
+    # try:
+    #     event_id = event.get("id", None)
+    #     if event_id is None:
+    #         return {"body": {"error": "Event ID is required"}}
+    #
+    #     return {"body": {"error": "This function is not meant to be called directly."}}
+    # except BaseException as e:
+    #     error_msg = f"Finder: An unexpected error occurred.\n Details:\n {e=}"
+    #     return {"body": {"error": error_msg}}
 
     # try:
     #     event_id = event.get("id", None)
