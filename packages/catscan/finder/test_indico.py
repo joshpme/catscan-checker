@@ -1,11 +1,9 @@
 import json
 from unittest.mock import patch
 import pytest
-
 import indico
 
 ## Integration tests (need indico .env parameters)
-
 
 @pytest.mark.parametrize("event_id, contribution_id", [(37, 289)])
 def test_find_papers_integration_test(event_id, contribution_id):

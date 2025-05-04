@@ -1,6 +1,5 @@
 import os
 import pymysql
-import json
 
 def connect_db():
     return pymysql.connect(

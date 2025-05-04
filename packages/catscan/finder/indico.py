@@ -1,19 +1,25 @@
 import requests
 import os
 
-# Create a session object
-session = requests.Session()
-
-# Set common headers for the session
-token = os.getenv('INDICO_TOKEN')
-session.headers.update({
-    'Authorization': f'Bearer {token}'
-})
-
 indico_base = os.getenv("INDICO_BASE_URL")
 
+def get_session():
+    # Create a session object
+    session = requests.Session()
+
+    # Set common headers for the session
+    token = os.getenv('INDICO_TOKEN')
+    session.headers.update({
+        'Authorization': f'Bearer {token}'
+    })
+
+    return session
+
+
 # output, filename, contents, error
-def find_papers(event_id):
+def find_papers(event_id, session=None):
+    if session is None:
+        session = get_session()
     url = f'/event/{event_id}/editing/api/paper/list'
     response = session.get(indico_base + url)
     if response.status_code == 200:
@@ -23,7 +29,9 @@ def find_papers(event_id):
 
 
 # Options: latex / word / bibtex / unknown
-def get_paper(event_id, contribution_id):
+def get_paper(event_id, contribution_id, session=None):
+    if session is None:
+        session = get_session()
     url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
     response = session.get(indico_base + url)
     if response.status_code == 200:
@@ -32,8 +40,8 @@ def get_paper(event_id, contribution_id):
     return None, f"Status code: {response.status_code}"
 
 
-def find_latest_revision(event_id, contribution_id):
-    contribution, error = get_paper(event_id, contribution_id)
+def find_latest_revision(event_id, contribution_id, session=None):
+    contribution, error = get_paper(event_id, contribution_id, session=session)
 
     if contribution is None:
         return None, f"No contribution found {error}"
@@ -85,7 +93,9 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
     append_to_exclude_list = []
     contribution_revision_tuples = [] # (contribution_id, revision_id)
 
-    papers, error = find_papers(event_id)
+    session = get_session()
+
+    papers, error = find_papers(event_id, session=session)
     if error is not None:
         return None, append_to_exclude_list, f"Error finding papers: {error}"
 
@@ -93,7 +103,7 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
         contribution_id = paper['id']
         if contribution_id in exclude_list:
             continue
-        revision, error = find_latest_revision(event_id, contribution_id)
+        revision, error = find_latest_revision(event_id, contribution_id, session=session)
 
         # Skip if the contribution is not found
         if error is not None:
