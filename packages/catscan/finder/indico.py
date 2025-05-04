@@ -1,28 +1,22 @@
 import requests
 import os
 
-indico_base = os.getenv("INDICO_BASE_URL")
-#
-# def shared_sess():
-#     sx = requests.Session()
-#     sx.headers.update({
-#         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
-#     })
-#     return sx
-#
-#
+
 # # output, filename, contents, error
-# def find_papers(event_id, sx=None):
-#     sess = sx
-#     if sess is None:
-#         sess = shared_sess()
-#     url = f'/event/{event_id}/editing/api/paper/list'
-#     response = sess.get(indico_base + url)
-#     if response.status_code == 200:
-#         return response.json(), None
-#
-#     return None, f"Status code: {response.status_code}"
-#
+def find_papers(event_id, sx=None):
+    indico_base = os.getenv("INDICO_BASE_URL")
+    url = f'/event/{event_id}/editing/api/paper/list'
+    if sx is None:
+        response = requests.get(indico_base + url, headers={
+            'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
+        })
+    else:
+        response = sx.get(indico_base + url)
+    if response.status_code == 200:
+        return response.json(), None
+
+    return None, f"Status code: {response.status_code}"
+
 #
 # # Options: latex / word / bibtex / unknown
 # def get_paper(event_id, contribution_id, sx=None):
@@ -90,20 +84,25 @@ def find_contributions(event_id, exclude_list=None):
         exclude_list = []
     append_to_exclude_list = []
     contribution_revision_tuples = []  # (contribution_id, revision_id)
+    sx = requests.Session()
+    sx.headers.update({
+        'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
+    })
 
-    return contribution_revision_tuples, append_to_exclude_list, None
-    # sx = shared_sess()
-    #
-    # papers, revision_error = find_papers(event_id, sx=sx)
-    # if revision_error is not None:
-    #     return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
-    #
+    papers, revision_error = find_papers(event_id, sx=sx)
+    if revision_error is not None:
+        return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
+
     # for paper in papers:
     #     contribution_id = paper['id']
     #     if contribution_id in exclude_list:
     #         continue
     #     revision, revision_error = find_latest_revision(event_id, contribution_id, sx=sx)
     #
+    return contribution_revision_tuples, append_to_exclude_list, None
+
+    #
+
     #     # Skip if the contribution is not found
     #     if revision_error is not None:
     #         continue
