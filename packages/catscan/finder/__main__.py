@@ -1,7 +1,7 @@
 import os
 import time
 import sentry_sdk
-#from finder import finder
+from finder import finder
 
 sentry_sdk.init(
     dsn=os.getenv("SENTRY_DSN"),
