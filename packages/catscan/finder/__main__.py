@@ -1,5 +1,5 @@
 import os
-#import time
+import time
 import sentry_sdk
 #from runner import runner
 
@@ -9,10 +9,12 @@ sentry_sdk.init(
 )
 
 def main(event):
+    start_timer = time.time()
     event_id = event.get("id", None)
     if event_id is None:
         return {"body": {"error": "Event ID is required"}}
-    return {"body":{"error":"This function is not meant to be called directly.", "event_id": event_id}}
+    end_timer = time.time()
+    return {"body":{"error":"This function is not meant to be called directly.", "event_id": event_id, "duration": end_timer - start_timer}}
     # try:
     #     event_id = event.get("id", None)
     #     if event_id is None:
