@@ -44,7 +44,7 @@ def test_find_latest_revision_integration_test(event_id, contribution_id, revisi
 
 @pytest.mark.parametrize("event_id, contribution_id, revision_id", [(37, 154, 9037)])
 def test_find_correct_contribution_integration_test(event_id, contribution_id, revision_id):
-    contribution_revision_tuples, _, error = indico.find_all_contributions_with_no_catscan_comment(event_id)
+    contribution_revision_tuples, _, error = indico.find_contributions(event_id)
 
     assert error is None, f"Error finding latest revision for contribution {contribution_id}: {error}"
 
@@ -58,7 +58,7 @@ def test_find_correct_contribution_integration_test(event_id, contribution_id, r
 @pytest.mark.timeout(15*60)
 @pytest.mark.parametrize("event_id", [37, 81])
 def test_timeout_test_integration_test(event_id):
-    contribution_revision_tuples, _, error = indico.find_all_contributions_with_no_catscan_comment(event_id)
+    contribution_revision_tuples, _, error = indico.find_contributions(event_id)
 
     assert error is None, f"Error finding all contributions with no catscan comment: {error}"
 

@@ -85,7 +85,7 @@ def has_catscan_comment(revision):
     return False
 
 
-def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
+def find_contributions(event_id, exclude_list=None):
     if exclude_list is None:
         exclude_list = []
     append_to_exclude_list = []

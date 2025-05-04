@@ -1,5 +1,5 @@
 from db import connect_db, get_cache, append_cache, append_queue, find_recent_queue_items
-from indico import find_all_contributions_with_no_catscan_comment
+from indico import find_contributions
 
 
 def finder(event_id):
@@ -11,7 +11,7 @@ def finder(event_id):
         cache_list = get_cache(cnx, event_id)
         recently_queued = find_recent_queue_items(cnx, event_id)
         exclude_list = recently_queued + cache_list
-        to_check, new_exclude_list, find_error = find_all_contributions_with_no_catscan_comment(event_id,                                                                         exclude_list=exclude_list)
+        to_check, new_exclude_list, find_error = find_contributions(event_id, exclude_list=exclude_list)
         if find_error is not None:
             error_list.append(f"Error finding contributions: {find_error}")
         for contrib_id in new_exclude_list:
