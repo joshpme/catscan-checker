@@ -33,5 +33,5 @@ def main(event):
         return return_body
     except BaseException as e:
         error_msg = f"Finder: An unexpected error occurred.\n Details:\n {e=}"
-        sentry_sdk.capture_message(error_msg, level="error")
+        #sentry_sdk.capture_message(error_msg, level="error")
         return {"body": {"error": error_msg}}

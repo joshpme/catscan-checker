@@ -17,11 +17,11 @@ def get_session():
 
 
 # output, filename, contents, error
-def find_papers(event_id, session=None):
-    if session is None:
-        session = get_session()
+def find_papers(event_id, sx=None):
+    if sx is None:
+        sx = get_session()
     url = f'/event/{event_id}/editing/api/paper/list'
-    response = session.get(indico_base + url)
+    response = sx.get(indico_base + url)
     if response.status_code == 200:
         return response.json(), None
 
@@ -29,19 +29,19 @@ def find_papers(event_id, session=None):
 
 
 # Options: latex / word / bibtex / unknown
-def get_paper(event_id, contribution_id, session=None):
-    if session is None:
-        session = get_session()
+def get_paper(event_id, contribution_id, sx=None):
+    if sx is None:
+        sx = get_session()
     url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
-    response = session.get(indico_base + url)
+    response = sx.get(indico_base + url)
     if response.status_code == 200:
         return response.json(), None
 
     return None, f"Status code: {response.status_code}"
 
 
-def find_latest_revision(event_id, contribution_id, session=None):
-    contribution, error = get_paper(event_id, contribution_id, session=session)
+def find_latest_revision(event_id, contribution_id, sx=None):
+    contribution, error = get_paper(event_id, contribution_id, sx=sx)
 
     if contribution is None:
         return None, f"No contribution found {error}"
@@ -95,7 +95,7 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
 
     session = get_session()
 
-    papers, error = find_papers(event_id, session=session)
+    papers, error = find_papers(event_id, sx=session)
     if error is not None:
         return None, append_to_exclude_list, f"Error finding papers: {error}"
 
@@ -103,7 +103,7 @@ def find_all_contributions_with_no_catscan_comment(event_id, exclude_list=None):
         contribution_id = paper['id']
         if contribution_id in exclude_list:
             continue
-        revision, error = find_latest_revision(event_id, contribution_id, session=session)
+        revision, error = find_latest_revision(event_id, contribution_id, sx=session)
 
         # Skip if the contribution is not found
         if error is not None:
