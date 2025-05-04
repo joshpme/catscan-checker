@@ -8,30 +8,29 @@ sentry_sdk.init(
     send_default_pii=True,
 )
 
-
 def main(event):
     try:
         start_timer = time.time()
         event_id = event.get("id", None)
         if event_id is None:
             return {"body": {"error": "Event ID is required"}}
-        finder(event_id=event_id)
+        queue_items, cached_items, error_list = finder(event_id=event_id)
         end_timer = time.time()
         content_body = {
             "event_id": event_id,
             "duration": end_timer - start_timer,
-            #"queue_items": queue_items,
-            #"cached_items": cached_items,
-            #"errors": errors
+            "queue_items": queue_items,
+            "cached_items": cached_items,
+            "errors": error_list
         }
         return_body = {"body": content_body}
         sentry_sdk.capture_event({
             "message": "Finder ran",
             "level": "info",
-            #"extra": content_body,
+            "extra": content_body,
         })
         return return_body
     except BaseException as e:
         error_msg = f"Finder: An unexpected error occurred.\n Details:\n {e=}"
-        #sentry_sdk.capture_message(error_msg, level="error")
+        sentry_sdk.capture_message(error_msg, level="error")
         return {"body": {"error": error_msg}}
