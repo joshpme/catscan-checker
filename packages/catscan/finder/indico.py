@@ -88,10 +88,9 @@ def find_contributions(event_id, exclude_list=None):
     response = requests.get(indico_base + url, headers={
         'Authorization': f'Bearer {os.getenv('INDICO_TOKEN')}'
     })
-    if response.status_code == 200:
-        return response.json(), None
 
-    return None, f"Status code: {response.status_code}"
+    content = response.json()
+
 
     #find_papers(event_id)
 
