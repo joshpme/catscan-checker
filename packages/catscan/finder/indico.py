@@ -18,16 +18,7 @@ import os
 
 #
 # # Options: latex / word / bibtex / unknown
-# def get_paper(event_id, contribution_id, sx=None):
-#     sess = sx
-#     if sess is None:
-#         sess = shared_sess()
-#     url = f"/event/{event_id}/api/contributions/{contribution_id}/editing/paper"
-#     response = sess.get(indico_base + url)
-#     if response.status_code == 200:
-#         return response.json(), None
-#
-#     return None, f"Status code: {response.status_code}"
+
 #
 #
 # def find_latest_revision(event_id, contribution_id, sx=None):
@@ -78,7 +69,8 @@ import os
 #     return False
 
 def find_papers(session, event_id):
-    response = session.get(f"https://indico.jacow.org/event/{event_id}/editing/api/paper/list")
+    indico_base = os.getenv("INDICO_BASE_URL")
+    response = session.get(f"{indico_base}/event/{event_id}/editing/api/paper/list")
     if response.status_code != 200:
         return None, f"Status code: {response.status_code}"
     try:
@@ -86,13 +78,23 @@ def find_papers(session, event_id):
     except JSONDecodeError as e:
         return None, f"JSON decode error: {str(e)}"
 
+
+def get_paper(session, event_id, contribution_id):
+    indico_base = os.getenv("INDICO_BASE_URL")
+    response = session.get(f"{indico_base}/event/{event_id}/api/contributions/{contribution_id}/editing/paper")
+    if response.status_code != 200:
+        return None, f"Status code: {response.status_code}"
+    try:
+        return response.json(), None
+    except JSONDecodeError as e:
+        return None, f"JSON decode error: {str(e)}"
+
+
 def find_contributions(event_id, exclude_list=None):
     if exclude_list is None:
         exclude_list = []
     append_to_exclude_list = []
     contribution_revision_tuples = []  # (contribution_id, revision_id)
-
-    #def find_papers(event_id):
 
     indico_token = os.getenv("INDICO_TOKEN")
     token_value = f"Bearer {indico_token}"
@@ -103,8 +105,19 @@ def find_contributions(event_id, exclude_list=None):
         papers, revision_error = find_papers(session, event_id)
 
         if papers is None:
-            return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
+            return None, [], f"Error finding papers: {revision_error}"
 
+        for paper in papers:
+            if "id" not in paper:
+                continue
+            contribution_id = paper['id']
+            if contribution_id in exclude_list:
+                continue
+
+            revision, revision_error = get_paper(session, event_id, contribution_id)
+
+            if revision_error is not None:
+                continue
 
 
 
