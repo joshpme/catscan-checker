@@ -3,6 +3,8 @@ from indico import find_all_contributions_with_no_catscan_comment
 
 def finder(event_id):
     errors = []
+    queue_items = 0
+    cached_items = 0
     with connect_db() as cnx:
         cache_list = get_cache(cnx, event_id)
         recently_queued = find_recent_queue_items(cnx, event_id)
