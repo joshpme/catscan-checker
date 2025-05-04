@@ -8,8 +8,11 @@ sentry_sdk.init(
     send_default_pii=True,
 )
 
-def main():
-    return {"body":{"error":"This function is not meant to be called directly."}}
+def main(event):
+    event_id = event.get("id", None)
+    if event_id is None:
+        return {"body": {"error": "Event ID is required"}}
+    return {"body":{"error":"This function is not meant to be called directly.", "event_id": event_id}}
     # try:
     #     event_id = event.get("id", None)
     #     if event_id is None:
