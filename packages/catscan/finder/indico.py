@@ -21,45 +21,40 @@ import os
 
 #
 #
-# def find_latest_revision(event_id, contribution_id, sx=None):
-#     contribution, get_paper_error = get_paper(event_id, contribution_id, sx=sx)
-#
-#     if contribution is None:
-#         return None, f"No contribution found {get_paper_error}"
-#
-#     highest = -1
-#     curr_revision = None
-#     for revision in contribution.get('revisions', []):
-#         if revision['id'] > highest:
-#             highest = revision['id']
-#             curr_revision = revision
-#
-#     if highest != -1:
-#         return curr_revision, None
-#
-#     return None, "Revision not found"
+def find_latest_revision(paper):
+    highest = -1
+    curr_revision = None
+    for revision in paper.get('revisions', []):
+        if revision['id'] > highest:
+            highest = revision['id']
+            curr_revision = revision
+
+    if highest != -1:
+        return curr_revision, None
+
+    return None, "Revision not found"
 #
 #
 # # Return data, content_type (latex|bibtex|word|unknown), file (json obj), error
-# def check_paper_type(revision):
-#     source_file_type = [180, 31]
-#
-#     for file in revision.get('files', []):
-#         if file['filename'].lower().endswith('.docx'):
-#             return "word", file
-#
-#     file_type = "unknown"
-#     for file in revision.get('files', []):
-#         if file['filename'].lower().endswith('.bib'):
-#             file_type = "bibtex"
-#
-#     for file in revision.get('files', []):
-#         if file['filename'].lower().endswith('.tex') and file['file_type'] in source_file_type:
-#             if file_type == "unknown":
-#                 file_type = "latex"
-#             return file_type, file
-#
-#     return "unknown", None
+def find_paper_type(revision):
+    source_file_type = [180, 31]
+
+    for file in revision.get('files', []):
+        if file['filename'].lower().endswith('.docx'):
+            return "word"
+
+    file_type = "unknown"
+    for file in revision.get('files', []):
+        if file['filename'].lower().endswith('.bib'):
+            file_type = "bibtex"
+
+    for file in revision.get('files', []):
+        if file['filename'].lower().endswith('.tex') and file['file_type'] in source_file_type:
+            if file_type == "unknown":
+                file_type = "latex"
+            return file_type
+
+    return "unknown"
 #
 #
 # def has_catscan_comment(revision):
@@ -113,23 +108,18 @@ def find_contributions(event_id, exclude_list=None):
             contribution_id = paper['id']
             if contribution_id in exclude_list:
                 continue
-
-            revision, revision_error = get_paper(session, event_id, contribution_id)
-
+            paper, paper_error = get_paper(session, event_id, contribution_id)
+            if paper_error is not None:
+                continue
+            revision, revision_error = find_latest_revision(paper)
             if revision_error is not None:
                 continue
+            if revision is None:
+                continue
+            paper_type = find_paper_type(revision)
 
 
 
-    # if revision_error is not None:
-    #     return None, append_to_exclude_list, f"Error finding papers: {revision_error}"
-
-    # for paper in papers:
-    #     contribution_id = paper['id']
-    #     if contribution_id in exclude_list:
-    #         continue
-    #     revision, revision_error = find_latest_revision(event_id, contribution_id, sx=sx)
-    #
     return contribution_revision_tuples, append_to_exclude_list, None
 
     #
