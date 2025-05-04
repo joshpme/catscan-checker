@@ -83,9 +83,10 @@ def find_contributions(event_id, exclude_list=None):
     contribution_revision_tuples = []  # (contribution_id, revision_id)
 
     #def find_papers(event_id):
-    requests.get("https://indico.jacow.org/event/37/editing/api/paper/list")
+    token_value = "Bearer XXX"
+    requests.get("https://indico.jacow.org/event/37/editing/api/paper/list", headers={"Authorization": token_value})
     # requests.get(os.getenv("INDICO_BASE_URL") + f"/event/{event_id}/editing/api/paper/list", {
-    #     "Authorization": f"Bearer {os.getenv("INDICO_TOKEN")}"
+    #
     # })
 
 
