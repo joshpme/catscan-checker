@@ -29,8 +29,9 @@ def get_word_comment(event_id, contrib_id, revision_id):
         return None, "Filename not provided"
 
     result_name = filename[:-5]
-    md_comment = f"# CatScan Results\n\n"
-    md_comment += f"Your paper has been automatically scanned for formatting issues. Here are the results:\n\n"
-    md_comment += f"[See Report](https://scan.jacow.org/?results={result_name})"
+    md_comment = f"CatScan has been checked for common formatting problems.\n"
+    md_comment += f"**[See CatScan Report](https://scan.jacow.org/?results={result_name})**\n\n"
+    md_comment += (f"Please attempt to resolve any errors that were found.\n"
+                   f"You can re-check your paper using [CatScan](https://scan.jacow.org/) before re-submitting.")
 
     return md_comment, None

@@ -33,8 +33,8 @@ def get_latex_comment(file):
     if scan_result["body"] == "No issues found":
         return None, "No issues found"
 
-    md_comment = "CatScan detected the following issues in your references:\n"
-    md_comment += scan_result["body"]
-    md_comment += "\n\nJACoW Resources: [Formatting Citations](https://www.jacow.org/Authors/FormattingCitations) | [Reference Search](https://refs.jacow.org/)"
+    md_comment = "CatScan detected the following issues in your references:\n\n"
+    md_comment += scan_result["body"].strip()
+    md_comment += "\n\n[Re-check your paper @ CatScan](https://scan.jacow.org/) | [Citation Guidelines](https://www.jacow.org/Authors/FormattingCitations) | [Reference Search](https://refs.jacow.org/)"
 
     return md_comment, None
