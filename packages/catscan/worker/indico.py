@@ -58,10 +58,14 @@ def find_latest_revision(event_id, contribution_id, revision_id):
 def check_paper_type(revision):
     bibtex_type = [182]
     source_file_type = [180, 31]
+    all_filenames = []
+
+    for file in revision.get('files', []):
+        all_filenames.append(file['filename'])
 
     for file in revision.get('files', []):
         if file['filename'].lower().endswith('.docx') and file['file_type'] in source_file_type:
-            return "word", file
+            return "word", file, all_filenames
 
     file_type = "unknown"
     for file in revision.get('files', []):
@@ -72,9 +76,9 @@ def check_paper_type(revision):
         if file['filename'].lower().endswith('.tex') and file['file_type'] in source_file_type:
             if file_type == "unknown":
                 file_type = "latex"
-            return file_type, file
+            return file_type, file, all_filenames
 
-    return "unknown", None
+    return "unknown", None, all_filenames
 
 
 def leave_comment(event_id, contribution_id, revision_id, comment):

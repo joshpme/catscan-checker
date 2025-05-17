@@ -2,11 +2,13 @@ import os
 import requests
 from indico import download_contents
 
-def call_latex_scan(filename, content):
+def call_latex_scan(filename, content, all_filenames=None):
     latex_scanner_url = os.getenv('LATEX_SCANNER_URL')
     data = {
         'filename': filename,
-        'content': content
+        'content': content,
+        'check_supporting_files': True,
+        'filenames': all_filenames,
     }
     response = requests.post(latex_scanner_url, json=data)
 
@@ -18,11 +20,11 @@ def call_latex_scan(filename, content):
 
     return None
 
-def get_latex_comment(file):
+def get_latex_comment(file, all_filenames):
     filename, contents, error = download_contents(file)
     if error is not None:
         return None, "Could not download contents of latex file"
-    scan_result = call_latex_scan(filename, contents)
+    scan_result = call_latex_scan(filename, contents, all_filenames)
 
     if scan_result is None or "body" not in scan_result:
         return None, "No body in result"

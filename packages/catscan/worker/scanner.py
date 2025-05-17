@@ -22,7 +22,7 @@ def scan(to_scan):
     # reset revision id to revision['id'] found on revision from indico
     revision_id = revision['id']
 
-    file_type, file = check_paper_type(revision)
+    file_type, file, all_filenames = check_paper_type(revision)
 
     if error is not None:
         return error
@@ -30,7 +30,7 @@ def scan(to_scan):
     if file_type == "word":
         comment, scan_error = get_word_comment(event_id=event_id, contrib_id=contrib_id, revision_id=revision_id)
     elif file_type == "latex":
-        comment, scan_error = get_latex_comment(file=file)
+        comment, scan_error = get_latex_comment(file=file, all_filenames=all_filenames)
     else:
         return f"Unknown file type: {file_type}"
 
