@@ -19,7 +19,7 @@ def find_latest_revision(paper):
 
 # # Return data, content_type (latex|bibtex|word|unknown)
 def find_paper_type(revision):
-    source_file_type = [180, 31]
+    source_file_type = [180, 31, 352]
 
     for file in revision.get('files', []):
         if file['filename'].lower().endswith('.docx'):
